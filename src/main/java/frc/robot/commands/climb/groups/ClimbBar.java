@@ -1,5 +1,6 @@
 package frc.robot.commands.climb.groups;
 
+
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.climb.individual.AlignFixedHooks;
 import frc.robot.commands.climb.individual.AscendToBar;
@@ -16,7 +17,7 @@ public class ClimbBar extends SequentialCommandGroup {
     /**
      * Creates a new ClimbBar.
      * 
-     * @param climber climber subsystem this command will run on.
+     * @param climber The climber subsystem this command will run on
      */
     public ClimbBar(Climber climber) {
         addCommands(

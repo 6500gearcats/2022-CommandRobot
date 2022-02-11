@@ -12,7 +12,7 @@ public class AlignFixedHooks extends CommandBase {
   /**
    * Creates a new AlignFixedHooks
    * 
-   * @param climber The climber subsystem this command will run on.
+   * @param climber The climber subsystem this command will run on
    */
   public AlignFixedHooks(Climber climber) {
     m_climber = climber; 
@@ -20,6 +20,12 @@ public class AlignFixedHooks extends CommandBase {
     addRequirements(climber);
   }
 
+  /**
+   * Calling execute should result in the robot doing the following: 
+   *    
+   *    1. Tilting the robot's arm forwards at 10% tilt speed for 1 second
+   *
+   */
   @Override
   public void execute() {
   }
