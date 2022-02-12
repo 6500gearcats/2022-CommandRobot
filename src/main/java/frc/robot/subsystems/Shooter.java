@@ -2,9 +2,21 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class Shooter extends SubsystemBase{
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-    public Shooter() {}
+
+
+import edu.wpi.first.wpilibj.motorcontrol.MotorController;
+import frc.robot.Constants.DriveConstants;
+public class Shooter extends SubsystemBase{
+  private final MotorController m_shooterMotor=
+  new CANSparkMax(DriveConstants.m_shooterMotor1Port, MotorType.kBrushless);
+
+    public Shooter() {
+      
+    }
+  
 
     @Override
     public void periodic() {
