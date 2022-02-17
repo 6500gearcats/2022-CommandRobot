@@ -30,11 +30,36 @@ public final class Constants {
         public static final double kEncoderDistancePerPulse =
             // Assumes the encoders are directly mounted on the wheel shafts
             (kWheelDiameterInches * Math.PI) / (double) kEncoderCPR;
-        public static int m_shooterMotor1Port;
-      }
+          public static int m_shooterMotor1Port;
+    }
+    public static final class ShooterConstants { 
 
+        //TODO. Have to find the encoder ports.
+        public static final int[] kShooterEncoderPorts = new int[] {0, 1};
+//TODO. Have to test this to see if it goes in the right direction.        
+        public static final boolean kEncoderReversed = false;
+        public static final double kSVolts = 0.05;
+        public static final double kShooterFreeRPS = 5300;
+        public static final double kShooterTargetRPS = 4000;
+        public static final double kShooterToleranceRPS = 50;
+    public static final double kVVoltSecondsPerRotation =
+        // Should have value 12V at free speed...
+        12.0 / kShooterFreeRPS;
+    // These are not real PID gains, and will have to be tuned for your specific robot.
+    public static final double kP = 1;
+    public static final double kI = 0;
+    public static final double kD = 0;
+
+    public static final int kEncoderCPR = 1024;
+    public static final double kWheelDiameterInches = 6;
+    public static final double kEncoderDistancePerPulse =
+        // Assumes the encoders are directly mounted on the wheel shafts
+        (kWheelDiameterInches * Math.PI) / (double) kEncoderCPR;
+    public static Object kFeederSpeed;
+    }
       public static final class OIConstants {
         public static final int kDriverControllerPort = 0;
+
       }
 
 }
