@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.I2C;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -30,6 +32,14 @@ public final class Constants {
         public static final double kEncoderDistancePerPulse =
             // Assumes the encoders are directly mounted on the wheel shafts
             (kWheelDiameterInches * Math.PI) / (double) kEncoderCPR;
+      }
+
+      public static final class IntakeConstants {
+        public static final int kIntakeMotorPort = 20;
+        public static final I2C.Port i2cPort = I2C.Port.kMXP;
+        public static final double kIntakeReverseSpeed = -0.5;
+        public static final double kIntakePickupSpeed = 0.5;
+        public static final int kBallPresentThreshold = 0;
       }
 
       public static final class OIConstants {
