@@ -32,6 +32,11 @@ public final class Constants {
             (kWheelDiameterInches * Math.PI) / (double) kEncoderCPR;
       }
 
+      public static final class IntakeConstants {
+        public static final int kIntakeMotorPort = 20;
+        public static final double kIntakeReverseSpeed = -0.5;
+      }
+
       public static final class OIConstants {
         public static final int kDriverControllerPort = 0;
       }
