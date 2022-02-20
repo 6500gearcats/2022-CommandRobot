@@ -46,4 +46,9 @@ public final class Constants {
         public static final int kDriverControllerPort = 0;
       }
 
+      public static final class ElevatorConstants {
+        public static final int kElevatorMotorPort = 21;
+        public static final double kElevatorSpeed = 0.5;
+      }
+
 }
