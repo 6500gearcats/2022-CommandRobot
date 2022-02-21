@@ -17,6 +17,8 @@ public class Intake extends SubsystemBase{
     public final MotorController m_intakeMotor = new CANSparkMax(IntakeConstants.kIntakeMotorPort, MotorType.kBrushless);
     private final ColorSensorV3 m_colorSensor = new ColorSensorV3(IntakeConstants.i2cPort);
 
+    private boolean m_bBallPresent = false;
+
     public Intake() {}
 
     @Override
@@ -40,10 +42,9 @@ public class Intake extends SubsystemBase{
     }
 
     public boolean isBallPresent() {
-      boolean isBallPresent = false;
       int proxValue = m_colorSensor.getProximity();
-      isBallPresent = proxValue > IntakeConstants.kBallPresentThreshold;
-      return isBallPresent;
+      m_bBallPresent = proxValue > IntakeConstants.kBallPresentThreshold;
+      return m_bBallPresent;
     }
 
     public void stop() {

@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.XboxController.Button;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -44,6 +45,7 @@ public final class Constants {
 
       public static final class OIConstants {
         public static final int kDriverControllerPort = 0;
+        public static final int kCommandBinding = Button.kA.value;
       }
 
 }
