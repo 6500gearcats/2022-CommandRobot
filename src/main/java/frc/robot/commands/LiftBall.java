@@ -5,21 +5,21 @@ import frc.robot.subsystems.Elevator;
 
 public class LiftBall extends CommandBase {
  
-    private final Elevator m_elevatorSystam;
+    private final Elevator m_elevatorSystem;
 
     public LiftBall(Elevator theElevator) {
-        m_elevatorSystam = theElevator;
-        addRequirements(m_elevatorSystam);
+        m_elevatorSystem = theElevator;
+        addRequirements(m_elevatorSystem);
     }
 
     @Override
     public void initialize() {
-        m_elevatorSystam.startMotor();
+        m_elevatorSystem.startMotor();
     }
   
     @Override
     public boolean isFinished() {
-      return m_elevatorSystam.isBallAtTop();
+      return m_elevatorSystem.isBallAtTop();
     }
 
     // Called once after isFinished returns true
@@ -29,6 +29,6 @@ public class LiftBall extends CommandBase {
     // can to fall out
     // + there is no need to worry about stalling the motor or crushing the
     // can.
-        m_elevatorSystam.stop();
+        m_elevatorSystem.stop();
     }
 }
