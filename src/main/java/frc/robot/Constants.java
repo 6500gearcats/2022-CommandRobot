@@ -45,7 +45,7 @@ public final class Constants {
 
       public static final class OIConstants {
         public static final int kDriverControllerPort = 0;
-        public static final int kCommandBinding = Button.kA.value;
+        public static final int kPickUpBallBinding = Button.kA.value;
       }
 
       public static final class ElevatorConstants {

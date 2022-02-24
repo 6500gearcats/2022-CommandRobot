@@ -58,7 +58,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    new JoystickButton(m_driverController, OIConstants.kCommandBinding).whenPressed(new PickupBall(m_robotIntake));
+    new JoystickButton(m_driverController, OIConstants.kPickUpBallBinding).whenPressed(new PickupBall(m_robotIntake));
   }
 
   /**
