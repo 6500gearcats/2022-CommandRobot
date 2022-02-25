@@ -53,4 +53,9 @@ public final class Constants {
         public static final double kElevatorSpeed = 0.5;
       }
 
+      public static final class ShooterConstants {
+        public static final int kShooterMotorPort = 30;
+        public static final double kShooterSpeed = 1.0;
+        
+      }
 }
