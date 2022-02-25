@@ -14,7 +14,7 @@ public class Intake extends SubsystemBase{
    *
    */
     
-    public final MotorController m_intakeMotor = new CANSparkMax(IntakeConstants.kIntakeMotorPort, MotorType.kBrushless);
+    public final MotorController m_intakeMotor = new CANSparkMax(IntakeConstants.kIntakeMotorPort, MotorType.kBrushed);
     private final ColorSensorV3 m_colorSensor = new ColorSensorV3(IntakeConstants.i2cPort);
 
     private boolean m_bBallPresent = false;
