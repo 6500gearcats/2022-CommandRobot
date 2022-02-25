@@ -49,5 +49,12 @@ public class Intake extends SubsystemBase{
     public void stop() {
       m_intakeMotor.stopMotor();
     }
+
+    public void pushBall() {
+      while(isBallPresent() == true){
+        m_intakeMotor.set(IntakeConstants.kPushBallSpeed);
+      }
+      m_intakeMotor.stopMotor();
+    }
     
 }

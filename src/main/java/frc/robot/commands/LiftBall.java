@@ -2,19 +2,25 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Intake;
 
 public class LiftBall extends CommandBase {
  
-    private final Elevator m_elevatorSystem;
+    public final Elevator m_elevatorSystem;
+    public final Intake m_intakeSystem;
+    public static final double kPushBall = 0.5;
 
-    public LiftBall(Elevator theElevator) {
+    public LiftBall(Elevator theElevator, Intake theIntake) {
         m_elevatorSystem = theElevator;
         addRequirements(m_elevatorSystem);
+        m_intakeSystem = theIntake;
+        addRequirements(m_intakeSystem);
     }
 
     @Override
     public void initialize() {
         m_elevatorSystem.startMotor();
+        m_intakeSystem.pushBall();
     }
   
     @Override
