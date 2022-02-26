@@ -41,14 +41,20 @@ public class Intake extends SubsystemBase{
       m_intakeMotor.set(IntakeConstants.kIntakePickupSpeed);
     }
 
-    public boolean isBallPresent() {
+    public void setPushBallSpeed() {
+      m_intakeMotor.set(IntakeConstants.kPushBallSpeed);
+    }
+
+    public boolean ballIsPresent() {
+      boolean ballIsPresent = false;
       int proxValue = m_colorSensor.getProximity();
-      m_bBallPresent = proxValue > IntakeConstants.kBallPresentThreshold;
-      return m_bBallPresent;
+      ballIsPresent = proxValue > IntakeConstants.kBallPresentThreshold;
+      return ballIsPresent;
     }
 
     public void stop() {
       m_intakeMotor.stopMotor();
     }
-    
+   
+
 }
