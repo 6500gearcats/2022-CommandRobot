@@ -19,16 +19,12 @@ public class PickupBall extends CommandBase {
   
     @Override
     public boolean isFinished() {
-      return m_intakeSystem.isBallPresent();
+      return m_intakeSystem.ballIsPresent();
     }
 
     // Called once after isFinished returns true
     @Override
     public void end(boolean interrupted) {
-    // NOTE: Doesn't stop in simulation due to lower friction causing the
-    // can to fall out
-    // + there is no need to worry about stalling the motor or crushing the
-    // can.
         m_intakeSystem.stop();
     }
 }
