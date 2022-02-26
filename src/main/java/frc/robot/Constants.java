@@ -40,7 +40,7 @@ public final class Constants {
         public static final I2C.Port i2cPort = I2C.Port.kMXP;
         public static final double kIntakeReverseSpeed = -0.5;
         public static final double kIntakePickupSpeed = 0.5;
-        public static final int kBallPresentThreshold = 0;
+        public static final int kBallPresentThreshold = 500;
         public static final double kPushBallSpeed = 0.5;
       }
 

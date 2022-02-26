@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ElevatorConstants;
 
 public class Elevator extends SubsystemBase{
-  public final MotorController m_elevatorMotor = new CANSparkMax(ElevatorConstants.kElevatorMotorPort, MotorType.kBrushless);
+  public final MotorController m_elevatorMotor = new CANSparkMax(ElevatorConstants.kElevatorMotorPort, MotorType.kBrushed);
 
     public Elevator() {}
 

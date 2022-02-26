@@ -48,6 +48,8 @@ public class RobotContainer {
         new DefaultDrive(
             m_robotDrive, m_driverController::getLeftY, m_driverController::getRightX));
 
+    m_robotDrive.setMaxOutput(0.5);
+
   }
 
   /**
