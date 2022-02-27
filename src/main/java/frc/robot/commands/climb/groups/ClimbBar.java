@@ -8,6 +8,7 @@ import frc.robot.commands.climb.individual.ContactTheBar;
 import frc.robot.commands.climb.individual.SetupForClimb;
 import frc.robot.commands.climb.individual.TransferToFixedHooks;
 import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.DriveTrain;
 
 /**
  * Sequential command that encapsulates the various sub-commands used
@@ -19,10 +20,10 @@ public class ClimbBar extends SequentialCommandGroup {
      * 
      * @param climber The climber subsystem this command will run on
      */
-    public ClimbBar(Climber climber) {
+    public ClimbBar(Climber climber, DriveTrain drive) {
         addCommands(
             // Setup the robot for climbing the bar
-            new SetupForClimb(climber), 
+            new SetupForClimb(climber, drive), 
             
             // Contact the robot's hooks with the bar being climbed
             new ContactTheBar(climber),

@@ -47,11 +47,21 @@ public final class Constants {
       public static final class OIConstants {
         public static final int kDriverControllerPort = 0;
         public static final int kPickUpBallBinding = Button.kA.value;
+        public static final int kSetupForClimb = Button.kY.value;
       }
 
       public static final class ElevatorConstants {
         public static final int kElevatorMotorPort = 21;
         public static final double kElevatorSpeed = 0.5;
+      }
+
+      public static final class ClimberConstants {
+        public static final int kTiltMotorPort = 10;
+        public static final int kWinchMotorPort = 11;    
+        public static final double kDefaultTiltSpeed = 0.5;
+        public static final double kMaxWinchRotations = 16600;
+        public static final double kMaxWinchSpeed = 1.0;
+        public static final double kMaxDriveSpeed = 0.1;    
       }
 
 }

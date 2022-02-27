@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.DefaultDrive;
 import frc.robot.commands.PickupBall;
+import frc.robot.commands.climb.individual.SetupForClimb;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -61,6 +62,8 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     new JoystickButton(m_driverController, OIConstants.kPickUpBallBinding).whenPressed(new PickupBall(m_robotIntake));
+
+    new JoystickButton(m_driverController, OIConstants.kSetupForClimb).whenPressed(new SetupForClimb(m_robotClimber, m_robotDrive));
   }
 
   /**
