@@ -5,6 +5,7 @@ import com.revrobotics.ColorSensorV3;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.IntakeConstants;
 
@@ -17,14 +18,17 @@ public class Intake extends SubsystemBase{
     public final MotorController m_intakeMotor = new CANSparkMax(IntakeConstants.kIntakeMotorPort, MotorType.kBrushed);
     private final ColorSensorV3 m_colorSensor = new ColorSensorV3(IntakeConstants.i2cPort);
 
-    private boolean m_bBallPresent = false;
-
     public Intake() {}
 
     @Override
     public void periodic() {
       // This method will be called once per scheduler run
-    }
+      SmartDashboard.putNumber("ColorSensor Proximity", m_colorSensor.getProximity());
+      SmartDashboard.putNumber("ColorSensor Red", m_colorSensor.getRed());
+      SmartDashboard.putNumber("ColorSensor Green", m_colorSensor.getGreen());
+      SmartDashboard.putNumber("ColorSensor Blue", m_colorSensor.getBlue());
+      SmartDashboard.putBoolean("Intake has a ball", ballIsPresent());
+    }  
   
     @Override
     public void simulationPeriodic() {

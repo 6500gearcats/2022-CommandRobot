@@ -4,6 +4,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ElevatorConstants;
 
@@ -15,6 +16,7 @@ public class Elevator extends SubsystemBase{
     @Override
     public void periodic() {
       // This method will be called once per scheduler run
+      SmartDashboard.putBoolean("Elevator running", m_elevatorMotor.get() > 0.0);
     }
   
     @Override
