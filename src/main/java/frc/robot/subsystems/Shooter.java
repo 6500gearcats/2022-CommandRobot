@@ -7,6 +7,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import frc.robot.Constants.DriveConstants;
@@ -19,6 +20,9 @@ public class Shooter extends PIDSubsystem{
       ShooterConstants.kShooterEncoderPorts[0],
       ShooterConstants.kShooterEncoderPorts[1],
       ShooterConstants.kEncoderReversed);
+  private final SimpleMotorFeedforward m_shooterFeedForward =
+  new SimpleMotorFeedforward(
+    ShooterConstants.kSVolts, ShooterConstants.kVVoltSecondsPerRotation);
 
     public Shooter() {
       super(new PIDController(ShooterConstants.kP, ShooterConstants.kI, ShooterConstants.kD));
@@ -29,20 +33,12 @@ public class Shooter extends PIDSubsystem{
 
     @Override
     public void useOutput(double output, double setpoint) {
-    PIDController m_shooterFeedforward;
-    m_shooterMotor.setVoltage(output + m_shooterFeedforward.calculate(setpoint));
+    m_shooterMotor.setVoltage(output + m_shooterFeedForward.calculate(setpoint));
     }
 
     public boolean atSetpoint() {
       return m_controller.atSetpoint();
     }
-
-    public void runFeeder() {
-      m_feederMotor.set(ShooterConstants.kFeederSpeed);
-    
-
-
-
 
     @Override
     public void periodic() {
@@ -55,8 +51,7 @@ public class Shooter extends PIDSubsystem{
     }
     @Override
     protected double getMeasurement() {
-      // TODO Auto-generated method stub
-      return 0;
+      return m_shooterEncoder.getRate();
     }
-    
-}
+
+    }

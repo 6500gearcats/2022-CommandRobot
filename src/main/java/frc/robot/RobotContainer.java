@@ -6,14 +6,17 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.XboxController.Button;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.DefaultDrive;
+import frc.robot.commands.PickupBall;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -27,7 +30,7 @@ public class RobotContainer {
   private final Shooter m_robotShooter = new Shooter();
   private final Climber m_robotClimber = new Climber();
   private final Elevator m_robotElevator = new Elevator();
-  private final Intake m_roboIntake = new Intake();
+  private final Intake m_robotIntake = new Intake();
 
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
@@ -53,7 +56,10 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+
+    new JoystickButton(m_driverController, OIConstants.kPickUpBallBinding).whenPressed(new PickupBall(m_robotIntake));
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

@@ -50,6 +50,10 @@ public final class Constants {
     public static final double kI = 0;
     public static final double kD = 0;
 
+    public static final double kFeederMotorSpeedRun = 1;
+    //TO DO Temporary constant for speed of feeder, fix.
+
+
     public static final int kEncoderCPR = 1024;
     public static final double kWheelDiameterInches = 6;
     public static final double kEncoderDistancePerPulse =

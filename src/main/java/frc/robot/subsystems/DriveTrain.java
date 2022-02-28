@@ -50,6 +50,7 @@ public class DriveTrain extends SubsystemBase {
     // result in both sides moving forward. Depending on how your robot's
     // gearbox is constructed, you might have to invert the left side instead.
     m_rightMotors.setInverted(true);
+    m_leftMotors.setInverted(true);
 
     // Sets the distance per pulse for the encoders
     m_leftEncoder.setDistancePerPulse(DriveConstants.kEncoderDistancePerPulse);
