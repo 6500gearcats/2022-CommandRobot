@@ -33,6 +33,7 @@ public final class Constants {
         public static final double kEncoderDistancePerPulse =
             // Assumes the encoders are directly mounted on the wheel shafts
             (kWheelDiameterInches * Math.PI) / (double) kEncoderCPR;
+        public static final double kMaxSpeed = 0.5;
       }
 
       public static final class IntakeConstants {
@@ -61,7 +62,7 @@ public final class Constants {
         public static final double kDefaultTiltSpeed = 0.5;
         public static final double kMaxWinchRotations = 16600;
         public static final double kMaxWinchSpeed = 1.0;
-        public static final double kMaxDriveSpeed = 0.1;    
+        public static final double kMaxDriveSpeed = 0.1;
       }
 
 }

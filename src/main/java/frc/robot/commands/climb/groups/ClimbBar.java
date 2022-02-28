@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.climb.individual.AlignFixedHooks;
 import frc.robot.commands.climb.individual.AscendToBar;
 import frc.robot.commands.climb.individual.ContactTheBar;
-import frc.robot.commands.climb.individual.SetupForClimb;
+import frc.robot.commands.climb.individual.RaiseArm;
 import frc.robot.commands.climb.individual.TransferToFixedHooks;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
@@ -22,9 +22,6 @@ public class ClimbBar extends SequentialCommandGroup {
      */
     public ClimbBar(Climber climber, DriveTrain drive) {
         addCommands(
-            // Setup the robot for climbing the bar
-            new SetupForClimb(climber, drive), 
-            
             // Contact the robot's hooks with the bar being climbed
             new ContactTheBar(climber),
 
