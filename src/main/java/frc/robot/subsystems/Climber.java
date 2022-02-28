@@ -24,16 +24,17 @@ public class Climber extends SubsystemBase{
   private RelativeEncoder m_tiltEncoder;
   private EncoderOdometer m_winchOdometer;
 
-  private SparkMaxLimitSwitch m_forwardLimit;
-  private SparkMaxLimitSwitch m_reverseLimit;
+  private SparkMaxLimitSwitch m_upperLimit;
+  private SparkMaxLimitSwitch m_lowerLimit;
 
     public Climber() {
-      m_forwardLimit = m_winchMotor.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
-      m_reverseLimit = m_winchMotor.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
+      m_lowerLimit = m_winchMotor.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
+      m_upperLimit = m_winchMotor.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
 
       m_winchEncoder = m_winchMotor.getEncoder();
       m_tiltEncoder = m_tiltMotor.getEncoder();
 
+      //m_winchMotor.setInverted(true);
       m_winchMotor.setIdleMode(IdleMode.kBrake);
       m_tiltMotor.setIdleMode(IdleMode.kBrake);
 
@@ -44,6 +45,7 @@ public class Climber extends SubsystemBase{
     public void periodic() {
       // This method will be called once per scheduler run
       SmartDashboard.putNumber("Arm position", m_winchOdometer.getPosition());
+      SmartDashboard.putNumber("Winch Motor Speed",m_winchMotor.get());
     }
   
     @Override
@@ -68,8 +70,13 @@ public class Climber extends SubsystemBase{
     }
 
     public boolean ArmIsFullyExtended() {
-        return (m_forwardLimit.isPressed() 
-            || (m_winchOdometer.getPosition() > ClimberConstants.kMaxWinchRotations));
+      boolean lowerLimit = m_lowerLimit.isPressed();
+      boolean upperLimit = m_upperLimit.isPressed();
+      SmartDashboard.putBoolean("Upper limit", upperLimit);
+      SmartDashboard.putBoolean("Lower limit", lowerLimit);
+
+      return (m_upperLimit.isPressed() 
+          || (Math.abs(m_winchOdometer.getPosition())) > ClimberConstants.kMaxWinchRotations);
     }
 
     public void resetWinchPosition() {
