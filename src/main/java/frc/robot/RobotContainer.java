@@ -18,10 +18,12 @@ import frc.robot.Constants.ClimberConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.DefaultDrive;
+import frc.robot.commands.KillClimber;
 import frc.robot.commands.LiftBall;
 import frc.robot.commands.PickupBall;
+import frc.robot.commands.ShootBall;
 import frc.robot.commands.climb.groups.SetupForClimb;
-import frc.robot.commands.climb.individual.RaiseArm;
+import frc.robot.commands.climb.individual.LowerArm;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -66,7 +68,11 @@ public class RobotContainer {
     new JoystickButton(m_driverController, OIConstants.kPickUpBallBinding).whenPressed(new PickupBall(m_robotIntake));
     new JoystickButton(m_driverController, OIConstants.kSetupForClimb).whenPressed(new SetupForClimb(m_robotClimber));
     new JoystickButton(m_driverController, OIConstants.kLiftBallBinding).whenPressed(new LiftBall(m_robotElevator, m_robotIntake));
-    
+    new JoystickButton(m_driverController, OIConstants.kKillClimber).whenPressed(new KillClimber(m_robotClimber));
+    new JoystickButton(m_driverController, OIConstants.kFireShooter).whenPressed(new ShootBall(m_robotShooter, m_robotElevator));
+
+    new JoystickButton(m_driverController, OIConstants.kretractArm).whenPressed(new LowerArm(m_robotClimber));
+
     new JoystickButton(m_driverController, OIConstants.kSlowModeTrigger)
       .whenPressed(() -> m_robotDrive.setMaxOutput(ClimberConstants.kMaxDriveSpeed))
       .whenReleased(() -> m_robotDrive.setMaxOutput(DriveConstants.kMaxSpeed));

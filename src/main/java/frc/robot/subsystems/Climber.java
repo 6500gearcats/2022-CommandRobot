@@ -10,7 +10,7 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
+import frc.robot.Constants;
 import frc.robot.Constants.ClimberConstants;
 import frc.robot.utility.EncoderOdometer;
 
@@ -37,6 +37,8 @@ public class Climber extends SubsystemBase{
       //m_winchMotor.setInverted(true);
       m_winchMotor.setIdleMode(IdleMode.kBrake);
       m_tiltMotor.setIdleMode(IdleMode.kBrake);
+
+      m_winchMotor.setSmartCurrentLimit(ClimberConstants.kMaxLiftCurrent);
 
       m_winchOdometer = new EncoderOdometer(m_winchEncoder);
     }
@@ -85,6 +87,21 @@ public class Climber extends SubsystemBase{
 
     public void stopWinch() {
       m_winchMotor.stopMotor();
+    }
+
+    public void retractArm() {
+      m_winchMotor.set(ClimberConstants.kMaxWinchSpeed * -1);
+    }
+
+    public boolean ArmIsFullyRetracted() {
+      boolean lowerLimit = m_lowerLimit.isPressed();
+      boolean upperLimit = m_upperLimit.isPressed();
+      SmartDashboard.putBoolean("Upper limit", upperLimit);
+      SmartDashboard.putBoolean("Lower limit", lowerLimit);
+
+      return (m_lowerLimit.isPressed() 
+          || (Math.abs(m_winchOdometer.getPosition())) > ClimberConstants.kMaxWinchRotations);
+
     }
     
 }
