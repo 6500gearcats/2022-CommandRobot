@@ -11,7 +11,9 @@ public class Shooter extends SubsystemBase{
 
 
   public final MotorController m_ShooterMotor = new CANSparkMax(ShooterConstants.kShooterMotorPort, MotorType.kBrushless);
-    public Shooter() {}
+  private boolean m_bBallFired = false; 
+  private boolean m_bShooterAtSpeed = false;
+  public Shooter() {}
 
     @Override
     public void periodic() {
@@ -30,4 +32,21 @@ public class Shooter extends SubsystemBase{
     public void stopShooter() {
       m_ShooterMotor.stopMotor();
     }
+
+    public double shooterSpeed(){
+      return m_ShooterMotor.get();
+    }
+
+    public boolean isBallFired() {
+      double FireSpeed = shooterSpeed();
+      m_bBallFired = FireSpeed < ShooterConstants.kBallFiredThreshold;
+      return m_bBallFired;
+    }
+
+    public boolean shooterSpeedSet(){
+      double ShooterSpeed = shooterSpeed();
+      m_bShooterAtSpeed = ShooterSpeed == ShooterConstants.kShooterSpeed;
+      return m_bShooterAtSpeed;
+    }
+
 }
