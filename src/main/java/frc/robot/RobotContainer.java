@@ -18,6 +18,7 @@ import frc.robot.Constants.ClimberConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.DefaultDrive;
+import frc.robot.commands.LiftBall;
 import frc.robot.commands.PickupBall;
 import frc.robot.commands.climb.groups.SetupForClimb;
 import frc.robot.commands.climb.individual.RaiseArm;
@@ -63,12 +64,13 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     new JoystickButton(m_driverController, OIConstants.kPickUpBallBinding).whenPressed(new PickupBall(m_robotIntake));
-
     new JoystickButton(m_driverController, OIConstants.kSetupForClimb).whenPressed(new SetupForClimb(m_robotClimber));
-
-      new JoystickButton(m_driverController, Button.kLeftBumper.value)
+    new JoystickButton(m_driverController, OIConstants.kLiftBallBinding).whenPressed(new LiftBall(m_robotElevator, m_robotIntake));
+    
+    new JoystickButton(m_driverController, OIConstants.kSlowModeTrigger)
       .whenPressed(() -> m_robotDrive.setMaxOutput(ClimberConstants.kMaxDriveSpeed))
       .whenReleased(() -> m_robotDrive.setMaxOutput(DriveConstants.kMaxSpeed));
+
   }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
