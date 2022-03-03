@@ -33,7 +33,7 @@ public class Elevator extends SubsystemBase{
     }
 
     public boolean isBallAtTop() {
-      return m_topSwitch.get();
+      return !(m_topSwitch.get());
 
     }
 
