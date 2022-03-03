@@ -14,10 +14,8 @@ public class Intake extends SubsystemBase{
    *
    */
     
-    public final MotorController m_intakeMotor = new CANSparkMax(IntakeConstants.kIntakeMotorPort, MotorType.kBrushless);
+    public final MotorController m_intakeMotor = new CANSparkMax(IntakeConstants.kIntakeMotorPort, MotorType.kBrushed);
     private final ColorSensorV3 m_colorSensor = new ColorSensorV3(IntakeConstants.i2cPort);
-
-    private boolean m_bBallPresent = false;
 
     public Intake() {}
 
@@ -41,14 +39,20 @@ public class Intake extends SubsystemBase{
       m_intakeMotor.set(IntakeConstants.kIntakePickupSpeed);
     }
 
-    public boolean isBallPresent() {
+    public void setPushBallSpeed() {
+      m_intakeMotor.set(IntakeConstants.kPushBallSpeed);
+    }
+
+    public boolean ballIsPresent() {
+      boolean ballIsPresent = false;
       int proxValue = m_colorSensor.getProximity();
-      m_bBallPresent = proxValue > IntakeConstants.kBallPresentThreshold;
-      return m_bBallPresent;
+      ballIsPresent = proxValue > IntakeConstants.kBallPresentThreshold;
+      return ballIsPresent;
     }
 
     public void stop() {
       m_intakeMotor.stopMotor();
     }
-    
+   
+
 }

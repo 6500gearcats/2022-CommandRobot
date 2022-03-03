@@ -33,6 +33,7 @@ public final class Constants {
         public static final double kEncoderDistancePerPulse =
             // Assumes the encoders are directly mounted on the wheel shafts
             (kWheelDiameterInches * Math.PI) / (double) kEncoderCPR;
+        public static final double kMaxSpeed = 0.5;
       }
 
       public static final class IntakeConstants {
@@ -40,17 +41,32 @@ public final class Constants {
         public static final I2C.Port i2cPort = I2C.Port.kMXP;
         public static final double kIntakeReverseSpeed = -0.5;
         public static final double kIntakePickupSpeed = 0.5;
-        public static final int kBallPresentThreshold = 0;
+        public static final int kBallPresentThreshold = 500;
+        public static final double kPushBallSpeed = 0.5;
       }
 
       public static final class OIConstants {
         public static final int kDriverControllerPort = 0;
         public static final int kPickUpBallBinding = Button.kA.value;
+        public static final int kSetupForClimb = Button.kY.value;
+        public static final int kLiftBallBinding = Button.kX.value;
+        public static final int kSlowModeTrigger = Button.kLeftBumper.value;
       }
 
       public static final class ElevatorConstants {
         public static final int kElevatorMotorPort = 21;
-        public static final double kElevatorSpeed = 0.5;
+        public static final double kElevatorSpeed = -0.5;
+        public static final int kTopSwitchChannel = 0;
+        public static final double kPushBall = 0.5;
+      }
+
+      public static final class ClimberConstants {
+        public static final int kTiltMotorPort = 10;
+        public static final int kWinchMotorPort = 11;    
+        public static final double kDefaultTiltSpeed = 0.5;
+        public static final double kMaxWinchRotations = 330;
+        public static final double kMaxWinchSpeed = -0.2;
+        public static final double kMaxDriveSpeed = 0.1;
       }
 
       public static final class ShooterConstants {

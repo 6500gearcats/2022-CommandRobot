@@ -1,7 +1,10 @@
 package frc.robot.commands;
 
 
+import frc.robot.Constants.DriveConstants;
 import frc.robot.subsystems.DriveTrain;
+import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import java.util.function.DoubleSupplier;
 
@@ -14,6 +17,7 @@ public class DefaultDrive extends CommandBase {
   private final DriveTrain m_drive;
   private final DoubleSupplier m_forward;
   private final DoubleSupplier m_rotation;
+  private double m_maxSpeed;
 
   /**
    * Creates a new DefaultDrive.
@@ -26,11 +30,27 @@ public class DefaultDrive extends CommandBase {
     m_drive = subsystem;
     m_forward = forward;
     m_rotation = rotation;
+    m_maxSpeed = DriveConstants.kMaxSpeed;
     addRequirements(m_drive);
+  }
+
+  public DefaultDrive(DriveTrain subsystem, DoubleSupplier forward, DoubleSupplier rotation, double speed) {
+    m_drive = subsystem;
+    m_forward = forward;
+    m_rotation = rotation;
+    addRequirements(m_drive);
+    m_maxSpeed = speed;
+  }
+
+  @Override
+  public void initialize() {
+    m_drive.setMaxOutput(m_maxSpeed);
   }
 
   @Override
   public void execute() {
-    m_drive.arcadeDrive(m_forward.getAsDouble(), m_rotation.getAsDouble());
+    Double forward = m_forward.getAsDouble();
+    Double rotation = m_rotation.getAsDouble();
+    m_drive.arcadeDrive(forward, rotation);
   }
 }
