@@ -103,5 +103,9 @@ public class Climber extends SubsystemBase{
           || (Math.abs(m_winchOdometer.getPosition())) > ClimberConstants.kMaxWinchRotations);
 
     }
+
+    public void stopTilt() {
+      m_tiltMotor.stopMotor();
+    }
     
 }

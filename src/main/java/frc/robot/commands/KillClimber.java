@@ -15,7 +15,7 @@ public class KillClimber extends CommandBase {
     @Override
     public void initialize() {
         m_climberSystem.stopWinch();
-       // m_climberSystem.stopTilt();
+        m_climberSystem.stopTilt();
     }
   
     @Override
