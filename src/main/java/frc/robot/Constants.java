@@ -53,7 +53,7 @@ public final class Constants {
         public static final int kSlowModeTrigger = Button.kLeftBumper.value;
         public static final int kKillClimber = Button.kB.value;
         public static final int kFireShooter = Button.kRightBumper.value;
-        public static final int kretractArm = Button.kStart.value;
+        public static final int kRetractArm = Button.kStart.value;
       }
 
       public static final class ElevatorConstants {

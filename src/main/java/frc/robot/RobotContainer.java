@@ -71,7 +71,7 @@ public class RobotContainer {
     new JoystickButton(m_driverController, OIConstants.kKillClimber).whenPressed(new KillClimber(m_robotClimber));
     new JoystickButton(m_driverController, OIConstants.kFireShooter).whenPressed(new ShootBall(m_robotShooter, m_robotElevator));
 
-    new JoystickButton(m_driverController, OIConstants.kretractArm).whenPressed(new LowerArm(m_robotClimber));
+    new JoystickButton(m_driverController, OIConstants.kRetractArm).whenPressed(new LowerArm(m_robotClimber));
 
     new JoystickButton(m_driverController, OIConstants.kSlowModeTrigger)
       .whenPressed(() -> m_robotDrive.setMaxOutput(ClimberConstants.kMaxDriveSpeed))
