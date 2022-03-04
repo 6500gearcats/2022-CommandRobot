@@ -9,7 +9,7 @@ import frc.robot.subsystems.DriveTrain;
 /**
  * A command to setup the robot for a bar to be climbed.
  */
-public class LowerArm extends CommandBase {
+public class RetractArm extends CommandBase {
   private final Climber m_climber;
 
   /**
@@ -17,7 +17,7 @@ public class LowerArm extends CommandBase {
    * 
    * @param climber The climber subsystem this command will run on
    */
-  public LowerArm(Climber climber) {
+  public RetractArm(Climber climber) {
     m_climber = climber;
   
     addRequirements(m_climber);
@@ -36,7 +36,9 @@ public class LowerArm extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return m_climber.ArmIsFullyRetracted();
+    boolean isRetracted = m_climber.ArmIsFullyRetracted();
+    boolean isStalled = m_climber.WinchIsStalled(); 
+    return (isRetracted || isStalled);
   }
 
   // Called once after isFinished returns true

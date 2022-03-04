@@ -5,6 +5,7 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxLimitSwitch;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.SparkMaxRelativeEncoder;
+import com.revrobotics.CANSparkMax.FaultID;
 import com.revrobotics.CANSparkMax.IdleMode;
 
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
@@ -27,6 +28,9 @@ public class Climber extends SubsystemBase{
   private SparkMaxLimitSwitch m_upperLimit;
   private SparkMaxLimitSwitch m_lowerLimit;
 
+  private double m_lastWinchPosition; // update each periodic - use to detect stall
+  private boolean m_isStalled = false;
+
     public Climber() {
       m_lowerLimit = m_winchMotor.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
       m_upperLimit = m_winchMotor.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
@@ -46,7 +50,13 @@ public class Climber extends SubsystemBase{
 
     @Override
     public void periodic() {
+      if (m_winchMotor.get() != 0){
+        if (m_winchOdometer.getPosition() == m_lastWinchPosition) {
+          m_isStalled = true;
+        }
+      }
       // This method will be called once per scheduler run
+      m_lastWinchPosition = m_winchOdometer.getPosition();
       SmartDashboard.putNumber("Arm position", m_winchOdometer.getPosition());
       SmartDashboard.putNumber("Winch Motor Speed",m_winchMotor.get());
     }
@@ -88,9 +98,11 @@ public class Climber extends SubsystemBase{
 
     public void stopWinch() {
       m_winchMotor.stopMotor();
+      m_isStalled = false;
     }
 
     public void retractArm() {
+      m_winchOdometer.reset();
       m_winchMotor.set(ClimberConstants.kMaxWinchSpeed * -1);
     }
 
@@ -111,6 +123,12 @@ public class Climber extends SubsystemBase{
 
     public void tiltRobot(double speed) {
       m_tiltMotor.set(speed);
+    }
+
+    public boolean WinchIsStalled() {
+      // We will use both motor stall detection and also whether the motor encoder value is changing.
+      boolean bStalled = m_winchMotor.getFault(FaultID.kStall);
+      return (m_isStalled || bStalled);
     }
     
 }
