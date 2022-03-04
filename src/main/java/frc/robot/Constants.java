@@ -51,6 +51,9 @@ public final class Constants {
         public static final int kSetupForClimb = Button.kY.value;
         public static final int kLiftBallBinding = Button.kX.value;
         public static final int kSlowModeTrigger = Button.kLeftBumper.value;
+        public static final int kKillClimber = Button.kB.value;
+        public static final int kFireShooter = Button.kRightBumper.value;
+        public static final int kRetractArm = Button.kStart.value;
       }
 
       public static final class ElevatorConstants {
@@ -67,12 +70,13 @@ public final class Constants {
         public static final double kMaxWinchRotations = 330;
         public static final double kMaxWinchSpeed = -0.2;
         public static final double kMaxDriveSpeed = 0.1;
+        public static final int kMaxLiftCurrent = 25;
       }
 
       public static final class ShooterConstants {
         public static final int kShooterMotorPort = 30;
-        public static final double kShooterSpeed = 1.0;
-        public static final double kBallFiredThreshold = 1;
+        public static final double kShooterSpeed = 0.5;
+        public static final double kBallFiredThreshold = 0.5;
         
       }
 }
