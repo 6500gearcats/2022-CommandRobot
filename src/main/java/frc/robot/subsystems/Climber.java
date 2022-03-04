@@ -24,12 +24,17 @@ public class Climber extends SubsystemBase{
   private RelativeEncoder m_winchEncoder;
   private RelativeEncoder m_tiltEncoder;
   private EncoderOdometer m_winchOdometer;
+  private EncoderOdometer m_tiltOdometer;
 
   private SparkMaxLimitSwitch m_upperLimit;
   private SparkMaxLimitSwitch m_lowerLimit;
 
   private double m_lastWinchPosition; // update each periodic - use to detect stall
-  private boolean m_isStalled = false;
+  private double m_lastTiltPosition; // update each periodic - use to detect stall
+  
+  private boolean m_isWinchStalled = false;
+  private boolean m_isTiltStalled = false;
+  
 
     public Climber() {
       m_lowerLimit = m_winchMotor.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
@@ -46,19 +51,32 @@ public class Climber extends SubsystemBase{
       m_tiltMotor.setSmartCurrentLimit(ClimberConstants.kMaxTiltCurrent);
 
       m_winchOdometer = new EncoderOdometer(m_winchEncoder);
+      m_tiltOdometer = new EncoderOdometer(m_tiltEncoder);
     }
 
     @Override
     public void periodic() {
-      if (m_winchMotor.get() != 0){
-        if (m_winchOdometer.getPosition() == m_lastWinchPosition) {
-          m_isStalled = true;
-        }
-      }
+      // if (m_winchMotor.get() != 0){
+      //   if (m_winchOdometer.getPosition() == m_lastWinchPosition) {
+      //     m_isWinchStalled = true;
+      //   }
+      // }
+
+      // if (m_tiltMotor.get() != 0){
+      //   if (m_tiltOdometer.getPosition() == m_lastTiltPosition) {
+      //     m_isTiltStalled = true;
+      //   }
+      // }
+
       // This method will be called once per scheduler run
       m_lastWinchPosition = m_winchOdometer.getPosition();
+      m_lastTiltPosition = m_tiltOdometer.getPosition();
       SmartDashboard.putNumber("Arm position", m_winchOdometer.getPosition());
       SmartDashboard.putNumber("Winch Motor Speed",m_winchMotor.get());
+      SmartDashboard.putNumber("Tilt position", m_tiltOdometer.getPosition());
+      SmartDashboard.putNumber("Tilt Motor Speed",m_tiltMotor.get());
+      //if (tiltIsStalled()) stopTilt();
+      if (winchIsStalled()) stopWinch();
     }
   
     @Override
@@ -66,19 +84,18 @@ public class Climber extends SubsystemBase{
       // This method will be called once per scheduler run during simulation
     }
 
-    public void tiltArmForward(double speed) {
-      m_tiltMotor.set(speed);
-    }
+    // public void tiltArmForward(double speed) {
+      
+    //   m_tiltMotor.set(speed);
+    // }
 
-    public boolean frontTiltSwitchClosed() {
-      return false;
-    }
 
     public void extendArm() {
       this.extendArm(ClimberConstants.kMaxWinchSpeed);
     }
 
     public void extendArm(double speed) {
+      m_winchOdometer.reset();
       m_winchMotor.set(speed);
     }
 
@@ -98,7 +115,7 @@ public class Climber extends SubsystemBase{
 
     public void stopWinch() {
       m_winchMotor.stopMotor();
-      m_isStalled = false;
+      m_isWinchStalled = false;
     }
 
     public void retractArm() {
@@ -119,16 +136,28 @@ public class Climber extends SubsystemBase{
 
     public void stopTilt() {
       m_tiltMotor.stopMotor();
+      m_isTiltStalled = false;
     }
 
     public void tiltRobot(double speed) {
+      m_tiltOdometer.reset();
       m_tiltMotor.set(speed);
     }
 
-    public boolean WinchIsStalled() {
+    public boolean winchIsStalled() {
       // We will use both motor stall detection and also whether the motor encoder value is changing.
       boolean bStalled = m_winchMotor.getFault(FaultID.kStall);
-      return (m_isStalled || bStalled);
+      SmartDashboard.putBoolean("Winch Moter stall", bStalled);
+      SmartDashboard.putBoolean("Winch Moter rotating", m_isTiltStalled);
+      return (m_isWinchStalled || bStalled);
+    }
+
+    public boolean tiltIsStalled() {
+      // We will use both motor stall detection and also whether the motor encoder value is changing.
+      boolean bStalled = m_tiltMotor.getFault(FaultID.kStall);
+      SmartDashboard.putBoolean("Tilt Moter stall", bStalled);
+      SmartDashboard.putBoolean("Tilt Moter rotating", m_isTiltStalled);
+      return (m_isTiltStalled || bStalled);
     }
     
 }

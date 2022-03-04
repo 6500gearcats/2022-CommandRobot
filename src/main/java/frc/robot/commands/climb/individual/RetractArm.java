@@ -37,7 +37,7 @@ public class RetractArm extends CommandBase {
   @Override
   public boolean isFinished() {
     boolean isRetracted = m_climber.ArmIsFullyRetracted();
-    boolean isStalled = m_climber.WinchIsStalled(); 
+    boolean isStalled = m_climber.winchIsStalled(); 
     return (isRetracted || isStalled);
   }
 

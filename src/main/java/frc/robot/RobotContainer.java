@@ -25,6 +25,7 @@ import frc.robot.commands.ShootBall;
 import frc.robot.commands.climb.groups.SetupForClimb;
 import frc.robot.commands.climb.groups.ClimbBar;
 import frc.robot.commands.climb.individual.RetractArm;
+import frc.robot.commands.climb.individual.StowClimber;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -77,6 +78,7 @@ public class RobotContainer {
     new JoystickButton(m_climberController, Button.kY.value).whenPressed(new ClimbBar(m_robotClimber));
     new JoystickButton(m_climberController, Button.kB.value).whenPressed(new KillClimber(m_robotClimber));
     new JoystickButton(m_climberController, Button.kStart.value).whenPressed(new RetractArm(m_robotClimber));
+    new JoystickButton(m_climberController, Button.kBack.value).whenPressed(new StowClimber(m_robotClimber));
 
 
 

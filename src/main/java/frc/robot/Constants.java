@@ -66,10 +66,10 @@ public final class Constants {
         public static final int kWinchMotorPort = 11;    
         public static final double kDefaultTiltSpeed = 0.5;
         public static final double kMaxWinchRotations = 330;
-        public static final double kMaxWinchSpeed = -0.2;
+        public static final double kMaxWinchSpeed = -0.5;
         public static final double kMaxDriveSpeed = 0.1;
-        public static final int kMaxLiftCurrent = 25;
-        public static final int kMaxTiltCurrent = 4;
+        public static final int kMaxLiftCurrent = 30;
+        public static final int kMaxTiltCurrent = 1;
       }
 
       public static final class ShooterConstants {
