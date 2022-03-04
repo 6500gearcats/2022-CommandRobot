@@ -39,6 +39,7 @@ public class Climber extends SubsystemBase{
       m_tiltMotor.setIdleMode(IdleMode.kBrake);
 
       m_winchMotor.setSmartCurrentLimit(ClimberConstants.kMaxLiftCurrent);
+      m_tiltMotor.setSmartCurrentLimit(ClimberConstants.kMaxTiltCurrent);
 
       m_winchOdometer = new EncoderOdometer(m_winchEncoder);
     }
@@ -106,6 +107,10 @@ public class Climber extends SubsystemBase{
 
     public void stopTilt() {
       m_tiltMotor.stopMotor();
+    }
+
+    public void tiltRobot(double speed) {
+      m_tiltMotor.set(speed);
     }
     
 }

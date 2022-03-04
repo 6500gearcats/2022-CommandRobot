@@ -23,6 +23,7 @@ import frc.robot.commands.LiftBall;
 import frc.robot.commands.PickupBall;
 import frc.robot.commands.ShootBall;
 import frc.robot.commands.climb.groups.SetupForClimb;
+import frc.robot.commands.climb.groups.ClimbBar;
 import frc.robot.commands.climb.individual.LowerArm;
 
 /**
@@ -41,6 +42,7 @@ public class RobotContainer {
 
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
+  XboxController m_climberController = new XboxController(OIConstants.kClimberControllerPort);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -65,13 +67,18 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
+    // XBox 0 - driver bindings
     new JoystickButton(m_driverController, OIConstants.kPickUpBallBinding).whenPressed(new PickupBall(m_robotIntake));
-    new JoystickButton(m_driverController, OIConstants.kSetupForClimb).whenPressed(new SetupForClimb(m_robotClimber));
     new JoystickButton(m_driverController, OIConstants.kLiftBallBinding).whenPressed(new LiftBall(m_robotElevator, m_robotIntake));
-    new JoystickButton(m_driverController, OIConstants.kKillClimber).whenPressed(new KillClimber(m_robotClimber));
     new JoystickButton(m_driverController, OIConstants.kFireShooter).whenPressed(new ShootBall(m_robotShooter, m_robotElevator));
 
-    new JoystickButton(m_driverController, OIConstants.kRetractArm).whenPressed(new LowerArm(m_robotClimber));
+    // XBox 1 - gunner bindings
+    new JoystickButton(m_climberController, Button.kA.value).whenPressed(new SetupForClimb(m_robotClimber));
+    new JoystickButton(m_climberController, Button.kY.value).whenPressed(new ClimbBar(m_robotClimber));
+    new JoystickButton(m_climberController, Button.kB.value).whenPressed(new KillClimber(m_robotClimber));
+    new JoystickButton(m_climberController, Button.kStart.value).whenPressed(new LowerArm(m_robotClimber));
+
+
 
     new JoystickButton(m_driverController, OIConstants.kSlowModeTrigger)
       .whenPressed(() -> m_robotDrive.setMaxOutput(ClimberConstants.kMaxDriveSpeed))

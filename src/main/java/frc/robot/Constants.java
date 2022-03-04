@@ -47,13 +47,11 @@ public final class Constants {
 
       public static final class OIConstants {
         public static final int kDriverControllerPort = 0;
+        public static final int kClimberControllerPort = 1;
         public static final int kPickUpBallBinding = Button.kA.value;
-        public static final int kSetupForClimb = Button.kY.value;
         public static final int kLiftBallBinding = Button.kX.value;
         public static final int kSlowModeTrigger = Button.kLeftBumper.value;
-        public static final int kKillClimber = Button.kB.value;
         public static final int kFireShooter = Button.kRightBumper.value;
-        public static final int kRetractArm = Button.kStart.value;
       }
 
       public static final class ElevatorConstants {
@@ -71,6 +69,7 @@ public final class Constants {
         public static final double kMaxWinchSpeed = -0.2;
         public static final double kMaxDriveSpeed = 0.1;
         public static final int kMaxLiftCurrent = 25;
+        public static final int kMaxTiltCurrent = 4;
       }
 
       public static final class ShooterConstants {

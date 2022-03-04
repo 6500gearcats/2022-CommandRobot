@@ -1,12 +1,13 @@
 package frc.robot.commands.climb.groups;
 
 
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.climb.individual.AlignFixedHooks;
-import frc.robot.commands.climb.individual.AscendToBar;
-import frc.robot.commands.climb.individual.ContactTheBar;
-import frc.robot.commands.climb.individual.RaiseArm;
-import frc.robot.commands.climb.individual.TransferToFixedHooks;
+import edu.wpi.first.wpilibj2.command.StartEndCommand;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.commands.KillClimber;
+import frc.robot.commands.climb.individual.*;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
 
@@ -20,19 +21,33 @@ public class ClimbBar extends SequentialCommandGroup {
      * 
      * @param climber The climber subsystem this command will run on
      */
-    public ClimbBar(Climber climber, DriveTrain drive) {
+    public ClimbBar(Climber climber) {
         addCommands(
-            // Contact the robot's hooks with the bar being climbed
-            new ContactTheBar(climber),
+            // 4)	Energize tilt motor backward at 25% tilt speed 
+            new RunCommand(
+                () -> climber.tiltRobot(-0.25), 
+                climber
+            ).withTimeout(1),
+
+            // 5)	Wait 0.5 seconds for full bar engagement
+            new WaitCommand(0.5), 
 
             // Ascend to the bar being climbed
-            new AscendToBar(climber),
+            // 6)	Energize winch in “retract” at 100% speed for 2s, then set to zero speed
+            new StartEndCommand(
+                () -> climber.retractArm(), 
+                () -> climber.stopWinch(),  
+                climber
+            ).withTimeout(2),
 
-            // Align the robot's fixed hooks to the bar being climbed
-            new AlignFixedHooks(climber),
+            // 7)	Wait 1s for robot to finish tilting
+            new WaitCommand(1), 
 
-            // Transfer to the robot's fixed hooks to finish the climb
-            new TransferToFixedHooks(climber)
+            // stop all climber motors
+            new KillClimber(climber),
+
+            new LowerArm(climber) 
+
         );
     }
 
