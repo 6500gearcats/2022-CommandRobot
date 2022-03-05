@@ -33,7 +33,7 @@ public class ClimbBar extends SequentialCommandGroup {
             new WaitCommand(0.5), 
 
             // Ascend to the bar being climbed
-            // 6)	Energize winch in “retract” at 100% speed for 2s, then set to zero speed
+            // 6)	Energize winch in "retract" at 100% speed for 2s, then set to zero speed
             new StartEndCommand(
                 () -> climber.retractArm(), 
                 () -> climber.stopWinch(),  
@@ -43,10 +43,13 @@ public class ClimbBar extends SequentialCommandGroup {
             // 7)	Wait 1s for robot to finish tilting
             new WaitCommand(1), 
 
-            // stop all climber motors
-            new KillClimber(climber),
+            //8)	Run winch in "retract" at 100% speed until bottom limit switch closes, then set to zero speed
+            new RetractArm(climber),
 
-            new LowerArm(climber) 
+            // stop all climber motors
+            new KillClimber(climber)
+
+            
 
         );
     }
