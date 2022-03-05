@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import java.security.AuthProvider;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
@@ -17,6 +19,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.ClimberConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
+import frc.robot.commands.AutoCommand;
 import frc.robot.commands.DefaultDrive;
 import frc.robot.commands.KillClimber;
 import frc.robot.commands.LiftBall;
@@ -71,7 +74,8 @@ public class RobotContainer {
     // XBox 0 - driver bindings
     new JoystickButton(m_driverController, OIConstants.kPickUpBallBinding).whenPressed(new PickupBall(m_robotIntake));
     new JoystickButton(m_driverController, OIConstants.kLiftBallBinding).whenPressed(new LiftBall(m_robotElevator, m_robotIntake));
-    new JoystickButton(m_driverController, OIConstants.kFireShooter).whenPressed(new ShootBall(m_robotShooter, m_robotElevator));
+    new JoystickButton(m_driverController, OIConstants.kFireShooter)
+    .whenPressed(new ShootBall(m_robotShooter, m_robotElevator).withTimeout(2));
 
     // XBox 1 - gunner bindings
     new JoystickButton(m_climberController, Button.kA.value).whenPressed(new SetupForClimb(m_robotClimber));
@@ -96,4 +100,8 @@ public class RobotContainer {
   //   // An ExampleCommand will run in autonomous
   //   return m_autoCommand;
   // }
-}
+
+  public Command getAutonomousCommand() {
+    return new AutoCommand(m_robotDrive, m_robotShooter, m_robotElevator);
+    }
+  }
