@@ -6,7 +6,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.XboxController.Axis;
 import edu.wpi.first.wpilibj.XboxController.Button;
+
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Climber;
@@ -14,6 +16,7 @@ import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.ClimberConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
@@ -43,7 +46,7 @@ public class RobotContainer {
 
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
-  XboxController m_climberController = new XboxController(OIConstants.kClimberControllerPort);
+  XboxController m_gunnerController = new XboxController(OIConstants.kClimberControllerPort);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -70,18 +73,17 @@ public class RobotContainer {
 
     // XBox 0 - driver bindings
     new JoystickButton(m_driverController, OIConstants.kPickUpBallBinding).whenPressed(new PickupBall(m_robotIntake));
-    new JoystickButton(m_driverController, OIConstants.kLiftBallBinding).whenPressed(new LiftBall(m_robotElevator, m_robotIntake));
     new JoystickButton(m_driverController, OIConstants.kFireShooter).whenPressed(new ShootBall(m_robotShooter, m_robotElevator));
 
     // XBox 1 - gunner bindings
-    new JoystickButton(m_climberController, Button.kA.value).whenPressed(new SetupForClimb(m_robotClimber));
-    new JoystickButton(m_climberController, Button.kY.value).whenPressed(new ClimbBar(m_robotClimber));
-    new JoystickButton(m_climberController, Button.kB.value).whenPressed(new KillClimber(m_robotClimber));
-    new JoystickButton(m_climberController, Button.kStart.value).whenPressed(new RetractArm(m_robotClimber));
-    new JoystickButton(m_climberController, Button.kBack.value).whenPressed(new StowClimber(m_robotClimber));
-
-
-
+    // new JoystickButton(m_climberController, Button.kA.value).whenPressed(new SetupForClimb(m_robotClimber));
+    // new JoystickButton(m_climberController, Button.kY.value).whenPressed(new ClimbBar(m_robotClimber));
+    // new JoystickButton(m_climberController, Button.kB.value).whenPressed(new KillClimber(m_robotClimber));
+    // new JoystickButton(m_climberController, Button.kStart.value).whenPressed(new RetractArm(m_robotClimber));
+    // new JoystickButton(m_climberController, Button.kBack.value).whenPressed(new StowClimber(m_robotClimber));
+    //new JoystickButton(m_gunnerController, m_gunnerController.getLeftTriggerAxis()).whenPressed(new LiftBall(m_robotElevator, m_robotIntake));
+    new Trigger(m_gunnerController::getLeftBumper).toggleWhenActive(new LiftBall(m_robotElevator, m_robotIntake));
+  
     new JoystickButton(m_driverController, OIConstants.kSlowModeTrigger)
       .whenPressed(() -> m_robotDrive.setMaxOutput(ClimberConstants.kMaxDriveSpeed))
       .whenReleased(() -> m_robotDrive.setMaxOutput(DriveConstants.kMaxSpeed));
