@@ -4,6 +4,9 @@
 
 package frc.robot;
 
+import java.util.function.DoubleConsumer;
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.XboxController.Button;
 
@@ -34,6 +37,9 @@ public final class Constants {
             // Assumes the encoders are directly mounted on the wheel shafts
             (kWheelDiameterInches * Math.PI) / (double) kEncoderCPR;
         public static final double kMaxSpeed = 0.5;
+        public static final DoubleSupplier kDriveP = null;
+        public static final DoubleConsumer kDriveD = null;
+        public static final DoubleSupplier kDriveI = null;
       }
 
       public static final class IntakeConstants {

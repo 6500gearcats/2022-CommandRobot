@@ -6,6 +6,8 @@ import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.PIDCommand;
+
 import java.util.function.DoubleSupplier;
 
 /**
@@ -26,16 +28,14 @@ public class PIDDrive extends PIDCommand {
    * @param forward The control input for driving forwards/backwards
    * @param rotation The control input for turning
    */
-  public PIDDrive(DriveTrain subsystem, DoubleSupplier forward, DoubleSupplier rotation) {
-    m_drive = subsystem;
-    m_forward = forward;
-    m_rotation = rotation;
-    m_maxSpeed = DriveConstants.kMaxSpeed;
-    addRequirements(m_drive);
-  }
 
-  public PIDDrive(DriveTrain subsystem, DoubleSupplier forward, DoubleSupplier rotation, double speed) {
-    m_drive = subsystem;
+  public PIDDrive(DriveTrain drive, DoubleSupplier forward, DoubleSupplier rotation, double speed) {
+    super(drive, 
+          drive::getAverageEncoderDistance(),
+          
+
+);
+    m_drive = drive;
     m_forward = forward;
     m_rotation = rotation;
     addRequirements(m_drive);
