@@ -71,6 +71,12 @@ public class Climber extends SubsystemBase{
       // This method will be called once per scheduler run
       m_lastWinchPosition = m_winchOdometer.getPosition();
       m_lastTiltPosition = m_tiltOdometer.getPosition();
+      boolean lowerLimit = m_lowerLimit.isPressed();
+      boolean upperLimit = m_upperLimit.isPressed();
+      SmartDashboard.putBoolean("Upper limit", upperLimit);
+      SmartDashboard.putBoolean("Lower limit", lowerLimit);
+
+
       SmartDashboard.putNumber("Arm position", m_winchOdometer.getPosition());
       SmartDashboard.putNumber("Winch Motor Speed",m_winchMotor.get());
       SmartDashboard.putNumber("Tilt position", m_tiltOdometer.getPosition());
@@ -124,11 +130,6 @@ public class Climber extends SubsystemBase{
     }
 
     public boolean ArmIsFullyRetracted() {
-      boolean lowerLimit = m_lowerLimit.isPressed();
-      boolean upperLimit = m_upperLimit.isPressed();
-      SmartDashboard.putBoolean("Upper limit", upperLimit);
-      SmartDashboard.putBoolean("Lower limit", lowerLimit);
-
       return (m_lowerLimit.isPressed() 
           || (Math.abs(m_winchOdometer.getPosition())) > ClimberConstants.kMaxWinchRotations);
 
