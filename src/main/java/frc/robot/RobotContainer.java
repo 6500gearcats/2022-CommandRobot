@@ -74,15 +74,21 @@ public class RobotContainer {
     // XBox 0 - driver bindings
     new JoystickButton(m_driverController, OIConstants.kPickUpBallBinding).whenPressed(new PickupBall(m_robotIntake));
     new JoystickButton(m_driverController, OIConstants.kFireShooter).whenPressed(new ShootBall(m_robotShooter, m_robotElevator));
+    new Trigger(() -> (m_driverController.getLeftTriggerAxis() > 0.5))
+      .whenActive(new DefaultDrive(m_robotDrive, m_driverController::getLeftY, m_driverController::getRightX, DriveConstants.kMaxSpeed));
+    
+    new Trigger(() -> (m_driverController.getRightTriggerAxis() > 0.5))
+      .whenActive(new DefaultDrive(m_robotDrive, m_driverController::getLeftY, m_driverController::getRightX, DriveConstants.kSlowSpeed));
 
     // XBox 1 - gunner bindings
-    // new JoystickButton(m_climberController, Button.kA.value).whenPressed(new SetupForClimb(m_robotClimber));
-    // new JoystickButton(m_climberController, Button.kY.value).whenPressed(new ClimbBar(m_robotClimber));
-    // new JoystickButton(m_climberController, Button.kB.value).whenPressed(new KillClimber(m_robotClimber));
-    // new JoystickButton(m_climberController, Button.kStart.value).whenPressed(new RetractArm(m_robotClimber));
-    // new JoystickButton(m_climberController, Button.kBack.value).whenPressed(new StowClimber(m_robotClimber));
-    //new JoystickButton(m_gunnerController, m_gunnerController.getLeftTriggerAxis()).whenPressed(new LiftBall(m_robotElevator, m_robotIntake));
-    new Trigger(m_gunnerController::getLeftBumper).toggleWhenActive(new LiftBall(m_robotElevator, m_robotIntake));
+    new JoystickButton(m_gunnerController, Button.kA.value).whenPressed(new SetupForClimb(m_robotClimber));
+    new JoystickButton(m_gunnerController, Button.kY.value).whenPressed(new ClimbBar(m_robotClimber));
+    new JoystickButton(m_gunnerController, Button.kB.value).whenPressed(new KillClimber(m_robotClimber));
+    new JoystickButton(m_gunnerController, Button.kStart.value).whenPressed(new RetractArm(m_robotClimber));
+    new JoystickButton(m_gunnerController, Button.kBack.value).whenPressed(new StowClimber(m_robotClimber));
+    
+    new Trigger(() -> (m_gunnerController.getLeftTriggerAxis() > 0.5)).whenActive(new LiftBall(m_robotElevator, m_robotIntake));
+       
   
     new JoystickButton(m_driverController, OIConstants.kSlowModeTrigger)
       .whenPressed(() -> m_robotDrive.setMaxOutput(ClimberConstants.kMaxDriveSpeed))
