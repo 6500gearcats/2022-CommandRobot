@@ -28,7 +28,7 @@ public class Shooter extends PIDSubsystem{
       super(new PIDController(ShooterConstants.kP, ShooterConstants.kI, ShooterConstants.kD));
     getController().setTolerance(ShooterConstants.kShooterToleranceRPS);
     m_shooterEncoder.setDistancePerPulse(ShooterConstants.kEncoderDistancePerPulse);
-    setSetpoint(ShooterConstants.kShooterTargetRPS);
+    setSetpoint(ShooterConstants.kShooterTargetRPS); //This may have been Mr. Rob Gale's problem
   }
 
     @Override
