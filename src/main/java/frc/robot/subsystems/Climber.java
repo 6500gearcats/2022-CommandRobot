@@ -45,7 +45,7 @@ public class Climber extends SubsystemBase{
 
       //m_winchMotor.setInverted(true);
       m_winchMotor.setIdleMode(IdleMode.kBrake);
-      m_tiltMotor.setIdleMode(IdleMode.kBrake);
+      m_tiltMotor.setIdleMode(IdleMode.kCoast);
 
       m_winchMotor.setSmartCurrentLimit(ClimberConstants.kMaxLiftCurrent);
       m_tiltMotor.setSmartCurrentLimit(ClimberConstants.kMaxTiltCurrent);

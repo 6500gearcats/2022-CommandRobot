@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.Constants.ClimberConstants;
 import frc.robot.commands.KillClimber;
 import frc.robot.commands.climb.individual.*;
 import frc.robot.subsystems.Climber;
@@ -25,7 +26,7 @@ public class ClimbBar extends SequentialCommandGroup {
         addCommands(
             // 4)	Energize tilt motor backward at 25% tilt speed 
             new RunCommand(
-                () -> climber.tiltRobot(-0.25), 
+                () -> climber.tiltRobot(ClimberConstants.kBackTiltSpeed), 
                 climber
             ).withTimeout(1),
 
@@ -48,9 +49,9 @@ public class ClimbBar extends SequentialCommandGroup {
 
             //9)	Switch tilt motor to forward at 25% speed
             new RunCommand(
-                () -> climber.tiltRobot(0.25), 
+                () -> climber.tiltRobot(ClimberConstants.kFwdTiltSpeed), 
                 climber
-            ).withTimeout(0.5),
+            ).withTimeout(3),
 
             // 11)	Run winch in “extend” at 100% speed for 1s, then set to zero speed
             new StartEndCommand(
@@ -58,6 +59,11 @@ public class ClimbBar extends SequentialCommandGroup {
                 () -> climber.stopWinch(),  
                 climber
             ).withTimeout(1),
+
+            new RunCommand(
+                () -> climber.tiltRobot(ClimberConstants.kFwdTiltSpeed), 
+                climber
+            ).withTimeout(2),
 
             // stop all climber motors
             new KillClimber(climber)
