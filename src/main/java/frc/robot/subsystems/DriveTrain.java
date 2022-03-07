@@ -4,10 +4,15 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.math.filter.SlewRateLimiter;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.Constants.DriveConstants;
+import frc.robot.utility.GCSlewRateLimiter;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
@@ -31,6 +36,8 @@ public class DriveTrain extends SubsystemBase {
   // The robot's drive
   private final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotors, m_rightMotors);
   
+  private GCSlewRateLimiter m_driveRateLimiter;
+  private GCSlewRateLimiter m_turnRateLimiter;
 
   // The left-side drive encoder
   private final Encoder m_leftEncoder =
@@ -46,6 +53,23 @@ public class DriveTrain extends SubsystemBase {
           DriveConstants.kRightEncoderPorts[1],
           DriveConstants.kRightEncoderReversed);
 
+
+  private ShuffleboardTab tab = Shuffleboard.getTab("Drive");
+  private NetworkTableEntry m_maxSpeed =
+      tab.add("Max Speed", 1)
+        .getEntry();
+                    
+  private NetworkTableEntry m_driveSlew =
+      tab.add("Drive Slew Rate", 0.8)
+        .getEntry();
+
+  private NetworkTableEntry m_rotationSlew =
+      tab.add("RotationSlewRate", 0.8)
+        .getEntry();
+      
+  private double m_lastDriveInput = 0.0;
+  private double m_lastTurnInput = 0.0;
+
   /** Creates a new DriveSubsystem. */
   public DriveTrain() {
     // We need to invert one side of the drivetrain so that positive voltages
@@ -56,6 +80,29 @@ public class DriveTrain extends SubsystemBase {
     // Sets the distance per pulse for the encoders
     m_leftEncoder.setDistancePerPulse(DriveConstants.kEncoderDistancePerPulse);
     m_rightEncoder.setDistancePerPulse(DriveConstants.kEncoderDistancePerPulse);
+
+    m_driveRateLimiter = new GCSlewRateLimiter(DriveConstants.kDriveRateLimit);
+    m_turnRateLimiter = new GCSlewRateLimiter(DriveConstants.kTurnRateLimit);
+
+  }
+
+
+  @Override
+  public void periodic() {
+    double max = m_maxSpeed.getDouble(1.0);
+    this.setMaxOutput(max);
+
+    double driveSlew = m_driveSlew.getDouble(1.0);
+
+    double rotationSlew = m_rotationSlew.getDouble(1.0);
+
+    if (driveSlew != m_driveRateLimiter.getRate()) {
+      m_driveRateLimiter = new GCSlewRateLimiter(driveSlew, m_lastDriveInput);
+    }
+
+    if (rotationSlew != m_turnRateLimiter.getRate()) {
+      m_turnRateLimiter = new GCSlewRateLimiter(rotationSlew, m_lastTurnInput);
+    }
   }
 
   /**
@@ -65,7 +112,16 @@ public class DriveTrain extends SubsystemBase {
    * @param rot the commanded rotation
    */
   public void arcadeDrive(double fwd, double rot) {
-    m_drive.arcadeDrive(fwd, rot);
+
+    m_lastDriveInput = fwd;
+    m_lastTurnInput = rot;
+    Double forward = m_driveRateLimiter.calculate(fwd);
+    Double rotation = m_turnRateLimiter.calculate(rot);
+
+    SmartDashboard.putNumber("Applied forward", forward);
+    SmartDashboard.putNumber("Applied rotation", rotation);
+
+    m_drive.arcadeDrive(forward, rotation);
   }
 
   /** Resets the drive encoders to currently read a position of 0. */

@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.ClimberConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
-import frc.robot.commands.PIDDrive;
+import frc.robot.commands.DefaultDrive;
 import frc.robot.commands.KillClimber;
 import frc.robot.commands.LiftBall;
 import frc.robot.commands.PickupBall;
@@ -55,7 +55,7 @@ public class RobotContainer {
     m_robotDrive.setDefaultCommand(
         // A split-stick arcade command, with forward/backward controlled by the left
         // hand, and turning controlled by the right.
-        new PIDDrive(
+        new DefaultDrive(
             m_robotDrive, m_driverController::getLeftY, m_driverController::getRightX));
 
   }
