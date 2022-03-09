@@ -34,6 +34,7 @@ public final class Constants {
             // Assumes the encoders are directly mounted on the wheel shafts
             (kWheelDiameterInches * Math.PI) / (double) kEncoderCPR;
         public static final double kMaxSpeed = 0.5;
+        public static final double kSlowSpeed = 0.1;
       }
 
       public static final class IntakeConstants {
