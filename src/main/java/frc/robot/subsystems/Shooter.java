@@ -25,8 +25,8 @@ public class Shooter extends SubsystemBase{
       // This method will be called once per scheduler run during simulation
     }
 
-    public void setShooterSpeed(){
-      m_ShooterMotor.set(ShooterConstants.kShooterSpeed);
+    public void setShooterSpeedSlow(){
+      m_ShooterMotor.set(ShooterConstants.kShooterSpeedSlow);
     }
     
     public void stopShooter() {
@@ -43,9 +43,18 @@ public class Shooter extends SubsystemBase{
       return m_bBallFired;
     }
 
-    public boolean shooterSpeedSet(){
+    public boolean shooterSpeedSetSlow(){
       double ShooterSpeed = shooterSpeed();
-      m_bShooterAtSpeed = ShooterSpeed == ShooterConstants.kShooterSpeed;
+      m_bShooterAtSpeed = ShooterSpeed == ShooterConstants.kShooterSpeedSlow;
+      return m_bShooterAtSpeed;
+    }
+    public void setShooterSpeedFast(){
+      m_ShooterMotor.set(ShooterConstants.kShooterSpeedFast);
+    }
+
+    public boolean shooterSpeedSetFast(){
+      double ShooterSpeed = shooterSpeed();
+      m_bShooterAtSpeed = ShooterSpeed == ShooterConstants.kShooterSpeedFast;
       return m_bShooterAtSpeed;
     }
 

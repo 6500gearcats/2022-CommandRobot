@@ -15,7 +15,7 @@ public class AutoCommand extends SequentialCommandGroup {
                 DriveTrain
             ).withTimeout(2),
 
-        new ShootBall(shooter, elevator)
+        new ShootBallSlow(shooter, elevator)
         );
     }
 }

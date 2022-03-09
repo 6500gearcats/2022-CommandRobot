@@ -24,7 +24,8 @@ import frc.robot.commands.DefaultDrive;
 import frc.robot.commands.KillClimber;
 import frc.robot.commands.LiftBall;
 import frc.robot.commands.PickupBall;
-import frc.robot.commands.ShootBall;
+import frc.robot.commands.ShootBallFast;
+import frc.robot.commands.ShootBallSlow;
 import frc.robot.commands.climb.groups.SetupForClimb;
 import frc.robot.commands.climb.groups.Climb2Bars;
 import frc.robot.commands.climb.groups.ClimbBar;
@@ -76,7 +77,8 @@ public class RobotContainer {
     new JoystickButton(m_driverController, OIConstants.kPickUpBallBinding).whenPressed(new PickupBall(m_robotIntake));
     new JoystickButton(m_driverController, OIConstants.kLiftBallBinding).whenPressed(new LiftBall(m_robotElevator, m_robotIntake));
     new JoystickButton(m_driverController, OIConstants.kFireShooter)
-    .whenPressed(new ShootBall(m_robotShooter, m_robotElevator).withTimeout(2));
+    .whenPressed(new ShootBallSlow(m_robotShooter, m_robotElevator).withTimeout(2));
+    .whenPressed(new ShootBallFast(m_robotShooter, m_robotElevator).withTimeout(2));
 
     // XBox 1 - gunner bindings
     new JoystickButton(m_climberController, Button.kA.value).whenPressed(new SetupForClimb(m_robotClimber));
