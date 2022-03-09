@@ -27,6 +27,7 @@ import frc.robot.commands.PickupBall;
 import frc.robot.commands.ShootBall;
 import frc.robot.commands.climb.groups.SetupForClimb;
 import frc.robot.commands.climb.groups.ClimbBar;
+import frc.robot.commands.climb.groups.LiftBall2;
 import frc.robot.commands.climb.individual.RetractArm;
 import frc.robot.commands.climb.individual.StowClimber;
 
@@ -73,8 +74,7 @@ public class RobotContainer {
 
     // XBox 0 - driver bindings
     new JoystickButton(m_driverController, OIConstants.kPickUpBallBinding).whenPressed(new PickupBall(m_robotIntake));
-    new JoystickButton(m_driverController, OIConstants.kFireShooter).whenPressed(new ShootBall(m_robotShooter, m_robotElevator));
-
+  
     // XBox 1 - gunner bindings
     // new JoystickButton(m_climberController, Button.kA.value).whenPressed(new SetupForClimb(m_robotClimber));
     // new JoystickButton(m_climberController, Button.kY.value).whenPressed(new ClimbBar(m_robotClimber));
@@ -83,7 +83,9 @@ public class RobotContainer {
     // new JoystickButton(m_climberController, Button.kBack.value).whenPressed(new StowClimber(m_robotClimber));
     //new JoystickButton(m_gunnerController, m_gunnerController.getLeftTriggerAxis()).whenPressed(new LiftBall(m_robotElevator, m_robotIntake));
     new Trigger(m_gunnerController::getLeftBumper).toggleWhenActive(new LiftBall(m_robotElevator, m_robotIntake));
-  
+    new JoystickButton(m_gunnerController, OIConstants.kFireShooter)
+      .whenPressed(new ShootBall(m_robotShooter, m_robotElevator).withTimeout(0.8));
+
     new JoystickButton(m_driverController, OIConstants.kSlowModeTrigger)
       .whenPressed(() -> m_robotDrive.setMaxOutput(ClimberConstants.kMaxDriveSpeed))
       .whenReleased(() -> m_robotDrive.setMaxOutput(DriveConstants.kMaxSpeed));
