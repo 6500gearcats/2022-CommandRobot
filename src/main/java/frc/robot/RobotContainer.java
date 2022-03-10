@@ -97,7 +97,7 @@ public class RobotContainer {
     new Trigger(() -> (m_gunnerController.getRightTriggerAxis() > 0.5))
       .whenActive(new ShootBallFast(m_robotShooter, m_robotElevator).withTimeout(0.8));
 
-    new Trigger(() -> m_gunnerController.getLeftY() < 0.5)
+    new Trigger(() -> m_gunnerController.getLeftY() < -0.5)
       .whenActive(new LiftBall(m_robotElevator, m_robotIntake));
     
     // new JoystickButton(m_driverController, OIConstants.kSlowModeTrigger)
