@@ -31,7 +31,6 @@ import frc.robot.commands.ShootBall;
 import frc.robot.commands.climb.groups.SetupForClimb;
 import frc.robot.commands.climb.groups.Climb2Bars;
 import frc.robot.commands.climb.groups.ClimbBar;
-import frc.robot.commands.climb.groups.LiftBall2;
 import frc.robot.commands.climb.individual.RetractArm;
 import frc.robot.commands.climb.individual.StowClimber;
 
