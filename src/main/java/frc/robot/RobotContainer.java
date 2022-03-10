@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import java.security.AuthProvider;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Axis;
@@ -20,12 +22,14 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.ClimberConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
+import frc.robot.commands.AutoCommand;
 import frc.robot.commands.DefaultDrive;
 import frc.robot.commands.KillClimber;
 import frc.robot.commands.LiftBall;
 import frc.robot.commands.PickupBall;
 import frc.robot.commands.ShootBall;
 import frc.robot.commands.climb.groups.SetupForClimb;
+import frc.robot.commands.climb.groups.Climb2Bars;
 import frc.robot.commands.climb.groups.ClimbBar;
 import frc.robot.commands.climb.groups.LiftBall2;
 import frc.robot.commands.climb.individual.RetractArm;
@@ -93,9 +97,9 @@ public class RobotContainer {
     new JoystickButton(m_gunnerController, OIConstants.kFireShooter)
       .whenPressed(new ShootBall(m_robotShooter, m_robotElevator).withTimeout(0.8));
     
-    new JoystickButton(m_driverController, OIConstants.kSlowModeTrigger)
-      .whenPressed(() -> m_robotDrive.setMaxOutput(ClimberConstants.kMaxDriveSpeed))
-      .whenReleased(() -> m_robotDrive.setMaxOutput(DriveConstants.kMaxSpeed));
+    // new JoystickButton(m_driverController, OIConstants.kSlowModeTrigger)
+    //   .whenPressed(() -> m_robotDrive.setMaxOutput(ClimberConstants.kMaxDriveSpeed))
+    //   .whenReleased(() -> m_robotDrive.setMaxOutput(DriveConstants.kMaxSpeed));
 
   }
   /**
@@ -107,4 +111,8 @@ public class RobotContainer {
   //   // An ExampleCommand will run in autonomous
   //   return m_autoCommand;
   // }
-}
+
+  public Command getAutonomousCommand() {
+    return new AutoCommand(m_robotDrive, m_robotShooter, m_robotElevator);
+    }
+  }
