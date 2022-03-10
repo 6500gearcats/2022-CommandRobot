@@ -36,9 +36,10 @@ public final class Constants {
         public static final double kEncoderDistancePerPulse =
             // Assumes the encoders are directly mounted on the wheel shafts
             (kWheelDiameterInches * Math.PI) / (double) kEncoderCPR;
-        public static final double kMaxSpeed = 0.5;
-        public static final double kDriveRateLimit = 0.5;
-        public static final double kTurnRateLimit = 0.5;
+        public static final double kMaxSpeed = 1;
+        public static final double kSlowSpeed = 0.1;
+        public static final double kDriveRateLimit = 2;
+        public static final double kTurnRateLimit = 20;
       }
 
       public static final class IntakeConstants {
@@ -81,8 +82,8 @@ public final class Constants {
 
       public static final class ShooterConstants {
         public static final int kShooterMotorPort = 30;
-        public static final double kShooterSpeed = 0.5;
-        public static final double kBallFiredThreshold = 0.5;
+        public static final double kShooterSpeed = 0.85; //0.43
+        public static final double kBallFiredThreshold = 0.1;
         
       }
 }

@@ -89,8 +89,8 @@ public class DriveTrain extends SubsystemBase {
 
   @Override
   public void periodic() {
-    double max = m_maxSpeed.getDouble(1.0);
-    this.setMaxOutput(max);
+    // double max = m_maxSpeed.getDouble(1.0);
+    // this.setMaxOutput(max);
 
     double driveSlew = m_driveSlew.getDouble(1.0);
 
