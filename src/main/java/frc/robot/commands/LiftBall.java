@@ -11,12 +11,12 @@ public class LiftBall extends CommandBase {
 
     public boolean m_cancel = false;
     
-    public LiftBall(Elevator theElevator, Intake theIntake) {
-        m_elevatorSystem = theElevator;
-        m_intakeSystem = theIntake;
-        addRequirements(m_elevatorSystem, m_intakeSystem);
-        m_cancel = false;
-    }
+        public LiftBall(Elevator theElevator, Intake theIntake) {
+            m_elevatorSystem = theElevator;
+            m_intakeSystem = theIntake;
+            addRequirements(m_elevatorSystem, m_intakeSystem);
+            m_cancel = false;
+        }
 
     @Override
     public void initialize() {
@@ -25,7 +25,10 @@ public class LiftBall extends CommandBase {
             m_cancel = true;
         }
         else {
-            m_elevatorSystem.startMotor();        
+            if (m_elevatorSystem.m_wrongBall != false)
+            {
+                m_elevatorSystem.startMotor();    
+            }
         }
     }
   
