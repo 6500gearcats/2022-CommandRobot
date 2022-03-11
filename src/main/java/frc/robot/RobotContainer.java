@@ -101,7 +101,13 @@ public class RobotContainer {
 
     new Trigger(() -> m_gunnerController.getLeftY() < -0.5)
       .whenActive(new LiftBall(m_robotElevator, m_robotIntake));
-    
+
+    new Trigger(() -> m_gunnerController.getRightY() < -0.5)
+    .whenActive((new VomitBall(m_robotIntake)));
+      
+    new Trigger(() -> m_gunnerController.getRightY() > 0.5)
+    .whenActive((new PickupBall(m_robotIntake)));
+
     // new JoystickButton(m_driverController, OIConstants.kSlowModeTrigger)
     //   .whenPressed(() -> m_robotDrive.setMaxOutput(ClimberConstants.kMaxDriveSpeed))
     //   .whenReleased(() -> m_robotDrive.setMaxOutput(DriveConstants.kMaxSpeed));
