@@ -29,6 +29,7 @@ import frc.robot.commands.LiftBall;
 import frc.robot.commands.PickupBall;
 import frc.robot.commands.ShootBallFast;
 import frc.robot.commands.ShootBallSlow;
+import frc.robot.commands.VomitBall;
 import frc.robot.commands.climb.groups.SetupForClimb;
 import frc.robot.commands.climb.groups.Climb2Bars;
 import frc.robot.commands.climb.groups.ClimbBar;
@@ -76,15 +77,16 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    // XBox 0 - driver bindings
-    new JoystickButton(m_driverController, OIConstants.kPickUpBallBinding).whenPressed(new PickupBall(m_robotIntake));
+    // XBox 1 - driver bindings
+    new JoystickButton(m_driverController, Button.kA.value).whenPressed(new PickupBall(m_robotIntake));
+    new JoystickButton(m_driverController, Button.kY.value).whenPressed(new VomitBall(m_robotIntake));
     new Trigger(() -> (m_driverController.getLeftTriggerAxis() > 0.5))
       .whenActive(new DefaultDrive(m_robotDrive, m_driverController::getLeftY, m_driverController::getRightX, DriveConstants.kMaxSpeed));
     
     new Trigger(() -> (m_driverController.getRightTriggerAxis() > 0.5))
       .whenActive(new DefaultDrive(m_robotDrive, m_driverController::getLeftY, m_driverController::getRightX, DriveConstants.kSlowSpeed));
 
-    // XBox 1 - gunner bindings
+    // XBox 2 - gunner bindings
     new JoystickButton(m_gunnerController, Button.kA.value).whenPressed(new SetupForClimb(m_robotClimber));
     new JoystickButton(m_gunnerController, Button.kY.value).whenPressed(new ClimbBar(m_robotClimber));
     new JoystickButton(m_gunnerController, Button.kB.value).whenPressed(new KillClimber(m_robotClimber));
