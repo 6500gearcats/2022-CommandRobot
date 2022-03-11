@@ -4,12 +4,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Shooter;
 
-public class ShootBall extends CommandBase {
+public class ShootBallSlow extends CommandBase {
    
     private final Shooter m_ShooterSystem;
     private final Elevator m_ElevatorSystem;
 
-    public ShootBall(Shooter theShooter, Elevator theElevator){
+    public ShootBallSlow(Shooter theShooter, Elevator theElevator){
         m_ShooterSystem = theShooter;
         m_ElevatorSystem = theElevator;
         addRequirements(m_ShooterSystem, m_ElevatorSystem);
@@ -18,12 +18,12 @@ public class ShootBall extends CommandBase {
 
     @Override 
     public void initialize(){
-        m_ShooterSystem.setShooterSpeed();
+        m_ShooterSystem.setShooterSpeedSlow();
     }
 
     @Override
     public void execute(){
-        if (m_ShooterSystem.shooterSpeedSet()){
+        if (m_ShooterSystem.shooterSpeedSetSlow()){
             m_ElevatorSystem.startMotor();
         }
 
