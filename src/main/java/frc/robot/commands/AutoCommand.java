@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj2.command.StartEndCommand;
 public class AutoCommand extends SequentialCommandGroup {
     public AutoCommand(DriveTrain DriveTrain, Shooter shooter, Elevator elevator) {
         addCommands(
-            new ShootBall(shooter, elevator).withTimeout(2),
+            new ShootBallFast(shooter, elevator).withTimeout(2),
         new RunCommand(
                 () -> DriveTrain.arcadeDrive(0.7,0), 
                 DriveTrain
