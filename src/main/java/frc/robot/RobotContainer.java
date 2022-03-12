@@ -88,7 +88,9 @@ public class RobotContainer {
 
     // XBox 2 - gunner bindings
     new JoystickButton(m_gunnerController, Button.kA.value).whenPressed(new SetupForClimb(m_robotClimber));
-    new JoystickButton(m_gunnerController, Button.kY.value).whenPressed(new ClimbBar(m_robotClimber));
+    new JoystickButton(m_gunnerController, Button.kY.value).whenPressed(new Climb2Bars(m_robotClimber));
+    new JoystickButton(m_gunnerController, Button.kX.value).whenPressed(new ClimbBar(m_robotClimber));
+
     new JoystickButton(m_gunnerController, Button.kB.value).whenPressed(new KillClimber(m_robotClimber));
     new JoystickButton(m_gunnerController, Button.kStart.value).whenPressed(new RetractArm(m_robotClimber));
     new JoystickButton(m_gunnerController, Button.kBack.value).whenPressed(new StowClimber(m_robotClimber));
