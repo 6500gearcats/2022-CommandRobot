@@ -19,7 +19,7 @@ public class VomitBall extends CommandBase {
   
     @Override
     public boolean isFinished() {
-      return m_intakeSystem.ballIsNotPresent();
+      return (!m_intakeSystem.ballIsPresent());
     }
 
     // Called once after isFinished returns true
