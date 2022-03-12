@@ -49,6 +49,7 @@ public final class Constants {
         public static final double kIntakePickupSpeed = 0.5;
         public static final int kBallPresentThreshold = 500;
         public static final double kPushBallSpeed = 0.5;
+        public static final double kIntakeVomitSpeed = -0.5;
       }
 
       public static final class OIConstants {
