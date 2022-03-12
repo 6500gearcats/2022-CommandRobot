@@ -59,13 +59,13 @@ public class DriveTrain extends SubsystemBase {
       tab.add("Max Speed", 1)
         .getEntry();
                     
-  private NetworkTableEntry m_driveSlew =
-      tab.add("Drive Slew Rate", 0.8)
-        .getEntry();
+  // private NetworkTableEntry m_driveSlew =
+  //     tab.add("Drive Slew Rate", 0.8)
+  //       .getEntry();
 
-  private NetworkTableEntry m_rotationSlew =
-      tab.add("RotationSlewRate", 0.8)
-        .getEntry();
+  // private NetworkTableEntry m_rotationSlew =
+  //     tab.add("RotationSlewRate", 0.8)
+  //       .getEntry();
       
   private double m_lastDriveInput = 0.0;
   private double m_lastTurnInput = 0.0;
@@ -92,18 +92,18 @@ public class DriveTrain extends SubsystemBase {
     // double max = m_maxSpeed.getDouble(1.0);
     // this.setMaxOutput(max);
 
-    double driveSlew = m_driveSlew.getDouble(1.0);
+  //   double driveSlew = m_driveSlew.getDouble(1.0);
 
-    double rotationSlew = m_rotationSlew.getDouble(1.0);
+  //   double rotationSlew = m_rotationSlew.getDouble(1.0);
 
-    if (driveSlew != m_driveRateLimiter.getRate()) {
-      m_driveRateLimiter = new GCSlewRateLimiter(driveSlew, m_lastDriveInput);
-    }
+  //   if (driveSlew != m_driveRateLimiter.getRate()) {
+  //     m_driveRateLimiter = new GCSlewRateLimiter(driveSlew, m_lastDriveInput);
+  //   }
 
-    if (rotationSlew != m_turnRateLimiter.getRate()) {
-      m_turnRateLimiter = new GCSlewRateLimiter(rotationSlew, m_lastTurnInput);
-    }
-  }
+  //   if (rotationSlew != m_turnRateLimiter.getRate()) {
+  //     m_turnRateLimiter = new GCSlewRateLimiter(rotationSlew, m_lastTurnInput);
+  //   }
+ }
 
   /**
    * Drives the robot using arcade controls.
