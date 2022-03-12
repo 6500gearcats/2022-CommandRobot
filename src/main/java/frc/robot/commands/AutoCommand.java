@@ -14,7 +14,7 @@ public class AutoCommand extends SequentialCommandGroup {
         new RunCommand(
                 () -> DriveTrain.arcadeDrive(0.7,0), 
                 DriveTrain
-            ).withTimeout(1.5)
+            ).withTimeout(1)
 
 
         );
