@@ -27,6 +27,7 @@ import frc.robot.commands.DefaultDrive;
 import frc.robot.commands.KillClimber;
 import frc.robot.commands.LiftBall;
 import frc.robot.commands.PickupBall;
+import frc.robot.commands.ReverseLift;
 import frc.robot.commands.ShootBallFast;
 import frc.robot.commands.ShootBallSlow;
 import frc.robot.commands.VomitBall;
@@ -103,6 +104,10 @@ public class RobotContainer {
 
     new Trigger(() -> m_gunnerController.getLeftY() < -0.5)
       .whenActive(new LiftBall(m_robotElevator, m_robotIntake));
+      
+    new Trigger(() -> m_gunnerController.getLeftY() > 0.5)
+      .whileActiveContinuous(new ReverseLift(m_robotElevator, m_robotIntake));
+    
 
     new Trigger(() -> m_gunnerController.getRightY() < -0.5)
     .whenActive((new VomitBall(m_robotIntake)));

@@ -32,6 +32,10 @@ public class Elevator extends SubsystemBase{
       m_elevatorMotor.set(ElevatorConstants.kElevatorSpeed);
     }
 
+    public void reverseMotor() {
+      m_elevatorMotor.set(-ElevatorConstants.kElevatorSpeed);
+    }
+
     public boolean isBallAtTop() {
       return !(m_topSwitch.get());
 
