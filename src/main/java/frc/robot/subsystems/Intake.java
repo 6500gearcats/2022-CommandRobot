@@ -56,17 +56,4 @@ public class Intake extends SubsystemBase{
     public void stop() {
       m_intakeMotor.stopMotor();
     }
-    
-    public boolean ballBlue() {
-      boolean ballIsColor = false;
-      int colorValueBlue = m_colorSensor.getBlue();
-     ballIsColor = colorValueBlue > IntakeConstants.kBlueBallThreshold;
-     return ballIsColor;
-    }
-    public boolean ballRed() {
-      boolean ballIsColor = false;
-      int colorValueBlue = m_colorSensor.getRed();
-     ballIsColor = colorValueBlue > IntakeConstants.kRedBallThreshold;
-     return ballIsColor;
-    }
 }
