@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.IntakeConstants;
 
 public class Intake extends SubsystemBase{
-
     /**
    *
    */
@@ -58,10 +57,16 @@ public class Intake extends SubsystemBase{
       m_intakeMotor.stopMotor();
     }
     
-    public boolean ballIsNotPresent() {
-      boolean ballIsNotPresent = false;
-      int proxValue = m_colorSensor.getProximity();
-      ballIsNotPresent = proxValue < IntakeConstants.kBallPresentThreshold;
-      return ballIsNotPresent;
+    public boolean ballBlue() {
+      boolean ballIsColor = false;
+      int colorValueBlue = m_colorSensor.getBlue();
+     ballIsColor = colorValueBlue > IntakeConstants.kBlueBallThreshold;
+     return ballIsColor;
+    }
+    public boolean ballRed() {
+      boolean ballIsColor = false;
+      int colorValueBlue = m_colorSensor.getRed();
+     ballIsColor = colorValueBlue > IntakeConstants.kRedBallThreshold;
+     return ballIsColor;
     }
 }

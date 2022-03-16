@@ -21,7 +21,8 @@ public class LiftBall extends CommandBase {
     @Override
     public void initialize() {
         m_cancel = false;
-        if (m_elevatorSystem.isLoaded() || (!m_intakeSystem.ballIsPresent())) {
+        if (m_elevatorSystem.isLoaded()) {
+        //|| (!m_intakeSystem.ballIsPresent())) {
             m_cancel = true;
         }
         else {
@@ -31,12 +32,12 @@ public class LiftBall extends CommandBase {
   
     @Override
     public void execute() {
-        if (m_intakeSystem.ballIsPresent()) {
+//        if (m_intakeSystem.ballIsPresent()) {
             m_intakeSystem.setPushBallSpeed();        
-        }
-        else {
-            m_intakeSystem.stop();
-        }
+//        }
+//        else {
+//            m_intakeSystem.stop();
+//        }
     }
   
     @Override
