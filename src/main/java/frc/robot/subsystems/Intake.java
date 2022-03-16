@@ -39,6 +39,10 @@ public class Intake extends SubsystemBase{
       m_intakeMotor.set(IntakeConstants.kIntakePickupSpeed);
     }
 
+    public void setVomitSpeed() {
+      m_intakeMotor.set(IntakeConstants.kIntakeVomitSpeed);
+    }
+
     public void setPushBallSpeed() {
       m_intakeMotor.set(IntakeConstants.kPushBallSpeed);
     }
@@ -53,6 +57,5 @@ public class Intake extends SubsystemBase{
     public void stop() {
       m_intakeMotor.stopMotor();
     }
-   
-
+    
 }
