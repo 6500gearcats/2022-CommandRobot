@@ -77,9 +77,8 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    // XBox 1 - driver bindings
-    new JoystickButton(m_driverController, Button.kA.value).whenPressed(new PickupBall(m_robotIntake));
-    new JoystickButton(m_driverController, Button.kY.value).whenPressed(new VomitBall(m_robotIntake));
+    // XBox 0 - driver bindings
+    new JoystickButton(m_driverController, OIConstants.kPickUpBallBinding).whenPressed(new PickupBall(m_robotIntake));
     new Trigger(() -> (m_driverController.getLeftTriggerAxis() > 0.5))
       .whenActive(new DefaultDrive(m_robotDrive, m_driverController::getLeftY, m_driverController::getRightX, DriveConstants.kMaxSpeed));
     
@@ -101,13 +100,7 @@ public class RobotContainer {
 
     new Trigger(() -> m_gunnerController.getLeftY() < -0.5)
       .whenActive(new LiftBall(m_robotElevator, m_robotIntake));
-
-    new Trigger(() -> m_gunnerController.getRightY() < -0.5)
-    .whenActive((new VomitBall(m_robotIntake)));
-      
-    new Trigger(() -> m_gunnerController.getRightY() > 0.5)
-    .whenActive((new PickupBall(m_robotIntake)));
-
+    
     // new JoystickButton(m_driverController, OIConstants.kSlowModeTrigger)
     //   .whenPressed(() -> m_robotDrive.setMaxOutput(ClimberConstants.kMaxDriveSpeed))
     //   .whenReleased(() -> m_robotDrive.setMaxOutput(DriveConstants.kMaxSpeed));
