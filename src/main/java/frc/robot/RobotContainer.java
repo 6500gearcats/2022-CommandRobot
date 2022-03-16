@@ -27,6 +27,7 @@ import frc.robot.commands.DefaultDrive;
 import frc.robot.commands.KillClimber;
 import frc.robot.commands.LiftBall;
 import frc.robot.commands.PickupBall;
+import frc.robot.commands.ReverseLift;
 import frc.robot.commands.ShootBallFast;
 import frc.robot.commands.ShootBallSlow;
 import frc.robot.commands.VomitBall;
@@ -88,7 +89,9 @@ public class RobotContainer {
 
     // XBox 2 - gunner bindings
     new JoystickButton(m_gunnerController, Button.kA.value).whenPressed(new SetupForClimb(m_robotClimber));
-    new JoystickButton(m_gunnerController, Button.kY.value).whenPressed(new ClimbBar(m_robotClimber));
+    new JoystickButton(m_gunnerController, Button.kY.value).whenPressed(new Climb2Bars(m_robotClimber));
+    new JoystickButton(m_gunnerController, Button.kX.value).whenPressed(new ClimbBar(m_robotClimber));
+
     new JoystickButton(m_gunnerController, Button.kB.value).whenPressed(new KillClimber(m_robotClimber));
     new JoystickButton(m_gunnerController, Button.kStart.value).whenPressed(new RetractArm(m_robotClimber));
     new JoystickButton(m_gunnerController, Button.kBack.value).whenPressed(new StowClimber(m_robotClimber));
@@ -101,6 +104,10 @@ public class RobotContainer {
 
     new Trigger(() -> m_gunnerController.getLeftY() < -0.5)
       .whenActive(new LiftBall(m_robotElevator, m_robotIntake));
+      
+    new Trigger(() -> m_gunnerController.getLeftY() > 0.5)
+      .whileActiveContinuous(new ReverseLift(m_robotElevator, m_robotIntake));
+    
 
     new Trigger(() -> m_gunnerController.getRightY() < -0.5)
     .whenActive((new VomitBall(m_robotIntake)));

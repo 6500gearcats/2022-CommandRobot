@@ -31,7 +31,7 @@ public class ClimbBar extends SequentialCommandGroup {
             ).withTimeout(1),
 
             // 5)	Wait 0.5 seconds for full bar engagement
-            new WaitCommand(0.5), 
+            //new WaitCommand(0.5), 
 
             // Ascend to the bar being climbed
             // 6)	Energize winch in "retract" at 100% speed for 2s, then set to zero speed
@@ -42,7 +42,7 @@ public class ClimbBar extends SequentialCommandGroup {
             ).withTimeout(2),
 
             // 7)	Wait 1s for robot to finish tilting
-            new WaitCommand(1), 
+            //new WaitCommand(1), 
 
             //8)	Run winch in "retract" at 100% speed until bottom limit switch closes, then set to zero speed
             new RetractArm(climber),
