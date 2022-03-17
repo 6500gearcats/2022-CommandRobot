@@ -8,18 +8,12 @@ import frc.robot.subsystems.DriveTrain;
  * A command to move the robot to the initial position to start climbing.
  */
 public class GetToClimbPosition extends CommandBase {
-  private final DriveTrain m_drive;
-  private final Climber m_climber;
-
   /**
    * Creates a new GetToClimbPosition
    * 
    * @param climber The climber subsystem this command will run on
    */
   public GetToClimbPosition(Climber climber, DriveTrain drive) {
-    m_climber = climber; 
-    m_drive = drive;
-
     addRequirements(
       climber,
       drive

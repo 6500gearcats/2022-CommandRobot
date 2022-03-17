@@ -4,15 +4,11 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.math.filter.SlewRateLimiter;
-import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.utility.GCSlewRateLimiter;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
@@ -52,12 +48,6 @@ public class DriveTrain extends SubsystemBase {
           DriveConstants.kRightEncoderPorts[0],
           DriveConstants.kRightEncoderPorts[1],
           DriveConstants.kRightEncoderReversed);
-
-
-  private ShuffleboardTab tab = Shuffleboard.getTab("Drive");
-  private NetworkTableEntry m_maxSpeed =
-      tab.add("Max Speed", 1)
-        .getEntry();
                     
   // private NetworkTableEntry m_driveSlew =
   //     tab.add("Drive Slew Rate", 0.8)
@@ -67,9 +57,6 @@ public class DriveTrain extends SubsystemBase {
   //     tab.add("RotationSlewRate", 0.8)
   //       .getEntry();
       
-  private double m_lastDriveInput = 0.0;
-  private double m_lastTurnInput = 0.0;
-
   /** Creates a new DriveSubsystem. */
   public DriveTrain() {
     // We need to invert one side of the drivetrain so that positive voltages
@@ -113,8 +100,6 @@ public class DriveTrain extends SubsystemBase {
    */
   public void arcadeDrive(double fwd, double rot) {
 
-    m_lastDriveInput = fwd;
-    m_lastTurnInput = rot;
     Double forward = m_driveRateLimiter.calculate(fwd);
     Double rotation = m_turnRateLimiter.calculate(rot);
 

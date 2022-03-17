@@ -4,14 +4,11 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxLimitSwitch;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import com.revrobotics.SparkMaxRelativeEncoder;
 import com.revrobotics.CANSparkMax.FaultID;
 import com.revrobotics.CANSparkMax.IdleMode;
 
-import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 import frc.robot.Constants.ClimberConstants;
 import frc.robot.utility.EncoderOdometer;
 
@@ -29,9 +26,6 @@ public class Climber extends SubsystemBase{
   private SparkMaxLimitSwitch m_upperLimit;
   private SparkMaxLimitSwitch m_lowerLimit;
 
-  private double m_lastWinchPosition; // update each periodic - use to detect stall
-  private double m_lastTiltPosition; // update each periodic - use to detect stall
-  
   private boolean m_isWinchStalled = false;
   private boolean m_isTiltStalled = false;
   
@@ -68,9 +62,8 @@ public class Climber extends SubsystemBase{
       //   }
       // }
 
-      // This method will be called once per scheduler run
-      m_lastWinchPosition = m_winchOdometer.getPosition();
-      m_lastTiltPosition = m_tiltOdometer.getPosition();
+      m_winchOdometer.getPosition();
+      m_tiltOdometer.getPosition();
       boolean lowerLimit = m_lowerLimit.isPressed();
       boolean upperLimit = m_upperLimit.isPressed();
       SmartDashboard.putBoolean("Upper limit", upperLimit);

@@ -4,9 +4,6 @@
 
 package frc.robot;
 
-import java.util.function.DoubleConsumer;
-import java.util.function.DoubleSupplier;
-
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.XboxController.Button;
 
@@ -79,6 +76,8 @@ public final class Constants {
         public static final int kMaxTiltCurrent = 1;
         public static final double kFwdTiltSpeed = 0.5;
         public static final double kBackTiltSpeed = -0.5;
+        public static final double kTraversalRaiseSpeed = 1;
+        public static final double kTraversalTiltSpeed = 1;
       }
 
       public static final class ShooterConstants {
