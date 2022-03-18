@@ -10,7 +10,8 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Axis;
 import edu.wpi.first.wpilibj.XboxController.Button;
-
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Climber;
@@ -44,6 +45,8 @@ import frc.robot.commands.climb.individual.StowClimber;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+  private static final Command kShooterSpeedSlow = null;
+  private static final Command kShooterSpeedFast = null;
   // The robot's subsystems and commands are defined here...
   private final DriveTrain m_robotDrive = new DriveTrain();
   private final Shooter m_robotShooter = new Shooter();
@@ -133,4 +136,11 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     return new AutoCommand(m_robotDrive, m_robotShooter, m_robotElevator);
     }
+  {
+    SendableChooser<Command> m_chooser = new SendableChooser<>();
+      m_chooser.setDefaultOption("Shoot Ball High" , kShooterSpeedFast);
+      m_chooser.addOption("Shoot Ball Low" , kShooterSpeedSlow);
+      SmartDashboard.putData(m_chooser);
   }
+}
+
