@@ -20,9 +20,9 @@ public class Climb2Bars extends SequentialCommandGroup {
         addCommands(
             // Setup the robot for climbing the bar
             new ClimbBar(climber),
-            new WaitCommand(1),
+            //new WaitCommand(1),
             new RaiseArm(climber),
-            new WaitCommand(1),          
+           // new WaitCommand(1),          
             new ClimbBar(climber)
             
         );
