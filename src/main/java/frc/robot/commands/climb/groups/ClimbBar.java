@@ -1,16 +1,13 @@
 package frc.robot.commands.climb.groups;
 
 
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants.ClimberConstants;
 import frc.robot.commands.KillClimber;
 import frc.robot.commands.climb.individual.*;
 import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.DriveTrain;
 
 /**
  * Sequential command that encapsulates the various sub-commands used

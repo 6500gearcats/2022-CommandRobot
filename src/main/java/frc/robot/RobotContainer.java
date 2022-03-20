@@ -4,11 +4,8 @@
 
 package frc.robot;
 
-import java.security.AuthProvider;
-
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.XboxController.Axis;
 import edu.wpi.first.wpilibj.XboxController.Button;
 
 import frc.robot.subsystems.DriveTrain;
@@ -19,7 +16,6 @@ import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.Constants.ClimberConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.AutoCommand;
@@ -32,6 +28,7 @@ import frc.robot.commands.ShootBallFast;
 import frc.robot.commands.ShootBallSlow;
 import frc.robot.commands.VomitBall;
 import frc.robot.commands.climb.groups.SetupForClimb;
+import frc.robot.commands.climb.groups.TraversalClimb;
 import frc.robot.commands.climb.groups.Climb2Bars;
 import frc.robot.commands.climb.groups.ClimbBar;
 import frc.robot.commands.climb.individual.RetractArm;
@@ -90,7 +87,7 @@ public class RobotContainer {
     // XBox 2 - gunner bindings
     new JoystickButton(m_gunnerController, Button.kA.value).whenPressed(new SetupForClimb(m_robotClimber));
     new JoystickButton(m_gunnerController, Button.kY.value).whenPressed(new Climb2Bars(m_robotClimber));
-    new JoystickButton(m_gunnerController, Button.kX.value).whenPressed(new ClimbBar(m_robotClimber));
+    new JoystickButton(m_gunnerController, Button.kX.value).whenPressed(new TraversalClimb(m_robotClimber));
 
     new JoystickButton(m_gunnerController, Button.kB.value).whenPressed(new KillClimber(m_robotClimber));
     new JoystickButton(m_gunnerController, Button.kStart.value).whenPressed(new RetractArm(m_robotClimber));
