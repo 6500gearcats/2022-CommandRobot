@@ -34,10 +34,14 @@ public class Climber extends SubsystemBase{
       m_lowerLimit = m_winchMotor.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
       m_upperLimit = m_winchMotor.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
 
+      // m_upperLimit = m_winchMotor.getForwardLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
+      // m_lowerLimit = m_winchMotor.getReverseLimitSwitch(SparkMaxLimitSwitch.Type.kNormallyOpen);
+
+
       m_winchEncoder = m_winchMotor.getEncoder();
       m_tiltEncoder = m_tiltMotor.getEncoder();
 
-      //m_winchMotor.setInverted(true);
+      m_winchMotor.setInverted(true);
       m_winchMotor.setIdleMode(IdleMode.kBrake);
       m_tiltMotor.setIdleMode(IdleMode.kCoast);
 

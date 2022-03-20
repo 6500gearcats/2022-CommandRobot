@@ -33,7 +33,7 @@ public class RaiseArm extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return m_climber.ArmIsFullyExtended();
+  return m_climber.ArmIsFullyExtended();
   }
 
   // Called once after isFinished returns true

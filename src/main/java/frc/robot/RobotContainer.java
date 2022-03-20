@@ -28,6 +28,7 @@ import frc.robot.commands.ShootBallFast;
 import frc.robot.commands.ShootBallSlow;
 import frc.robot.commands.VomitBall;
 import frc.robot.commands.climb.groups.SetupForClimb;
+import frc.robot.commands.climb.groups.TraversalClimb;
 import frc.robot.commands.climb.groups.Climb2Bars;
 import frc.robot.commands.climb.groups.ClimbBar;
 import frc.robot.commands.climb.individual.RetractArm;
@@ -86,7 +87,7 @@ public class RobotContainer {
     // XBox 2 - gunner bindings
     new JoystickButton(m_gunnerController, Button.kA.value).whenPressed(new SetupForClimb(m_robotClimber));
     new JoystickButton(m_gunnerController, Button.kY.value).whenPressed(new Climb2Bars(m_robotClimber));
-    new JoystickButton(m_gunnerController, Button.kX.value).whenPressed(new ClimbBar(m_robotClimber));
+    new JoystickButton(m_gunnerController, Button.kX.value).whenPressed(new TraversalClimb(m_robotClimber));
 
     new JoystickButton(m_gunnerController, Button.kB.value).whenPressed(new KillClimber(m_robotClimber));
     new JoystickButton(m_gunnerController, Button.kStart.value).whenPressed(new RetractArm(m_robotClimber));
