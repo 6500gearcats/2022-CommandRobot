@@ -23,6 +23,7 @@ import frc.robot.Constants.ClimberConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.AutoCommand;
+import frc.robot.commands.AutoPickup;
 import frc.robot.commands.DefaultDrive;
 import frc.robot.commands.KillClimber;
 import frc.robot.commands.LiftBall;
@@ -79,7 +80,10 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     // XBox 1 - driver bindings
-    new JoystickButton(m_driverController, Button.kA.value).whenPressed(new PickupBall(m_robotIntake));
+    //new JoystickButton(m_driverController, Button.kA.value).whenPressed(new PickupBall(m_robotIntake));
+    new JoystickButton(m_driverController, Button.kA.value)
+    .whenPressed(new AutoPickup(m_robotIntake, m_robotDrive, m_driverController::getLeftY ));
+
     new JoystickButton(m_driverController, Button.kY.value).whenPressed(new VomitBall(m_robotIntake));
     new Trigger(() -> (m_driverController.getLeftTriggerAxis() > 0.5))
       .whenActive(new DefaultDrive(m_robotDrive, m_driverController::getLeftY, m_driverController::getRightX, DriveConstants.kMaxSpeed));

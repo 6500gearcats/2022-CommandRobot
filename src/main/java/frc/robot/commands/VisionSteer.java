@@ -18,8 +18,8 @@ import java.util.function.DoubleSupplier;
 public class VisionSteer extends CommandBase {
   private final DriveTrain m_drive;
   private final DoubleSupplier m_forward;
-  private final DoubleSupplier m_rotation;
   private double m_maxSpeed;
+  private double m_visionInput;
 
 
   /**
@@ -29,18 +29,13 @@ public class VisionSteer extends CommandBase {
    * @param forward The control input for driving forwards/backwards
    * @param rotation The control input for turning
    */
-  public VisionSteer(DriveTrain subsystem, DoubleSupplier forward, DoubleSupplier rotation) {
+  public VisionSteer(DriveTrain subsystem, DoubleSupplier forward) {
     m_drive = subsystem;
     m_forward = forward;
-    m_rotation = rotation;
-    m_maxSpeed = DriveConstants.kMaxSpeed;
+    m_maxSpeed = DriveConstants.kSlowSpeed;
     addRequirements(m_drive);
   }
 
-  public VisionSteer(DriveTrain subsystem, DoubleSupplier forward, DoubleSupplier rotation, double speed) {
-    this(subsystem,forward,rotation);
-    m_maxSpeed = speed;
-  }
 
   @Override
   public void initialize() {
@@ -49,9 +44,20 @@ public class VisionSteer extends CommandBase {
 
   @Override
   public void execute() {
+    m_visionInput = SmartDashboard.getNumber("target offset", 0.0);
+    
     Double forward = m_forward.getAsDouble();
-    Double rotation = m_rotation.getAsDouble();
+    Double rotation = 0.0;
+    if (Math.abs(m_visionInput) > 0.1 ) {
+      rotation = m_visionInput/2;
+    }
     
     m_drive.arcadeDrive(forward,rotation);
   }
+
+  // @Override
+  // public boolean isFinished() {
+  //   return (Math.abs(m_visionInput) <= 0.1);
+  // }
+
 }
