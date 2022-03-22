@@ -31,6 +31,7 @@ import frc.robot.commands.PickupBall;
 import frc.robot.commands.ReverseLift;
 import frc.robot.commands.ShootBallFast;
 import frc.robot.commands.ShootBallSlow;
+import frc.robot.commands.VisionSteer;
 import frc.robot.commands.VomitBall;
 import frc.robot.commands.climb.groups.SetupForClimb;
 import frc.robot.commands.climb.groups.Climb2Bars;
@@ -81,8 +82,12 @@ public class RobotContainer {
 
     // XBox 1 - driver bindings
     //new JoystickButton(m_driverController, Button.kA.value).whenPressed(new PickupBall(m_robotIntake));
+    // new JoystickButton(m_driverController, Button.kA.value)
+    // .whenPressed(new AutoPickup(m_robotIntake, m_robotDrive, m_driverController::getLeftY ));
+
     new JoystickButton(m_driverController, Button.kA.value)
-    .whenPressed(new AutoPickup(m_robotIntake, m_robotDrive, m_driverController::getLeftY ));
+    .whenPressed(new VisionSteer( m_robotDrive, m_driverController::getLeftY ));
+
 
     new JoystickButton(m_driverController, Button.kY.value).whenPressed(new VomitBall(m_robotIntake));
     new Trigger(() -> (m_driverController.getLeftTriggerAxis() > 0.5))

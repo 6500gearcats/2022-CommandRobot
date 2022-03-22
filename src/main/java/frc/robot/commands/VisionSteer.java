@@ -32,7 +32,7 @@ public class VisionSteer extends CommandBase {
   public VisionSteer(DriveTrain subsystem, DoubleSupplier forward) {
     m_drive = subsystem;
     m_forward = forward;
-    m_maxSpeed = DriveConstants.kSlowSpeed;
+    m_maxSpeed = DriveConstants.kMaxSpeed;
     addRequirements(m_drive);
   }
 
@@ -46,11 +46,11 @@ public class VisionSteer extends CommandBase {
   public void execute() {
     m_visionInput = SmartDashboard.getNumber("target offset", 0.0);
     
-    Double forward = m_forward.getAsDouble();
+    Double forward = DriveConstants.kAutoSpeed;
     Double rotation = 0.0;
-    if (Math.abs(m_visionInput) > 0.1 ) {
-      rotation = m_visionInput/2;
-    }
+    // if (Math.abs(m_visionInput) > 0.1 ) {
+       rotation = m_visionInput/2;
+    // }
     
     m_drive.arcadeDrive(forward,rotation);
   }
