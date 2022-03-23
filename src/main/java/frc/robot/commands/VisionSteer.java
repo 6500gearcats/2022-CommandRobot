@@ -75,7 +75,7 @@ public class VisionSteer extends CommandBase {
     Double forward = DriveConstants.kAutoSpeed;
     Double rotation = 0.0;
     // if (Math.abs(m_visionInput) > 0.1 ) {
-       rotation = filter.calculate(m_visionInput);
+       rotation = filter.calculate(m_visionInput) * 0.5;
     // }
     
     m_drive.arcadeDrive(forward,rotation);
