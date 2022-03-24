@@ -86,7 +86,8 @@ public class VisionSteer extends CommandBase {
       m_drive.arcadeDrive(0, 0);  
     }
     else {
-      rotation = filter.calculate(m_visionInput) * 0.5;
+      // scale and INVERT for 2022 robot (upside-down pixy2)
+      rotation = filter.calculate(m_visionInput) * -0.5;
       m_drive.arcadeDrive(forward,rotation);
     }
   }
