@@ -6,7 +6,9 @@ import frc.robot.Constants.DriveConstants;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.math.filter.MedianFilter;
 import edu.wpi.first.math.filter.SlewRateLimiter;
+import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
@@ -25,7 +27,10 @@ public class VisionSteer extends CommandBase {
   private double m_maxSpeed;
   private double m_visionInput;
   private int  m_visionFilterSamples;
-
+  NetworkTableInstance inst = NetworkTableInstance.getDefault();
+  NetworkTable table = inst.getTable("FMSInfo");
+  private boolean m_isRedAlliance;
+  
 
   ShuffleboardTab tab = Shuffleboard.getTab("Drive");
     private NetworkTableEntry m_visionFilterSample =
@@ -57,6 +62,8 @@ public class VisionSteer extends CommandBase {
     System.out.println("Setting vision sampler to: " + samples);
 
     filter = new MedianFilter(samples);
+
+    m_isRedAlliance = table.getEntry("IsRedAlliance").getBoolean(true);
     
   }
 
@@ -70,15 +77,18 @@ public class VisionSteer extends CommandBase {
 
   @Override
   public void execute() {
-    m_visionInput = SmartDashboard.getNumber("target offset", 0.0);
-    
     Double forward = DriveConstants.kAutoSpeed;
     Double rotation = 0.0;
-    // if (Math.abs(m_visionInput) > 0.1 ) {
-       rotation = filter.calculate(m_visionInput) * 0.5;
-    // }
+    m_visionInput = SmartDashboard.getNumber("target offset", 99);
     
-    m_drive.arcadeDrive(forward,rotation);
+    // Out of bounds value means we should stop
+    if (Math.abs(m_visionInput) > 1) {
+      m_drive.arcadeDrive(0, 0);  
+    }
+    else {
+      rotation = filter.calculate(m_visionInput) * 0.5;
+      m_drive.arcadeDrive(forward,rotation);
+    }
   }
 
   // @Override
