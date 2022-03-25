@@ -84,7 +84,7 @@ public class RobotContainer {
     // .whenPressed(new AutoPickup(m_robotIntake, m_robotDrive, m_driverController::getLeftY ));
 
     new JoystickButton(m_driverController, Button.kA.value)
-    .whenPressed(new VisionSteer( m_robotDrive, m_driverController::getLeftY ));
+    .whenPressed(new AutoPickup( m_robotIntake, m_robotDrive, m_driverController::getLeftY ));
 
 
     new JoystickButton(m_driverController, Button.kY.value).whenPressed(new VomitBall(m_robotIntake));
