@@ -73,7 +73,7 @@ public final class Constants {
         public static final double kMaxWinchSpeed = -0.8;
         public static final double kMaxDriveSpeed = 0.1;
         public static final int kMaxLiftCurrent = 30;
-        public static final int kMaxTiltCurrent = 1;
+        public static final int kMaxTiltCurrent = 2;
         public static final double kFwdTiltSpeed = 0.5;
         public static final double kBackTiltSpeed = -0.5;
         public static final double kTraversalRaiseSpeed = 1;

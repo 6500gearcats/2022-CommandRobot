@@ -55,15 +55,7 @@ public class ClimbBar extends SequentialCommandGroup {
                 () -> climber.extendArm(), 
                 () -> climber.stopWinch(),  
                 climber
-            ).withTimeout(1),
-
-            new RunCommand(
-                () -> climber.tiltRobot(ClimberConstants.kFwdTiltSpeed), 
-                climber
-            ).withTimeout(2),
-
-            // stop all climber motors
-            new KillClimber(climber)
+            ).withTimeout(1)
 
             
 
