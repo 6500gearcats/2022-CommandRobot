@@ -79,11 +79,10 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     // XBox 1 - driver bindings
-    //new JoystickButton(m_driverController, Button.kA.value).whenPressed(new PickupBall(m_robotIntake));
-    // new JoystickButton(m_driverController, Button.kA.value)
-    // .whenPressed(new AutoPickup(m_robotIntake, m_robotDrive, m_driverController::getLeftY ));
 
-    new JoystickButton(m_driverController, Button.kA.value)
+    new JoystickButton(m_driverController, Button.kA.value).whenPressed(new PickupBall(m_robotIntake));
+    
+    new JoystickButton(m_driverController, Button.kRightBumper.value)
     .whenPressed(new AutoPickup( m_robotIntake, m_robotDrive, m_driverController::getLeftY ));
 
 
