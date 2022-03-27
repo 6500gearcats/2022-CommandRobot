@@ -34,6 +34,7 @@ import frc.robot.commands.climb.groups.TraversalClimb;
 import frc.robot.commands.climb.groups.Climb2Bars;
 import frc.robot.commands.climb.groups.Climb3Bars;
 import frc.robot.commands.climb.groups.ClimbBar;
+import frc.robot.commands.climb.individual.ParkArm;
 import frc.robot.commands.climb.individual.RetractArm;
 import frc.robot.commands.climb.individual.StowClimber;
 
@@ -139,4 +140,8 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     return new AutoCommand(m_robotDrive, m_robotShooter, m_robotElevator);
     }
+
+  public Command AutoParkArm() {
+    return new ParkArm(m_robotClimber);
+  }
   }
