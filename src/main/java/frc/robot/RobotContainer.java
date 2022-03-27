@@ -112,7 +112,7 @@ public class RobotContainer {
       .whenActive(new LiftBall(m_robotElevator, m_robotIntake));
       
     new Trigger(() -> m_gunnerController.getLeftY() > 0.5)
-      .whileActiveContinuous(new ReverseLift(m_robotElevator, m_robotIntake));
+      .whileActiveContinuous(new ReverseLift(m_robotElevator, m_robotIntake, m_robotShooter));
     
 
     new Trigger(() -> m_gunnerController.getRightY() < -0.5)

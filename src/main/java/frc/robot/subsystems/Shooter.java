@@ -58,4 +58,8 @@ public class Shooter extends SubsystemBase{
       return m_bShooterAtSpeed;
     }
 
+    public void reverseMotor() {
+      m_ShooterMotor.set(-ShooterConstants.kShooterSpeedSlow);
+    }
+
 }
