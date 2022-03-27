@@ -15,11 +15,11 @@ public class AutoPickup extends ParallelRaceGroup {
     /**
      * 
      */
-    public AutoPickup(Intake intake, DriveTrain drive, DoubleSupplier forward) {
+    public AutoPickup(Intake intake, DriveTrain drive) {
         addCommands(
             // Start the Intake and
             new PickupBall(intake),
-            new VisionSteer(drive, forward)
+            new VisionSteer(drive)
         );
     }
 

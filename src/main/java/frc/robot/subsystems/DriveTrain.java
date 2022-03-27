@@ -13,6 +13,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import com.kauailabs.navx.frc.AHRS;
 
 public class DriveTrain extends SubsystemBase {
 
@@ -56,6 +59,27 @@ public class DriveTrain extends SubsystemBase {
   // private NetworkTableEntry m_rotationSlew =
   //     tab.add("RotationSlewRate", 0.8)
   //       .getEntry();
+
+  private final Gyro m_gyro = new AHRS();
+
+  /**
+   * Returns the turn rate of the robot.
+   *
+   * @return The turn rate of the robot, in degrees per second
+   */
+  public double getTurnRate() {
+    return m_gyro.getRate() * (DriveConstants.kGyroReversed ? -1.0 : 1.0);
+  }
+
+  public void resetAngle() {
+    m_gyro.reset();
+  }
+
+  public double gyroAngle = m_gyro.getAngle();
+
+  public boolean isAtTargetAngle() {
+    return gyroAngle >= 50.0;
+  }
       
   /** Creates a new DriveSubsystem. */
   public DriveTrain() {

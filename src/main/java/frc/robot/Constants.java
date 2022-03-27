@@ -38,6 +38,7 @@ public final class Constants {
         public static final double kDriveRateLimit = 2;
         public static final double kTurnRateLimit = 20;
         public static final double kAutoSpeed = -0.5;
+        public static final boolean kGyroReversed = false;
       }
 
       public static final class IntakeConstants {

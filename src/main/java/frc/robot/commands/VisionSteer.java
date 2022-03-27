@@ -23,7 +23,6 @@ import java.util.function.DoubleSupplier;
  */
 public class VisionSteer extends CommandBase {
   private final DriveTrain m_drive;
-  private final DoubleSupplier m_forward;
   private double m_maxSpeed;
   private double m_visionInput;
   private int  m_visionFilterSamples;
@@ -50,9 +49,8 @@ public class VisionSteer extends CommandBase {
    * @param forward The control input for driving forwards/backwards
    * @param rotation The control input for turning
    */
-  public VisionSteer(DriveTrain subsystem, DoubleSupplier forward) {
+  public VisionSteer(DriveTrain subsystem) {
     m_drive = subsystem;
-    m_forward = forward;
     m_maxSpeed = DriveConstants.kMaxSpeed;
     addRequirements(m_drive);
 

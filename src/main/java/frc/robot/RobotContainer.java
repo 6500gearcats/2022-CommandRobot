@@ -84,7 +84,7 @@ public class RobotContainer {
     new JoystickButton(m_driverController, Button.kA.value).whenPressed(new PickupBall(m_robotIntake));
     
     new JoystickButton(m_driverController, Button.kRightBumper.value)
-    .whenPressed(new AutoPickup( m_robotIntake, m_robotDrive, m_driverController::getLeftY ));
+    .whenPressed(new AutoPickup( m_robotIntake, m_robotDrive));
 
 
     new JoystickButton(m_driverController, Button.kY.value).whenPressed(new VomitBall(m_robotIntake));
@@ -138,7 +138,7 @@ public class RobotContainer {
   // }
 
   public Command getAutonomousCommand() {
-    return new AutoCommand(m_robotDrive, m_robotShooter, m_robotElevator);
+    return new AutoCommand(m_robotDrive, m_robotShooter, m_robotElevator, m_robotIntake);
     }
 
   public Command AutoParkArm() {
