@@ -1,17 +1,11 @@
 package frc.robot.commands;
 
 
-import frc.robot.Constants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.math.filter.MedianFilter;
-import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import java.util.function.DoubleSupplier;
@@ -25,19 +19,10 @@ public class VisionSteer extends CommandBase {
   private final DriveTrain m_drive;
   private double m_maxSpeed;
   private double m_visionInput;
-  private int  m_visionFilterSamples;
   NetworkTableInstance inst = NetworkTableInstance.getDefault();
   NetworkTable table = inst.getTable("FMSInfo");
-  private boolean m_isRedAlliance;
   
 
-  ShuffleboardTab tab = Shuffleboard.getTab("Drive");
-    private NetworkTableEntry m_visionFilterSample =
-    tab.add("Filter samples", 10)
-      .getEntry();
-
-  
-  
   // Creates a MedianFilter with a window size of 5 samples
   private MedianFilter filter; 
 
@@ -54,15 +39,12 @@ public class VisionSteer extends CommandBase {
     m_maxSpeed = DriveConstants.kMaxSpeed;
     addRequirements(m_drive);
 
-    double dSamples = m_visionFilterSample.getDouble(10.0);
-    int samples = (int)dSamples;
+    int samples = DriveConstants.kVisionFilterSamples;
 
     System.out.println("Setting vision sampler to: " + samples);
 
     filter = new MedianFilter(samples);
 
-    m_isRedAlliance = table.getEntry("IsRedAlliance").getBoolean(true);
-    
   }
 
 

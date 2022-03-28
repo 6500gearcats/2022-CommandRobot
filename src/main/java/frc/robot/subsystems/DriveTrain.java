@@ -4,18 +4,24 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.hal.SimDouble;
+import edu.wpi.first.hal.simulation.SimDeviceDataJNI;
+import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.utility.GCSlewRateLimiter;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.simulation.AnalogGyroSim;
+import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+//import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.SPI;
 
 public class DriveTrain extends SubsystemBase {
 
@@ -34,6 +40,8 @@ public class DriveTrain extends SubsystemBase {
 
   // The robot's drive
   private final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotors, m_rightMotors);
+  // private DifferentialDrivetrainSim drivetrainSim;
+
   
   private GCSlewRateLimiter m_driveRateLimiter;
   private GCSlewRateLimiter m_turnRateLimiter;
@@ -60,7 +68,7 @@ public class DriveTrain extends SubsystemBase {
   //     tab.add("RotationSlewRate", 0.8)
   //       .getEntry();
 
-  private final Gyro m_gyro = new AHRS();
+  private final AHRS m_navX = new AHRS(SPI.Port.kMXP);
 
   /**
    * Returns the turn rate of the robot.
@@ -68,17 +76,18 @@ public class DriveTrain extends SubsystemBase {
    * @return The turn rate of the robot, in degrees per second
    */
   public double getTurnRate() {
-    return m_gyro.getRate() * (DriveConstants.kGyroReversed ? -1.0 : 1.0);
+    return m_navX.getRate() * (DriveConstants.kGyroReversed ? -1.0 : 1.0);
   }
 
   public void resetAngle() {
-    m_gyro.reset();
+    m_navX.reset();
   }
 
-  public double gyroAngle = m_gyro.getAngle();
+  // public double gyroAngle = m_gyro.getAngle();
 
-  public boolean isAtTargetAngle() {
-    return gyroAngle >= 50.0;
+  public boolean isAtTargetAngle(double angle) {
+
+    return m_navX.getAngle() >= angle;
   }
       
   /** Creates a new DriveSubsystem. */
@@ -95,8 +104,27 @@ public class DriveTrain extends SubsystemBase {
     m_driveRateLimiter = new GCSlewRateLimiter(DriveConstants.kDriveRateLimit);
     m_turnRateLimiter = new GCSlewRateLimiter(DriveConstants.kTurnRateLimit);
 
+
+    // drivetrainSim =
+    // new DifferentialDrivetrainSim(
+    //     DriveConstants.PLANT,
+    //     DCMotor.getNEO(4),
+    //     DriveConstants.DRIVE_GEARING,
+    //     DriveConstants.TRACK_WIDTH_METERS,
+    //     DriveConstants.WHEEL_RADIUS_METERS,
+    //     null // VecBuilder.fill(0, 0, 0.0001, 0.1, 0.1, 0.005, 0.005)
+    //     );
   }
 
+  @Override
+  public void simulationPeriodic() {
+      // // From NavX example
+      // int dev = SimDeviceDataJNI.getSimDeviceHandle("navX-Sensor[0]");
+      // SimDouble angle = new SimDouble(SimDeviceDataJNI.getSimValueHandle(dev, "Yaw"));
+      // // NavX expects clockwise positive, but sim outputs clockwise negative
+      // angle.set(Math.IEEEremainder(-drivetrainSim.getHeading().getDegrees(), 360));
+      // // navxSimAngle = -drivetrainSim.getHeading().getDegrees();
+  }
 
   @Override
   public void periodic() {
@@ -175,6 +203,20 @@ public class DriveTrain extends SubsystemBase {
     m_maxOutput = maxOutput;
     SmartDashboard.putNumber("DriveTrain Max Output Set", m_maxOutput);
     m_drive.setMaxOutput(maxOutput);
+  }
+
+  /** Zeroes the heading of the robot. */
+  public void zeroHeading() {
+    m_navX.reset();
+  }
+
+  /**
+   * Returns the heading of the robot.
+   *
+   * @return the robot's heading in degrees, from 180 to 180
+   */
+  public double getHeading() {
+    return Math.IEEEremainder(m_navX.getAngle(), 360) * (DriveConstants.kGyroReversed ? -1.0 : 1.0);
   }
 
 }

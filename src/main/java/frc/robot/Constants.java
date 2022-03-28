@@ -4,6 +4,10 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.numbers.N2;
+import edu.wpi.first.math.system.LinearSystem;
+import edu.wpi.first.math.system.plant.LinearSystemId;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.XboxController.Button;
 
@@ -39,6 +43,27 @@ public final class Constants {
         public static final double kTurnRateLimit = 20;
         public static final double kAutoSpeed = -0.5;
         public static final boolean kGyroReversed = false;
+        public static final int kVisionFilterSamples = 10;
+        public static final double kTurnP = 1;
+        public static final double kTurnD = 0;
+        public static final double kTurnI = 0;
+        public static final double kTurnToleranceDeg = 5;
+        public static final double kTurnRateToleranceDegPerS = 10;
+        
+        // // Simulation constants
+        // public static final double kS = 0.62; // kS
+        // public static final double kV = 2.42; // kV
+        // public static final double kA = 0.165; // kA
+        // public static final double kVAngular = 1.654294727 * 2;
+        // public static final double kAAngular = kA; // ???????
+
+        // public static final LinearSystem<N2, N2, N2> PLANT =         
+        //   LinearSystemId.identifyDrivetrainSystem(kV, kA, kVAngular, kAAngular);
+
+        // public static final double TRACK_WIDTH_METERS = 0.5757943419; // About 22.6" from characterization, was 22" from CAD
+        // public static final double DRIVE_GEARING = 10.71;
+        // public static final double WHEEL_DIAMETER_METERS = Units.inchesToMeters(6);
+        // public static final double WHEEL_RADIUS_METERS = WHEEL_DIAMETER_METERS / 2.0d;
       }
 
       public static final class IntakeConstants {

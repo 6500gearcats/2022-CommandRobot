@@ -11,11 +11,11 @@ public class AutoCommand extends SequentialCommandGroup {
     public AutoCommand(DriveTrain DriveTrain, Shooter shooter, Elevator elevator, Intake intake) {
         addCommands(
             new ShootBallFast(shooter, elevator).withTimeout(2),
-        new RunCommand(
-                () -> DriveTrain.arcadeDrive(0.7,0), 
-                DriveTrain
-            ).withTimeout(1),
-            new TurnToBall().withTimeout(2),
+            new TurnToAngle(180.0, DriveTrain),
+            new RunCommand(
+                    () -> DriveTrain.arcadeDrive(0.7,0), 
+                    DriveTrain
+                ).withTimeout(1),
             new AutoPickup(intake, DriveTrain).withTimeout(10)
         );
         
