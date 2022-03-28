@@ -13,6 +13,10 @@ import frc.robot.Constants.ClimberConstants;
 import frc.robot.utility.EncoderOdometer;
 
 public class Climber extends SubsystemBase{
+  private static final boolean kLeftMotor1Port = false;
+  private static final boolean kLeftMotor2Port = false;
+  private static final boolean kRightMotor1Port = false;
+  private static final boolean kRightMotor2Port = false;
   public final CANSparkMax m_winchMotor = new CANSparkMax(ClimberConstants.kWinchMotorPort, MotorType.kBrushless);
   public final CANSparkMax m_tiltMotor = new CANSparkMax(ClimberConstants.kTiltMotorPort, MotorType.kBrushless);
 
@@ -72,7 +76,10 @@ public class Climber extends SubsystemBase{
       boolean upperLimit = m_upperLimit.isPressed();
       SmartDashboard.putBoolean("Upper limit", upperLimit);
       SmartDashboard.putBoolean("Lower limit", lowerLimit);
-
+      SmartDashboard.putBoolean("Motor Controller 1", kLeftMotor1Port); 
+      SmartDashboard.putBoolean("Motor Controller 3", kLeftMotor2Port); 
+      SmartDashboard.putBoolean("Motor Controller 2", kRightMotor1Port); 
+      SmartDashboard.putBoolean("Motor Controller 4", kRightMotor2Port); 
 
       SmartDashboard.putNumber("Arm position", m_winchOdometer.getPosition());
       SmartDashboard.putNumber("Winch Motor Speed",m_winchMotor.get());
