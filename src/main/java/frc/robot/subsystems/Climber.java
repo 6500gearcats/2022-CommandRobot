@@ -158,4 +158,7 @@ public class Climber extends SubsystemBase{
       return (m_isTiltStalled || bStalled);
     }
     
+    public void ParkArm() {
+      m_tiltMotor.set(ClimberConstants.kParkSpeed);
+    }
 }

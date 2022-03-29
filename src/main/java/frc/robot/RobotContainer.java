@@ -34,6 +34,7 @@ import frc.robot.commands.climb.groups.TraversalClimb;
 import frc.robot.commands.climb.groups.Climb2Bars;
 import frc.robot.commands.climb.groups.Climb3Bars;
 import frc.robot.commands.climb.groups.ClimbBar;
+import frc.robot.commands.climb.individual.ParkArm;
 import frc.robot.commands.climb.individual.RetractArm;
 import frc.robot.commands.climb.individual.StowClimber;
 
@@ -112,7 +113,7 @@ public class RobotContainer {
       .whenActive(new LiftBall(m_robotElevator, m_robotIntake));
       
     new Trigger(() -> m_gunnerController.getLeftY() > 0.5)
-      .whileActiveContinuous(new ReverseLift(m_robotElevator, m_robotIntake));
+      .whileActiveContinuous(new ReverseLift(m_robotElevator, m_robotIntake, m_robotShooter));
     
 
     new Trigger(() -> m_gunnerController.getRightY() < -0.5)
@@ -139,4 +140,8 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     return new AutoCommand(m_robotDrive, m_robotShooter, m_robotElevator);
     }
+
+  public Command AutoParkArm() {
+    return new ParkArm(m_robotClimber);
+  }
   }
