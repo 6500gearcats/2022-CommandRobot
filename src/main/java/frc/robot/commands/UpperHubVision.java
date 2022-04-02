@@ -53,24 +53,38 @@ public class UpperHubVision extends CommandBase {
         " | Skew: " + bestTarget.getSkew()
       );
 
-    // If there are no targets
+      //########################################################################
+      //EXPERIMENTAL - Run at your own risk, idk what im doig atm
+      //########################################################################
+
+      //Look at upper hub
+      m_drive.arcadeDrive(
+        translate(bestTarget.getYaw(), -30, 30, -1, 1),
+        0
+      ); 
+
+    // If there are no targets, print and stop drive
     } else {
       System.out.println("No targets found");
+      m_drive.arcadeDrive(0, 0); 
     }
-
-    //########################################################################
-    //EXPERIMENTAL - Run at your own risk, idk what im doig atm
-    //########################################################################
-
-    // Double forward = DriveConstants.kAutoSpeed;
-    // Double rotation = 0.0;
-
-    m_drive.arcadeDrive(0.1, 0.1); 
 
   }
 
   @Override
   public void end(boolean interrupted) {
     m_drive.arcadeDrive(0, 0); 
+  }
+
+  private double translate(double value, double oldMin, double oldMax, double newMin, double newMax) {
+    //Figure out how wide each range is
+    double oldSpan = oldMax - oldMin;
+    double newSpan = newMax - newMin;
+
+    //Convert the left range into a 0-1 range
+    double valueScaled = (value - oldMin) / oldSpan;
+
+    //Convert the 0-1 range into a value in the right range
+    return newMin + (valueScaled * newSpan);
   }
 }
