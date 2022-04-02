@@ -80,13 +80,15 @@ public final class Constants {
         public static final double kTraversalRaiseSpeed = 1;
         public static final double kTraversalTiltSpeed = 1;
         public static final double kParkSpeed = 0.05;
+        public static final double kStoreArmSpeed = 0.25;
       }
 
       public static final class ShooterConstants {
         public static final int kShooterMotorPort = 30;
-        public static final double kShooterSpeedSlow = 0.43;
-        public static final double kShooterSpeedFast = 0.70;
-        public static final double kShooterSpeed = 0.85; //0.43
+        public static final double kShooterSpeedSlow = 0.43; 
+        public static final double kShooterSpeedFast = 1; // This is currently too fast, we need to fine tune it later.
+        //TODO Make the fine tune the fast speed.
+        public static final double kShooterSpeed = 0.85; // Used to be 0.43. 
         public static final double kBallFiredThreshold = 0.1;
         public static final int kShooterEncoderPort = 30;
         
