@@ -47,10 +47,8 @@ public class UpperHubVision extends CommandBase {
 
       //Print general info
       System.out.println(
-        "Area: " + bestTarget.getArea() +
         " | Yaw: " + bestTarget.getYaw() +
-        " | Pitch: " + bestTarget.getPitch() +
-        " | Skew: " + bestTarget.getSkew()
+        " | Pitch: " + bestTarget.getPitch()
       );
 
       //########################################################################
@@ -59,8 +57,8 @@ public class UpperHubVision extends CommandBase {
 
       //Look at upper hub
       m_drive.arcadeDrive(
-        translate(bestTarget.getYaw(), -30, 30, -1, 1),
-        0
+        0.5,
+        translate(bestTarget.getYaw(), -30, 30, -1, 1)
       ); 
 
     // If there are no targets, print and stop drive
