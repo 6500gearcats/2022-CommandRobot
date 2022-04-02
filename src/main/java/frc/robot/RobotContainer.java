@@ -20,7 +20,6 @@ import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.AutoCommand;
 import frc.robot.commands.AutoPickup;
-import frc.robot.commands.UpperHubVision;
 import frc.robot.commands.DefaultDrive;
 import frc.robot.commands.KillClimber;
 import frc.robot.commands.LiftBall;
@@ -28,13 +27,13 @@ import frc.robot.commands.PickupBall;
 import frc.robot.commands.ReverseLift;
 import frc.robot.commands.ShootBallFast;
 import frc.robot.commands.ShootBallSlow;
-// import frc.robot.commands.VisionSteer;
+import frc.robot.commands.VisionSteer;
 import frc.robot.commands.VomitBall;
 import frc.robot.commands.climb.groups.SetupForClimb;
 import frc.robot.commands.climb.groups.TraversalClimb;
-// import frc.robot.commands.climb.groups.Climb2Bars;
+import frc.robot.commands.climb.groups.Climb2Bars;
 import frc.robot.commands.climb.groups.Climb3Bars;
-// import frc.robot.commands.climb.groups.ClimbBar;
+import frc.robot.commands.climb.groups.ClimbBar;
 import frc.robot.commands.climb.individual.ParkArm;
 import frc.robot.commands.climb.individual.RetractArm;
 import frc.robot.commands.climb.individual.StowClimber;
@@ -82,16 +81,18 @@ public class RobotContainer {
 
     // XBox 1 - driver bindings
 
-    // new JoystickButton(m_driverController, Button.kA.value).whenPressed(new PickupBall(m_robotIntake));
-    new JoystickButton(m_driverController, Button.kA.value).whenHeld(new UpperHubVision());
+    new JoystickButton(m_driverController, Button.kA.value).whenPressed(new PickupBall(m_robotIntake));
     
-    new JoystickButton(m_driverController, Button.kRightBumper.value).whenPressed(new AutoPickup( m_robotIntake, m_robotDrive, m_driverController::getLeftY ));
+    new JoystickButton(m_driverController, Button.kRightBumper.value)
+    .whenPressed(new AutoPickup( m_robotIntake, m_robotDrive, m_driverController::getLeftY ));
 
 
     new JoystickButton(m_driverController, Button.kY.value).whenPressed(new VomitBall(m_robotIntake));
-    new Trigger(() -> (m_driverController.getLeftTriggerAxis() > 0.5)).whenActive(new DefaultDrive(m_robotDrive, m_driverController::getLeftY, m_driverController::getRightX, DriveConstants.kMaxSpeed));
+    new Trigger(() -> (m_driverController.getLeftTriggerAxis() > 0.5))
+      .whenActive(new DefaultDrive(m_robotDrive, m_driverController::getLeftY, m_driverController::getRightX, DriveConstants.kMaxSpeed));
     
-    new Trigger(() -> (m_driverController.getRightTriggerAxis() > 0.5)).whenActive(new DefaultDrive(m_robotDrive, m_driverController::getLeftY, m_driverController::getRightX, DriveConstants.kSlowSpeed));
+    new Trigger(() -> (m_driverController.getRightTriggerAxis() > 0.5))
+      .whenActive(new DefaultDrive(m_robotDrive, m_driverController::getLeftY, m_driverController::getRightX, DriveConstants.kSlowSpeed));
 
     // XBox 2 - gunner bindings
     new JoystickButton(m_gunnerController, Button.kA.value).whenPressed(new SetupForClimb(m_robotClimber));
