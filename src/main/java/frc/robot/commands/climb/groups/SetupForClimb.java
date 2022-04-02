@@ -1,6 +1,7 @@
 package frc.robot.commands.climb.groups;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.climb.individual.PrepArm;
 import frc.robot.commands.climb.individual.RaiseArm;
 import frc.robot.subsystems.Climber;
@@ -9,7 +10,7 @@ import frc.robot.subsystems.Climber;
  * Sequential command that encapsulates the various sub-commands used
  * by the robot in climbing a bar in the climbing challenge
  */
-public class SetupForClimb extends ParallelCommandGroup {
+public class SetupForClimb extends SequentialCommandGroup {
     /**
      * Creates a new ClimbBar.
      * 
