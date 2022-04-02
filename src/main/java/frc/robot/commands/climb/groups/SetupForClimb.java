@@ -1,6 +1,7 @@
 package frc.robot.commands.climb.groups;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import frc.robot.commands.climb.individual.PrepArm;
 import frc.robot.commands.climb.individual.RaiseArm;
 import frc.robot.subsystems.Climber;
 
@@ -17,6 +18,7 @@ public class SetupForClimb extends ParallelCommandGroup {
     public SetupForClimb(Climber climber) {
         addCommands(
             // Setup the robot for climbing the bar
+            new PrepArm(climber).withTimeout(0.5),
             new RaiseArm(climber)
         );
     }
