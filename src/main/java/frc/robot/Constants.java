@@ -79,8 +79,8 @@ public final class Constants {
         public static final double kBackTiltSpeed = -0.5;
         public static final double kTraversalRaiseSpeed = 1;
         public static final double kTraversalTiltSpeed = 1;
-        public static final double kParkSpeed = 0.05;
-        public static final double kStoreArmSpeed = 0.25;
+        public static final double kParkSpeed = -0.05;
+        public static final double kStoreArmSpeed = -0.25;
       }
 
       public static final class ShooterConstants {
