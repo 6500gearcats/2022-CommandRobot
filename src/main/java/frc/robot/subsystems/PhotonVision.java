@@ -69,13 +69,14 @@ public class PhotonVision extends SubsystemBase {
         double upperHubTargetHeight = Units.inchesToMeters(Constants.VisionConstants.upperHubTargetHeight);
         double cameraHeight = Units.inchesToMeters(Constants.VisionConstants.cameraHeight);
 
-        System.out.println("Target Height: " + upperHubTargetHeight);
-        System.out.println("Camera Height: " + cameraHeight);
+        System.out.println("Pitch: " + targetPitch);
         System.out.println("Height Difference: " + (upperHubTargetHeight - cameraHeight));
+        System.out.println("Distance in Meters: " + (upperHubTargetHeight - cameraHeight) / Math.tan(Math.toRadians(targetPitch)));
+        System.out.println("PhotonVision: " + PhotonUtils.calculateDistanceToTargetMeters(cameraHeight, upperHubTargetHeight, 0, Math.toRadians(targetPitch)));
 
         //Return distace
         return Units.metersToInches(
-            (upperHubTargetHeight - cameraHeight) / Math.tan(targetPitch)
+            (upperHubTargetHeight - cameraHeight) / Math.tan(Math.toRadians(targetPitch))
         );
     }
 

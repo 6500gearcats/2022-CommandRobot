@@ -94,7 +94,7 @@ public final class Constants {
 
       public static final class VisionConstants {
         public static final double upperHubTargetHeight = 104;    //Height of the upper hub target in inches
-        public static final double cameraHeight = 34.5;    //Height of the camera on the robot in inches
+        public static final double cameraHeight = 73;    //Height of the camera on the robot in inches
         public static final double targetDistanceFromHub = 36;    //Target distance to be from hub for upper ball shooting in inches
       }
 }
