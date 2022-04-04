@@ -92,6 +92,12 @@ public final class Constants {
         public static final double kShooterSpeed = 0.85; // Used to be 0.43. 
         public static final double kBallFiredThreshold = 0.1;
         public static final int kShooterEncoderPort = 30;
-        
+       
+        public static final class IntakeLifterConstants {
+         public static final int kIntakeLifterMotorPort = 22;  
+         public static final double kIntakeLifterDownSpeed = -0.2;
+         public static final double kIntakeLifterUpSpeed = 0.2;
+         public static final double kIntakeLiftedThreshhold = 0.1;
       }
+    }  
 }

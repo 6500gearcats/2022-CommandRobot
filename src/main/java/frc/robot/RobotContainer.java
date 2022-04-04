@@ -13,6 +13,7 @@ import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.IntakeLifter;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -21,6 +22,7 @@ import frc.robot.Constants.OIConstants;
 import frc.robot.commands.AutoCommand;
 import frc.robot.commands.AutoPickup;
 import frc.robot.commands.DefaultDrive;
+import frc.robot.commands.IntakeUp;
 import frc.robot.commands.KillClimber;
 import frc.robot.commands.LiftBall;
 import frc.robot.commands.PickupBall;
@@ -51,6 +53,7 @@ public class RobotContainer {
   private final Climber m_robotClimber = new Climber();
   private final Elevator m_robotElevator = new Elevator();
   private final Intake m_robotIntake = new Intake();
+  private final IntakeLifter m_robotIntakeLifter = new IntakeLifter();
 
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
@@ -121,6 +124,10 @@ public class RobotContainer {
       
     new Trigger(() -> m_gunnerController.getRightY() > 0.5)
     .whenActive((new PickupBall(m_robotIntake)));
+
+    new JoystickButton(m_gunnerController, Button.kRightBumper.value)
+    .whileActiveContinuous(new IntakeUp(m_robotIntakeLifter));
+
 
     // new JoystickButton(m_driverController, OIConstants.kSlowModeTrigger)
     //   .whenPressed(() -> m_robotDrive.setMaxOutput(ClimberConstants.kMaxDriveSpeed))
