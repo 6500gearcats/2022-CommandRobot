@@ -1,15 +1,15 @@
 package frc.robot.commands;
 
 
-import frc.robot.Constants;
+// import frc.robot.Constants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.math.filter.MedianFilter;
-import edu.wpi.first.math.filter.SlewRateLimiter;
+// import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.SpeedController;
+// import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -23,13 +23,13 @@ import java.util.function.DoubleSupplier;
  */
 public class VisionSteer extends CommandBase {
   private final DriveTrain m_drive;
-  private final DoubleSupplier m_forward;
+  // private final DoubleSupplier m_forward;
   private double m_maxSpeed;
   private double m_visionInput;
-  private int  m_visionFilterSamples;
+  // private int  m_visionFilterSamples;
   NetworkTableInstance inst = NetworkTableInstance.getDefault();
   NetworkTable table = inst.getTable("FMSInfo");
-  private boolean m_isRedAlliance;
+  // private boolean m_isRedAlliance;
   
 
   ShuffleboardTab tab = Shuffleboard.getTab("Drive");
@@ -52,7 +52,7 @@ public class VisionSteer extends CommandBase {
    */
   public VisionSteer(DriveTrain subsystem, DoubleSupplier forward) {
     m_drive = subsystem;
-    m_forward = forward;
+    // m_forward = forward;
     m_maxSpeed = DriveConstants.kMaxSpeed;
     addRequirements(m_drive);
 
@@ -63,7 +63,7 @@ public class VisionSteer extends CommandBase {
 
     filter = new MedianFilter(samples);
 
-    m_isRedAlliance = table.getEntry("IsRedAlliance").getBoolean(true);
+    // m_isRedAlliance = table.getEntry("IsRedAlliance").getBoolean(true);
     
   }
 

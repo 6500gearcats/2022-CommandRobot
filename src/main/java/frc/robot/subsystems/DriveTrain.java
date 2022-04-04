@@ -109,6 +109,16 @@ public class DriveTrain extends SubsystemBase {
     m_drive.arcadeDrive(forward, rotation);
   }
 
+  public void driveDistance(double distance)
+  {
+    resetEncoders();
+    arcadeDrive(0.4, 0);
+    while(getAverageEncoderDistance() < distance) {
+      //HOW DO I SLEEP THIS THREAD???
+    }
+    arcadeDrive(0, 0);
+  }
+
   /** Resets the drive encoders to currently read a position of 0. */
   public void resetEncoders() {
     m_leftEncoder.reset();

@@ -13,13 +13,14 @@ import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.PhotonVision;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.AutoCommand;
-import frc.robot.commands.AutoPickup;
+// import frc.robot.commands.AutoPickup;
 import frc.robot.commands.DefaultDrive;
 import frc.robot.commands.KillClimber;
 import frc.robot.commands.LiftBall;
@@ -28,13 +29,13 @@ import frc.robot.commands.ReverseLift;
 import frc.robot.commands.ShootBallFast;
 import frc.robot.commands.ShootBallSlow;
 import frc.robot.commands.UpperHubVision;
-import frc.robot.commands.VisionSteer;
+// import frc.robot.commands.VisionSteer;
 import frc.robot.commands.VomitBall;
 import frc.robot.commands.climb.groups.SetupForClimb;
 import frc.robot.commands.climb.groups.TraversalClimb;
-import frc.robot.commands.climb.groups.Climb2Bars;
+// import frc.robot.commands.climb.groups.Climb2Bars;
 import frc.robot.commands.climb.groups.Climb3Bars;
-import frc.robot.commands.climb.groups.ClimbBar;
+// import frc.robot.commands.climb.groups.ClimbBar;
 import frc.robot.commands.climb.individual.ParkArm;
 import frc.robot.commands.climb.individual.RetractArm;
 import frc.robot.commands.climb.individual.StowClimber;
@@ -82,11 +83,11 @@ public class RobotContainer {
 
     // XBox 1 - driver bindings
 
-    new JoystickButton(m_driverController, Button.kA.value).whenPressed(new PickupBall(m_robotIntake));
+    // new JoystickButton(m_driverController, Button.kA.value).whenPressed(new PickupBall(m_robotIntake));
     
     // new JoystickButton(m_driverController, Button.kRightBumper.value)
     // .whenPressed(new AutoPickup( m_robotIntake, m_robotDrive, m_driverController::getLeftY ));
-    new JoystickButton(m_driverController, Button.kRightBumper.value)
+    new JoystickButton(m_driverController, Button.kA.value)
     .whenHeld(new UpperHubVision( m_robotDrive, m_robotIntake));
 
 
