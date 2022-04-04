@@ -66,7 +66,7 @@ public class PhotonVision extends SubsystemBase {
     public double getDistanceToTarget() {
         
         //Get constants from constants file and convert to meters
-        double upperHubTargetHeight = Units.inchesToMeters(Constants.VisionConstants.targetDistanceFromHub);
+        double upperHubTargetHeight = Units.inchesToMeters(Constants.VisionConstants.upperHubTargetHeight);
         double cameraHeight = Units.inchesToMeters(Constants.VisionConstants.cameraHeight);
 
         System.out.println("Target Height: " + upperHubTargetHeight);
