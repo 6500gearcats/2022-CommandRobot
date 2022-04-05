@@ -69,17 +69,49 @@ public class PhotonVision extends SubsystemBase {
             (upperHubTargetHeight - cameraHeight) / Math.tan(Math.toRadians(targetPitch + cameraAngle))
         );
     }
-    
-    private double translate(double value, double oldMin, double oldMax, double newMin, double newMax) {
-        //Figure out how wide each range is
-        double oldSpan = oldMax - oldMin;
-        double newSpan = newMax - newMin;
-    
-        //Convert the left range into a 0-1 range
-        double valueScaled = (value - oldMin) / oldSpan;
-    
-        //Convert the 0-1 range into a value in the right range
-        return newMin + (valueScaled * newSpan);
+
+    //Return the fowards speed needed to move the robot to the target distance
+    public double ySpeedToTarget() {
+        //Define vars needed
+        double distanceToTarget = getDistanceToTarget();
+        double targetDistance = Constants.VisionConstants.targetDistanceFromHub;
+        double marginForError = Constants.VisionConstants.marginForError;
+
+        //Return value based on where the target is
+        if(distanceToTarget > targetDistance + marginForError) {
+            return 0.3;
+        } else if(distanceToTarget < targetDistance - marginForError) {
+            return -0.3;
+        } else {
+            return 0;
+        }
+    }
+
+    //Return the rotational speed needed to aim the robot at the target
+    public double xSpeedToTarget() {
+        //Define vars needed
+        double angleToTarget = targetPitch;
+        double targetAngle = 0;
+        double marginForError = Constants.VisionConstants.marginForError;
+
+        if(angleToTarget > targetAngle + marginForError) {
+            return 0.2;
+        } else if(angleToTarget < targetAngle - marginForError) {
+            return -0.2;
+        } else {
+            return 0;
+        }
+
+    }
+
+    //Return yaw
+    public double getYaw() {
+        return targetYaw;
+    }
+
+    //Return pitch
+    public double getPitch() {
+        return targetPitch;
     }
 
 }

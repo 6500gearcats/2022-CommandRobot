@@ -14,14 +14,13 @@ public class UpperHubVision extends CommandBase {
   
   //Define drive
   private final DriveTrain m_drive;
-  private final Intake m_intake;
 
   //Init class
-  public UpperHubVision(DriveTrain drive, Intake intake) {
+  public UpperHubVision(DriveTrain drive) {
     
     //Set drive and intake to parameters
     m_drive = drive;
-    m_intake = intake;
+    addRequirements(m_drive);
 
     //Set drive max
     m_drive.setMaxOutput(DriveConstants.kMaxSpeed);
@@ -29,23 +28,14 @@ public class UpperHubVision extends CommandBase {
     upperHubVision = new PhotonVision();
   }
 
-  // //Command call init
-  // @Override
-  // public void initialize() {
-  //   upperHubVision.moveToShootUpper();
-  // }
-
   //Command call execute
   @Override
   public void execute() {
+    //Print variables
     System.out.println("Distance in inches: " + upperHubVision.getDistanceToTarget());
-    if(upperHubVision.getDistanceToTarget() > Constants.VisionConstants.targetDistanceFromHub) {
-      m_drive.arcadeDrive(0.3, 0);
-      System.out.println("Moving");
-    } else {
-      m_drive.arcadeDrive(0, 0);
-      System.out.println("Not Moving");
-    }
+    System.out.println("Yaw: " + upperHubVision.getYaw());
+
+    m_drive.arcadeDrive(upperHubVision.ySpeedToTarget(), 0);
   }
 
   @Override
