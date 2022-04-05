@@ -38,10 +38,10 @@ public class UpperHubVision extends CommandBase {
     double xSpeed = upperHubVision.xSpeedToTarget();
 
     //Use x speed first and then y speed to get to target
-    if(ySpeed != 0) {
-      m_drive.arcadeDrive(xSpeed, 0);
+    if(xSpeed != 0) {
+      m_drive.arcadeDrive(0, xSpeed);
     } else {
-      m_drive.arcadeDrive(0, ySpeed);
+      m_drive.arcadeDrive(ySpeed, 0);
     }
   }
 

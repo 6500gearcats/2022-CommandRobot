@@ -3,7 +3,6 @@ package frc.robot.subsystems;
 import org.photonvision.*;
 import org.photonvision.targeting.PhotonTrackedTarget;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.DriveConstants;
 import edu.wpi.first.math.util.Units;
 import frc.robot.Constants;
 import java.lang.Math;
@@ -79,10 +78,8 @@ public class PhotonVision extends SubsystemBase {
 
         //Return value based on where the target is
         if(distanceToTarget > targetDistance + marginForError) {
-            System.out.println("Moving Y: Fowards");
             return 0.3;
         } else if(distanceToTarget < targetDistance - marginForError) {
-            System.out.println("Moving Y: Backwards");
             return -0.3;
         } else {
             return 0;
@@ -97,25 +94,12 @@ public class PhotonVision extends SubsystemBase {
         double marginForError = Constants.VisionConstants.marginForError;
 
         if(angleToTarget > targetAngle + marginForError) {
-            System.out.println("Moving X: Right");
-            return 0.2;
+            return 0.3;
         } else if(angleToTarget < targetAngle - marginForError) {
-            System.out.println("Moving X: Left");
-            return -0.2;
+            return -0.3;
         } else {
             return 0;
         }
-
-    }
-
-    //Return yaw
-    public double getYaw() {
-        return targetYaw;
-    }
-
-    //Return pitch
-    public double getPitch() {
-        return targetPitch;
     }
 
 }
