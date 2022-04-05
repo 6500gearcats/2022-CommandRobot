@@ -34,17 +34,88 @@ public class PhotonVision extends SubsystemBase {
     //Class that contains the fowards speed and rotation speed to be assigned to arcade drive to move the robot
     public class arcadeDriveSpeeds {
         //Speed vars
-        public double fowardSpeed;
-        public double rotationSpeed;
+        private double fowardSpeed;
+        private double rotationSpeed;
+        private boolean applySaefty = true;
+        private double maxSpeed;
 
-        //Constructor 
+
+
+        /**
+         * Constructor
+         * 
+         * @param fowardSpeed Fowards speed
+         * @param rotationSpeed Rotation speed
+         */
         public arcadeDriveSpeeds(double fowardSpeed, double rotationSpeed) {
+            this.maxSpeed = 0.4;
             this.fowardSpeed = fowardSpeed;
             this.rotationSpeed = rotationSpeed;
         }
 
+
+
+        /**
+         * Constructor
+         * 
+         * @param fowardSpeed Fowards speed
+         * @param rotationSpeed Rotation speed
+         * @param maxSpeed Max speed the robot should go
+         */
+        public arcadeDriveSpeeds(double fowardSpeed, double rotationSpeed, double maxSpeed) {
+            this.maxSpeed = maxSpeed;
+            this.fowardSpeed = fowardSpeed;
+            this.rotationSpeed = rotationSpeed;
+        }
+
+
+
+        /**
+         * Disable saefty
+         */
+        public void disableSaefty() {
+            applySaefty = false;
+        }
+ 
+
+
+        /**
+         * Get the fowards speed and apply saefty if it is on
+         * 
+         * @return Fowards speed
+         */
+        public double getFowardSpeed() {
+            if(applySaefty && fowardSpeed > maxSpeed) {
+                return maxSpeed;
+            } else {
+                return fowardSpeed;
+            }
+        }
+
+
+
+        /**
+         * Get the rotation speed and apply saefty if it is on
+         * 
+         * @return Rotation speed
+         */
+        public double getRotationSpeed() {
+            if(applySaefty && fowardSpeed > maxSpeed) {
+                return maxSpeed;
+            } else {
+                return rotationSpeed;
+            }
+        }
+
+
+
+        /**
+         * Get fowards and rotation value as strings
+         * 
+         * @return String that contains fowards and rotation speeds
+         */
         public String toString() {
-            return "Fowards: " + fowardSpeed + " | Rotation: " + rotationSpeed;
+            return "Fowards=" + fowardSpeed + " Rotation=" + rotationSpeed;
         }
     }
 
@@ -83,8 +154,8 @@ public class PhotonVision extends SubsystemBase {
      */
     public void printPidValues() {
         System.out.println(
-            "Fowards error: postion = " + fowardsController.getPositionError() + " velocity: " + fowardsController.getVelocityError() +
-            "\nRotation error: postion = " + rotationController.getPositionError() + " velocity: " + rotationController.getVelocityError()
+            "Fowards error: postion = " + fowardsController.getPositionError() + " velocity = " + fowardsController.getVelocityError() +
+            "\nRotation error: postion = " + rotationController.getPositionError() + " velocity = " + rotationController.getVelocityError()
         );
     }
 
@@ -142,59 +213,6 @@ public class PhotonVision extends SubsystemBase {
         //If there is no target then set then dont drive
         } else {
             return new arcadeDriveSpeeds(0, 0);
-        }
-    }
-
-
-
-    /**
-     * ############################################################################################################################################
-     * I WOULD STRONGLY RECOMMEND NOT USING THIS FUNCTION, IT IS CURRENTLY VERY UNPREDICTABLE AND MAY TRANSFORM YOUR ROBOT INTO SCRAP METAL
-     * Will be removed soon
-     * ############################################################################################################################################
-     * 
-     * Return the fowards speed needed to move the robot to the target distance
-    */
-    public double ySpeedToTarget() {
-        //Define vars needed
-        double distanceToTarget = getDistanceToTarget();
-        double targetDistance = Constants.VisionConstants.targetDistanceFromHub;
-        double marginForError = Constants.VisionConstants.marginForError;
-        double requiredSpeed = (distanceToTarget * distanceToTarget) / 100;
-
-        //Return value based on where the target is
-        if(distanceToTarget > targetDistance + marginForError) {
-            return requiredSpeed;
-        } else if(distanceToTarget < targetDistance - marginForError) {
-            return -requiredSpeed;
-        } else {
-            return 0;
-        }
-    }
-
-
-
-    /**
-     * ############################################################################################################################################
-     * I WOULD STRONGLY RECOMMEND NOT USING THIS FUNCTION, IT IS CURRENTLY VERY UNPREDICTABLE AND TRANSFORM TURN YOUR ROBOT INTO SCRAP METAL
-     * Will be removed soon
-     * ############################################################################################################################################
-     * 
-     * Return the rotational speed needed to move the robot to the target distance
-    */
-    public double xSpeedToTarget() {
-        //Define vars needed
-        double angleToTarget = targetYaw;
-        double targetAngle = 0;
-        double marginForError = Constants.VisionConstants.marginForError;
-        double requiredSpeed = (targetYaw * targetYaw) / 100;
-
-        if(angleToTarget > targetAngle + marginForError) {
-            return requiredSpeed;
-        } else if(angleToTarget < targetAngle - marginForError) {
-            return -requiredSpeed;
-        } else {
-            return 0;
         }
     }
 
