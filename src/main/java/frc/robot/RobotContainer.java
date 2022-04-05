@@ -22,6 +22,7 @@ import frc.robot.Constants.OIConstants;
 import frc.robot.commands.AutoCommand;
 import frc.robot.commands.AutoPickup;
 import frc.robot.commands.DefaultDrive;
+import frc.robot.commands.IntakeDown;
 import frc.robot.commands.IntakeUp;
 import frc.robot.commands.KillClimber;
 import frc.robot.commands.LiftBall;
@@ -116,8 +117,7 @@ public class RobotContainer {
       .whenActive(new LiftBall(m_robotElevator, m_robotIntake));
       
     new Trigger(() -> m_gunnerController.getLeftY() > 0.5)
-      .whileActiveContinuous(new ReverseLift(m_robotElevator, m_robotIntake, m_robotShooter));
-    
+      .whileActiveOnce(new ReverseLift(m_robotElevator, m_robotIntake, m_robotShooter));    
 
     new Trigger(() -> m_gunnerController.getRightY() < -0.5)
     .whenActive((new VomitBall(m_robotIntake)));
@@ -125,8 +125,11 @@ public class RobotContainer {
     new Trigger(() -> m_gunnerController.getRightY() > 0.5)
     .whenActive((new PickupBall(m_robotIntake)));
 
+    new JoystickButton(m_gunnerController, Button.kLeftBumper.value)
+    .whileActiveOnce(new IntakeUp(m_robotIntakeLifter));
+
     new JoystickButton(m_gunnerController, Button.kRightBumper.value)
-    .whileActiveContinuous(new IntakeUp(m_robotIntakeLifter));
+    .whileActiveOnce(new IntakeDown(m_robotIntakeLifter));
 
 
     // new JoystickButton(m_driverController, OIConstants.kSlowModeTrigger)

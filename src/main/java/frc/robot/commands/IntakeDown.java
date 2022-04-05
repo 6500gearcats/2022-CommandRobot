@@ -4,11 +4,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.ShooterConstants.IntakeLifterConstants;
 import frc.robot.subsystems.IntakeLifter;
 
-public class IntakeUp extends CommandBase {
+public class IntakeDown extends CommandBase {
  
     private final IntakeLifter m_intakeLifterSystem;
 
-    public IntakeUp(IntakeLifter theIntakeLifter) {
+    public IntakeDown(IntakeLifter theIntakeLifter) {
         m_intakeLifterSystem = theIntakeLifter;
         addRequirements(m_intakeLifterSystem);
     }
@@ -20,7 +20,7 @@ public class IntakeUp extends CommandBase {
   
     @Override
     public void execute(){
-        m_intakeLifterSystem.setPickupSpeed();
+        m_intakeLifterSystem.setReverse();
     }
 
     @Override
