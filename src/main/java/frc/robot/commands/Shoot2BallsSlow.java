@@ -23,6 +23,7 @@ public class Shoot2BallsSlow extends CommandBase {
 
     @Override
     public void execute(){
+        m_ShooterSystem.setShooterSpeedSlow();
         if (m_ShooterSystem.shooterSpeedSetSlow()){
             m_ElevatorSystem.startMotor();
         }
