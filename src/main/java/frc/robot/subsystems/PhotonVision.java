@@ -19,8 +19,16 @@ public class PhotonVision extends SubsystemBase {
     private double targetPitch;
 
     //Create PID controller with constants from constants file
-    PIDController fowardsController = new PIDController(Constants.VisionConstants.pLinearGain, 0, Constants.VisionConstants.dLinearGain);
-    PIDController rotationController = new PIDController(Constants.VisionConstants.pAngularGain, 0, Constants.VisionConstants.dAngularGain);
+    PIDController fowardsController = new PIDController(
+        Constants.VisionConstants.pLinearGain, 
+        Constants.VisionConstants.iLinearGain, 
+        Constants.VisionConstants.dLinearGain
+    );
+    PIDController rotationController = new PIDController(
+        Constants.VisionConstants.pAngularGain, 
+        Constants.VisionConstants.iAngularGain, 
+        Constants.VisionConstants.dAngularGain
+    );
 
 
     //Class that contains the fowards speed and rotation speed to be assigned to arcade drive to move the robot
@@ -66,6 +74,18 @@ public class PhotonVision extends SubsystemBase {
         } else {
             targetInSights = false;
         }
+    }
+
+
+
+    /**
+     * Print values returned from photon vision for debugging
+     */
+    public void printPidValues() {
+        System.out.println(
+            "Fowards error: postion = " + fowardsController.getPositionError() + " velocity: " + fowardsController.getVelocityError() +
+            "\nRotation error: postion = " + rotationController.getPositionError() + " velocity: " + rotationController.getVelocityError()
+        );
     }
 
 

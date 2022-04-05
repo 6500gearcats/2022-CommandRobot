@@ -29,13 +29,14 @@ public class UpperHubVision extends CommandBase {
   //Command call execute
   @Override
   public void execute() {
-    //Print variables
-    System.out.println("Distance in inches: " + upperHubVision.getDistanceToTarget());
-    System.out.println("Yaw: " + upperHubVision.getYaw());
+    // //Print variables
+    // System.out.println("Distance in inches: " + upperHubVision.getDistanceToTarget());
+    // System.out.println("Yaw: " + upperHubVision.getYaw());
 
     //Define arcade speed
     PhotonVision.arcadeDriveSpeeds speeds = upperHubVision.getArcadeSpeed();
-    System.out.println(speeds);
+    // System.out.println(speeds);
+    upperHubVision.printPidValues();
     m_drive.arcadeDrive(speeds.fowardSpeed, speeds.rotationSpeed);
   }
 
