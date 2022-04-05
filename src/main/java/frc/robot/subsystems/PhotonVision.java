@@ -79,8 +79,10 @@ public class PhotonVision extends SubsystemBase {
 
         //Return value based on where the target is
         if(distanceToTarget > targetDistance + marginForError) {
+            System.out.println("Moving Y: Fowards");
             return 0.3;
         } else if(distanceToTarget < targetDistance - marginForError) {
+            System.out.println("Moving Y: Backwards");
             return -0.3;
         } else {
             return 0;
@@ -95,8 +97,10 @@ public class PhotonVision extends SubsystemBase {
         double marginForError = Constants.VisionConstants.marginForError;
 
         if(angleToTarget > targetAngle + marginForError) {
+            System.out.println("Moving X: Right");
             return 0.2;
         } else if(angleToTarget < targetAngle - marginForError) {
+            System.out.println("Moving X: Left");
             return -0.2;
         } else {
             return 0;
