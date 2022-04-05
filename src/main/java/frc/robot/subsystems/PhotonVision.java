@@ -4,9 +4,7 @@ import org.photonvision.*;
 import org.photonvision.targeting.PhotonTrackedTarget;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
-import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.math.util.Units;
-import frc.robot.subsystems.Intake;
 import frc.robot.Constants;
 import java.lang.Math;
 
@@ -15,25 +13,14 @@ public class PhotonVision extends SubsystemBase {
     //Define PhotonVision camera
     private PhotonCamera camera = new PhotonCamera("Camera1");
 
-    //Define drive
-    private final DriveTrain m_drive;
-    private final Intake m_intake;
-
-
     //Define PhotonVision vars
     private boolean targetInSights = false;
     private double targetYaw;
     private double targetPitch;
 
     //Init function
-    public PhotonVision(DriveTrain drive, Intake intake) {
-        
-        //Set drive and intake to parameters
-        m_drive = drive;
-        m_intake = intake;
-
-        //Set drive max
-        m_drive.setMaxOutput(DriveConstants.kMaxSpeed);
+    public PhotonVision() {
+    
     }
 
     /**
@@ -82,16 +69,6 @@ public class PhotonVision extends SubsystemBase {
             (upperHubTargetHeight - cameraHeight) / Math.tan(Math.toRadians(targetPitch + cameraAngle))
         );
     }
-
-    //Drive robot to shoot at the upper hub
-    public void moveToShootUpper()
-    {
-        while(true)
-        {
-            
-        }
-    }
-
     
     private double translate(double value, double oldMin, double oldMax, double newMin, double newMax) {
         //Figure out how wide each range is
