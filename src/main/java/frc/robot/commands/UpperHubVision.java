@@ -1,9 +1,7 @@
 package frc.robot.commands;
 
-import frc.robot.Constants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.PhotonVision;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -35,7 +33,16 @@ public class UpperHubVision extends CommandBase {
     System.out.println("Distance in inches: " + upperHubVision.getDistanceToTarget());
     System.out.println("Yaw: " + upperHubVision.getYaw());
 
-    m_drive.arcadeDrive(upperHubVision.ySpeedToTarget(), 0);
+    //Define speeds
+    double ySpeed = upperHubVision.ySpeedToTarget();
+    double xSpeed = upperHubVision.xSpeedToTarget();
+
+    //Use x speed first and then y speed to get to target
+    if(ySpeed != 0) {
+      m_drive.arcadeDrive(xSpeed, 0);
+    } else {
+      m_drive.arcadeDrive(0, ySpeed);
+    }
   }
 
   @Override
