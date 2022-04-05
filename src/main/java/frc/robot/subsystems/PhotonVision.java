@@ -42,7 +42,6 @@ public class PhotonVision extends SubsystemBase {
     */
     @Override
     public void periodic() {
-
         //Get latest results from camera and set best target
         var result = camera.getLatestResult();
 
@@ -62,17 +61,20 @@ public class PhotonVision extends SubsystemBase {
         }
     }
 
+    //Pring values returned from photon vision for debugging
+    public void printPhotonVisionValues() {
+        System.out.println(
+            "Found Target: " + targetInSights +
+            "Pitch: " + targetPitch +
+            "Yaw: " + targetYaw
+        );
+    }
+
     //Calculate distance to target
     public double getDistanceToTarget() {
-        
         //Get constants from constants file and convert to meters
         double upperHubTargetHeight = Units.inchesToMeters(Constants.VisionConstants.upperHubTargetHeight);
         double cameraHeight = Units.inchesToMeters(Constants.VisionConstants.cameraHeight);
-
-        System.out.println("Pitch: " + targetPitch);
-        System.out.println("Height Difference: " + (upperHubTargetHeight - cameraHeight));
-        System.out.println("Distance in Meters: " + (upperHubTargetHeight - cameraHeight) / Math.tan(Math.toRadians(targetPitch)));
-        System.out.println("PhotonVision: " + PhotonUtils.calculateDistanceToTargetMeters(cameraHeight, upperHubTargetHeight, 0, Math.toRadians(targetPitch)));
 
         //Return distace
         return Units.metersToInches(
@@ -100,6 +102,6 @@ public class PhotonVision extends SubsystemBase {
     
         //Convert the 0-1 range into a value in the right range
         return newMin + (valueScaled * newSpan);
-      }
+    }
 
 }

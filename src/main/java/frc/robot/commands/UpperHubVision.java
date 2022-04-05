@@ -25,6 +25,7 @@ public class UpperHubVision extends CommandBase {
   @Override
   public void execute() {
     System.out.println("Distance in inches: " + upperHubVision.getDistanceToTarget());
+    upperHubVision.printPhotonVisionValues();
   }
 
   // @Override
