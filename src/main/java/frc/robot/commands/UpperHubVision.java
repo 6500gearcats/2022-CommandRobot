@@ -33,16 +33,8 @@ public class UpperHubVision extends CommandBase {
     System.out.println("Distance in inches: " + upperHubVision.getDistanceToTarget());
     System.out.println("Yaw: " + upperHubVision.getYaw());
 
-    //Define speeds
-    double ySpeed = upperHubVision.ySpeedToTarget();
-    double xSpeed = upperHubVision.xSpeedToTarget();
-
-    //Use x speed first and then y speed to get to target
-    if(xSpeed != 0) {
-      m_drive.arcadeDrive(0, xSpeed);
-    } else {
-      m_drive.arcadeDrive(ySpeed, 0);
-    }
+    //Define arcade speed
+    // ... working on this ...
   }
 
   @Override
