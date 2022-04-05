@@ -102,4 +102,14 @@ public class PhotonVision extends SubsystemBase {
         }
     }
 
+    //Return yaw
+    public double getYaw() {
+        return targetYaw;
+    }
+
+    //Return pitch
+    public double getPitch() {
+        return targetPitch;
+    }
+
 }
