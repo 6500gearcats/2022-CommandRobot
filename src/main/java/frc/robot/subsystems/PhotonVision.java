@@ -34,6 +34,10 @@ public class PhotonVision extends SubsystemBase {
             this.fowardSpeed = fowardSpeed;
             this.rotationSpeed = rotationSpeed;
         }
+
+        public String toString() {
+            return "Fowards: " + fowardSpeed + " | Rotation: " + rotationSpeed;
+        }
     }
 
 
