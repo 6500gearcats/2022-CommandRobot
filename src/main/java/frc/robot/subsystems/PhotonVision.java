@@ -65,8 +65,8 @@ public class PhotonVision extends SubsystemBase {
     public void printPhotonVisionValues() {
         System.out.println(
             "Found Target: " + targetInSights +
-            "Pitch: " + targetPitch +
-            "Yaw: " + targetYaw
+            "\nPitch: " + targetPitch +
+            "\nYaw: " + targetYaw
         );
     }
 
@@ -75,10 +75,11 @@ public class PhotonVision extends SubsystemBase {
         //Get constants from constants file and convert to meters
         double upperHubTargetHeight = Units.inchesToMeters(Constants.VisionConstants.upperHubTargetHeight);
         double cameraHeight = Units.inchesToMeters(Constants.VisionConstants.cameraHeight);
+        double cameraAngle = Constants.VisionConstants.cameraAngle;
 
         //Return distace
         return Units.metersToInches(
-            (upperHubTargetHeight - cameraHeight) / Math.tan(Math.toRadians(targetPitch))
+            (upperHubTargetHeight - cameraHeight) / Math.tan(Math.toRadians(targetPitch + cameraAngle))
         );
     }
 
