@@ -85,13 +85,9 @@ public class PhotonVision extends SubsystemBase {
          * @return Fowards speed
          */
         public double getFowardSpeed() {
-            if(applySaefty && fowardSpeed > maxSpeed) {
-                if(fowardSpeed > 0) return maxSpeed;
-                if(fowardSpeed < 0) return -maxSpeed;
-                return 0;
-            } else {
-                return fowardSpeed;
-            }
+            if(applySaefty && fowardSpeed > maxSpeed) return maxSpeed;
+            if(applySaefty && fowardSpeed < -maxSpeed) return -maxSpeed;
+            return fowardSpeed;
         }
 
 
@@ -102,13 +98,9 @@ public class PhotonVision extends SubsystemBase {
          * @return Rotation speed
          */
         public double getRotationSpeed() {
-            if(applySaefty && rotationSpeed > maxSpeed) {
-                if(rotationSpeed > 0) return maxSpeed;
-                if(rotationSpeed < 0) return -maxSpeed;
-                return 0;
-            } else {
-                return rotationSpeed;
-            }
+            if(applySaefty && rotationSpeed > maxSpeed) return maxSpeed;
+            if(applySaefty && rotationSpeed < -maxSpeed) return -maxSpeed;
+            return rotationSpeed;
         }
 
 
