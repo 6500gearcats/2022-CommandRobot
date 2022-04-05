@@ -1,10 +1,7 @@
 package frc.robot.commands.climb.individual;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants.ClimberConstants;
 import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.DriveTrain;
 
 /**
  * A command to setup the robot for a bar to be climbed.

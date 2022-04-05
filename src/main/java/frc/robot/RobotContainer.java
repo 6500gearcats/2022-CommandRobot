@@ -4,11 +4,8 @@
 
 package frc.robot;
 
-import java.security.AuthProvider;
-
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.XboxController.Axis;
 import edu.wpi.first.wpilibj.XboxController.Button;
 
 import frc.robot.subsystems.DriveTrain;
@@ -19,10 +16,10 @@ import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.Constants.ClimberConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.AutoCommand;
+import frc.robot.commands.AutoPickup;
 import frc.robot.commands.DefaultDrive;
 import frc.robot.commands.KillClimber;
 import frc.robot.commands.LiftBall;
@@ -30,10 +27,14 @@ import frc.robot.commands.PickupBall;
 import frc.robot.commands.ReverseLift;
 import frc.robot.commands.ShootBallFast;
 import frc.robot.commands.ShootBallSlow;
+import frc.robot.commands.VisionSteer;
 import frc.robot.commands.VomitBall;
 import frc.robot.commands.climb.groups.SetupForClimb;
+import frc.robot.commands.climb.groups.TraversalClimb;
 import frc.robot.commands.climb.groups.Climb2Bars;
+import frc.robot.commands.climb.groups.Climb3Bars;
 import frc.robot.commands.climb.groups.ClimbBar;
+import frc.robot.commands.climb.individual.ParkArm;
 import frc.robot.commands.climb.individual.RetractArm;
 import frc.robot.commands.climb.individual.StowClimber;
 
@@ -78,8 +79,20 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
+<<<<<<< HEAD
     // XBox 0 - driver bindings
     new JoystickButton(m_driverController, OIConstants.kPickUpBallBinding).whenPressed(new PickupBall(m_robotIntake));
+=======
+    // XBox 1 - driver bindings
+
+    new JoystickButton(m_driverController, Button.kA.value).whenPressed(new PickupBall(m_robotIntake));
+    
+    new JoystickButton(m_driverController, Button.kRightBumper.value)
+    .whenPressed(new AutoPickup( m_robotIntake, m_robotDrive, m_driverController::getLeftY ));
+
+
+    new JoystickButton(m_driverController, Button.kY.value).whenPressed(new VomitBall(m_robotIntake));
+>>>>>>> 5e270916378b9f7e3f69cf18aef2c9f0a50ab90b
     new Trigger(() -> (m_driverController.getLeftTriggerAxis() > 0.5))
       .whenActive(new DefaultDrive(m_robotDrive, m_driverController::getLeftY, m_driverController::getRightX, DriveConstants.kMaxSpeed));
     
@@ -88,8 +101,8 @@ public class RobotContainer {
 
     // XBox 2 - gunner bindings
     new JoystickButton(m_gunnerController, Button.kA.value).whenPressed(new SetupForClimb(m_robotClimber));
-    new JoystickButton(m_gunnerController, Button.kY.value).whenPressed(new Climb2Bars(m_robotClimber));
-    new JoystickButton(m_gunnerController, Button.kX.value).whenPressed(new ClimbBar(m_robotClimber));
+    new JoystickButton(m_gunnerController, Button.kY.value).whenPressed(new Climb3Bars(m_robotClimber));
+    new JoystickButton(m_gunnerController, Button.kX.value).whenPressed(new TraversalClimb(m_robotClimber));
 
     new JoystickButton(m_gunnerController, Button.kB.value).whenPressed(new KillClimber(m_robotClimber));
     new JoystickButton(m_gunnerController, Button.kStart.value).whenPressed(new RetractArm(m_robotClimber));
@@ -105,7 +118,7 @@ public class RobotContainer {
       .whenActive(new LiftBall(m_robotElevator, m_robotIntake));
       
     new Trigger(() -> m_gunnerController.getLeftY() > 0.5)
-      .whileActiveContinuous(new ReverseLift(m_robotElevator, m_robotIntake));
+      .whileActiveContinuous(new ReverseLift(m_robotElevator, m_robotIntake, m_robotShooter));
     
 
     new Trigger(() -> m_gunnerController.getRightY() < -0.5)
@@ -132,4 +145,8 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     return new AutoCommand(m_robotDrive, m_robotShooter, m_robotElevator);
     }
+
+  public Command AutoParkArm() {
+    return new ParkArm(m_robotClimber);
+  }
   }
