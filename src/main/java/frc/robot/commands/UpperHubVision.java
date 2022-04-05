@@ -39,15 +39,17 @@ public class UpperHubVision extends CommandBase {
   @Override
   public void execute() {
     System.out.println("Distance in inches: " + upperHubVision.getDistanceToTarget());
-    if(upperHubVision.getDistanceToTarget() > Constants.VisionConstants.upperHubTargetHeight) {
-      m_drive.arcadeDrive(0.2, 0);
+    if(upperHubVision.getDistanceToTarget() > Constants.VisionConstants.targetDistanceFromHub) {
+      m_drive.arcadeDrive(0.3, 0);
+      System.out.println("Moving");
     } else {
       m_drive.arcadeDrive(0, 0);
+      System.out.println("Not Moving");
     }
   }
 
-  // @Override
-  // public void end(boolean interrupted) {
-
-  // }
+  @Override
+  public void end(boolean interrupted) {
+    m_drive.arcadeDrive(0, 0);
+  }
 }
