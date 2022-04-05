@@ -75,12 +75,13 @@ public class PhotonVision extends SubsystemBase {
         double distanceToTarget = getDistanceToTarget();
         double targetDistance = Constants.VisionConstants.targetDistanceFromHub;
         double marginForError = Constants.VisionConstants.marginForError;
+        double requiredSpeed = (distanceToTarget * distanceToTarget) / 100;
 
         //Return value based on where the target is
         if(distanceToTarget > targetDistance + marginForError) {
-            return 0.3;
+            return requiredSpeed;
         } else if(distanceToTarget < targetDistance - marginForError) {
-            return -0.3;
+            return -requiredSpeed;
         } else {
             return 0;
         }
@@ -89,14 +90,15 @@ public class PhotonVision extends SubsystemBase {
     //Return the rotational speed needed to aim the robot at the target
     public double xSpeedToTarget() {
         //Define vars needed
-        double angleToTarget = targetPitch;
+        double angleToTarget = targetYaw;
         double targetAngle = 0;
         double marginForError = Constants.VisionConstants.marginForError;
+        double requiredSpeed = (targetYaw * targetYaw) / 100;
 
         if(angleToTarget > targetAngle + marginForError) {
-            return 0.3;
+            return requiredSpeed;
         } else if(angleToTarget < targetAngle - marginForError) {
-            return -0.3;
+            return -requiredSpeed;
         } else {
             return 0;
         }
@@ -110,6 +112,18 @@ public class PhotonVision extends SubsystemBase {
     //Return pitch
     public double getPitch() {
         return targetPitch;
+    }
+
+    private double translate(double value, double oldMin, double oldMax, double newMin, double newMax) {
+        //Figure out how wide each range is
+        double oldSpan = oldMax - oldMin;
+        double newSpan = newMax - newMin;
+    
+        //Convert the left range into a 0-1 range
+        double valueScaled = (value - oldMin) / oldSpan;
+    
+        //Convert the 0-1 range into a value in the right range
+        return newMin + (valueScaled * newSpan);
     }
 
 }
