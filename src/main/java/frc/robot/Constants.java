@@ -4,9 +4,6 @@
 
 package frc.robot;
 
-import java.util.function.DoubleConsumer;
-import java.util.function.DoubleSupplier;
-
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.XboxController.Button;
 
@@ -37,9 +34,10 @@ public final class Constants {
             // Assumes the encoders are directly mounted on the wheel shafts
             (kWheelDiameterInches * Math.PI) / (double) kEncoderCPR;
         public static final double kMaxSpeed = 1;
-        public static final double kSlowSpeed = 0.1;
+        public static final double kSlowSpeed = 0.2;
         public static final double kDriveRateLimit = 2;
         public static final double kTurnRateLimit = 20;
+        public static final double kAutoSpeed = -0.5;
       }
 
       public static final class IntakeConstants {
@@ -75,20 +73,24 @@ public final class Constants {
         public static final int kWinchMotorPort = 11;    
         public static final double kDefaultTiltSpeed = 0.5;
         public static final double kMaxWinchRotations = 330;
-        public static final double kMaxWinchSpeed = -0.8;
+        public static final double kMaxWinchSpeed = -1.0;
         public static final double kMaxDriveSpeed = 0.1;
         public static final int kMaxLiftCurrent = 30;
-        public static final int kMaxTiltCurrent = 1;
+        public static final int kMaxTiltCurrent = 2;
         public static final double kFwdTiltSpeed = 0.5;
         public static final double kBackTiltSpeed = -0.5;
+        public static final double kTraversalRaiseSpeed = 1;
+        public static final double kTraversalTiltSpeed = 1;
+        public static final double kParkSpeed = 0.05;
       }
 
       public static final class ShooterConstants {
         public static final int kShooterMotorPort = 30;
         public static final double kShooterSpeedSlow = 0.43;
-        public static final double kShooterSpeedFast = 0.85;
+        public static final double kShooterSpeedFast = 0.70;
         public static final double kShooterSpeed = 0.85; //0.43
         public static final double kBallFiredThreshold = 0.1;
+        public static final int kShooterEncoderPort = 30;
         
       }
 }

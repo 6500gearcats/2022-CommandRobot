@@ -1,13 +1,8 @@
 package frc.robot.commands.climb.groups;
 
-
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import frc.robot.Constants.ClimberConstants;
-import frc.robot.commands.DefaultDrive;
 import frc.robot.commands.climb.individual.RaiseArm;
 import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.DriveTrain;
 
 /**
  * Sequential command that encapsulates the various sub-commands used
