@@ -90,6 +90,34 @@ public final class Constants {
         public static final double kShooterSpeed = 0.85; //0.43
         public static final double kBallFiredThreshold = 0.1;
         public static final int kShooterEncoderPort = 30;
+
+
+        public static final int[] kEncoderPorts = new int[] {4, 5};
+        public static final boolean kEncoderReversed = false;
+        public static final int kEncoderCPR = 42;
+        public static final double kEncoderDistancePerPulse =
+            // Distance units will be rotations
+            1.0 / (double) kEncoderCPR;
+
+        public static final double kShooterFreeRPS = 5676;
+        public static final double kShooterSlowTargetRPS = 3000;
+        public static final double kShooterFastTargetRPS = 4000;
+        public static final double kShooterToleranceRPS = 50;
+
+        // These are not real PID gains, and will have to be tuned for your specific robot.
+        public static final double kP = 1;
+        public static final double kI = 0;
+        public static final double kD = 0;
+
+        // On a real robot the feedforward constants should be empirically determined; these are
+        // reasonable guesses.
+        public static final double kSVolts = 0.05;
+        public static final double kVVoltSecondsPerRotation =
+            // Should have value 12V at free speed...
+            12.0 / kShooterFreeRPS;
+
+        public static final double kAutoShootTimeSeconds = 3;
+        public static final double kAutoTimeoutSeconds = 8;
         
       }
 }

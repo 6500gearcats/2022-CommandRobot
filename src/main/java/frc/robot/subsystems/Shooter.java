@@ -2,10 +2,8 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -16,24 +14,13 @@ public class Shooter extends SubsystemBase{
   private CANSparkMax m_sparkMax = new CANSparkMax(ShooterConstants.kShooterMotorPort, MotorType.kBrushless);
 
   public final MotorController m_ShooterMotor = m_sparkMax;
-  private SparkMaxPIDController m_pidController = m_sparkMax.getPIDController();
-  private double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, maxRPM; 
   private boolean m_bBallFired = false; 
   private boolean m_bShooterAtSpeed = false;
 
   private final RelativeEncoder m_shooterEncoder = m_sparkMax.getEncoder();
   
 
-  public Shooter() {
-    kP = 6e-5;
-    kI = 0;
-    kD = 0;
-    kIz = 0;
-    kFF = 0.000015;
-    kMaxOutput = 1;
-    kMinOutput = -1;
-  }
-
+  public Shooter() {}
 
     @Override
     public void periodic() {

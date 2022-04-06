@@ -27,7 +27,7 @@ import frc.robot.commands.PickupBall;
 import frc.robot.commands.ReverseLift;
 import frc.robot.commands.Shoot2BallsSlow;
 import frc.robot.commands.ShootBallFast;
-import frc.robot.commands.ShootBallSlow;
+import frc.robot.commands.ShootBalls;
 import frc.robot.commands.VisionSteer;
 import frc.robot.commands.VomitBall;
 import frc.robot.commands.climb.groups.SetupForClimb;
