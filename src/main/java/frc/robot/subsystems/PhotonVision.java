@@ -31,6 +31,7 @@ public class PhotonVision extends SubsystemBase {
     );
 
 
+
     //Class that contains the fowards speed and rotation speed to be assigned to arcade drive to move the robot
     public class arcadeDriveSpeeds {
         //Speed vars
@@ -48,7 +49,7 @@ public class PhotonVision extends SubsystemBase {
          * @param rotationSpeed Rotation speed
          */
         public arcadeDriveSpeeds(double fowardSpeed, double rotationSpeed) {
-            this.maxSpeed = 0.4;
+            this.maxSpeed = 0.5;
             this.fowardSpeed = fowardSpeed;
             this.rotationSpeed = rotationSpeed;
         }
@@ -150,7 +151,7 @@ public class PhotonVision extends SubsystemBase {
      */
     public String pidValuesAsString() {
         return "PID VALUES: [Fowards error: [postion=" + fowardsController.getPositionError() + ", velocity=" + fowardsController.getVelocityError() +
-        "] Rotation error: [postion = " + rotationController.getPositionError() + ", velocity=" + rotationController.getVelocityError() + "]]";
+        "], Rotation error: [postion = " + rotationController.getPositionError() + ", velocity=" + rotationController.getVelocityError() + "]]";
     }
 
 
@@ -226,32 +227,6 @@ public class PhotonVision extends SubsystemBase {
      */
     public double getPitch() {
         return targetPitch;
-    }
-
-
-
-    /**
-     * Translates a value in a specific range to a new range
-     * Ex. Translage 0.5 in range 0-1 into range 0-100 would be 50
-     * 
-     * @param value The value to be translated
-     * @param oldMin The min of the value's current range
-     * @param oldMax The max of the value's current range
-     * @param newMin  The min of the value's new range
-     * @param newMax  The mas of the value's new range
-     * 
-     * @return The value maped into the new range
-     */
-    private double translate(double value, double oldMin, double oldMax, double newMin, double newMax) {
-        //Figure out how wide each range is
-        double oldSpan = oldMax - oldMin;
-        double newSpan = newMax - newMin;
-    
-        //Convert the left range into a 0-1 range
-        double valueScaled = (value - oldMin) / oldSpan;
-    
-        //Convert the 0-1 range into a value in the right range
-        return newMin + (valueScaled * newSpan);
     }
 
 }
