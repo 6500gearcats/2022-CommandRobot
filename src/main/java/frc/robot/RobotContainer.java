@@ -144,8 +144,4 @@ public class RobotContainer {
   public Command AutoParkArm() {
     return new ParkArm(m_robotClimber);
   }
-
-  public Command AutoIntake() {
-    return new PickupBall(m_robotIntake);
-  }
   }
