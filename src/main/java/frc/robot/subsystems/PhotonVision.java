@@ -111,7 +111,7 @@ public class PhotonVision extends SubsystemBase {
          * @return String that contains fowards and rotation speeds
          */
         public String toString() {
-            return "Fowards=" + fowardSpeed + " Rotation=" + rotationSpeed;
+            return "ARCADE DRIVE SPEEDS: [Fowards=" + fowardSpeed + " Rotation=" + rotationSpeed + "]";
         }
     }
 
@@ -148,11 +148,9 @@ public class PhotonVision extends SubsystemBase {
     /**
      * Print values returned from photon vision for debugging
      */
-    public void printPidValues() {
-        System.out.println(
-            "Fowards error: postion = " + fowardsController.getPositionError() + " velocity = " + fowardsController.getVelocityError() +
-            "\nRotation error: postion = " + rotationController.getPositionError() + " velocity = " + rotationController.getVelocityError()
-        );
+    public String pidValuesAsString() {
+        return "PID VALUES: [Fowards error: [postion=" + fowardsController.getPositionError() + ", velocity=" + fowardsController.getVelocityError() +
+        "] Rotation error: [postion = " + rotationController.getPositionError() + ", velocity=" + rotationController.getVelocityError() + "]]";
     }
 
 
@@ -160,12 +158,8 @@ public class PhotonVision extends SubsystemBase {
     /**
      * Print values returned from photon vision for debugging
      */
-    public void printPhotonVisionValues() {
-        System.out.println(
-            "Found Target: " + targetInSights +
-            "\nPitch: " + targetPitch +
-            "\nYaw: " + targetYaw
-        );
+    public String photonVisionValuesAsString() {
+        return "PHOTONVISION VALUES: [Found Target=" + targetInSights + ", Pitch=" + targetPitch + ", Yaw=" + targetYaw + "]";
     }
 
 

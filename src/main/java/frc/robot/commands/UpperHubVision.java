@@ -35,8 +35,8 @@ public class UpperHubVision extends CommandBase {
 
     //Define arcade speed
     PhotonVision.arcadeDriveSpeeds speeds = upperHubVision.getArcadeSpeed();
-    System.out.println("\n" + speeds);
-    upperHubVision.printPidValues();
+    System.out.println(speeds);
+    System.out.println(upperHubVision.pidValuesAsString());
     m_drive.arcadeDrive(speeds.getFowardSpeed(), speeds.getRotationSpeed());
   }
 
