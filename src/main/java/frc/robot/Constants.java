@@ -101,7 +101,7 @@ public final class Constants {
         public static final int kLifterEncoder = 22;
         public static final int kEncoderRate = 4096;
         public static final int kMaxLifterCurrent = 20;
-        public static final double kLiftRotations = 50;
+        public static final double kLiftRotations = 30;
       }
     }  
 }

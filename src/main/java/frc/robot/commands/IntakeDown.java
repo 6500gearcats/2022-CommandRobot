@@ -20,14 +20,8 @@ public class IntakeDown extends CommandBase {
   
     @Override
     public void execute(){
-        m_intakeLifterSystem.setReverse();
+        m_intakeLifterSystem.setDropSpeed();
     }
-
-    @Override
-    public boolean isFinished(){
-        return m_intakeLifterSystem.getRotations() > IntakeLifterConstants.kLiftRotations;
-    }
-
 
     // Called once after isFinished returns true
     @Override

@@ -38,11 +38,11 @@ public class IntakeLifter extends SubsystemBase {
     }
     
     
-    public void setReverse() {
+    public void setDropSpeed() {
       m_intakeLifterMotor.set(IntakeLifterConstants.kIntakeLifterDownSpeed);
     }
 
-    public void setPickupSpeed() {
+    public void setLiftSpeed() {
       m_intakeLifterMotor.set(IntakeLifterConstants.kIntakeLifterUpSpeed);
     }
  

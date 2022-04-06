@@ -20,15 +20,10 @@ public class IntakeUp extends CommandBase {
   
     @Override
     public void execute(){
-        m_intakeLifterSystem.setPickupSpeed();
+        m_intakeLifterSystem.setLiftSpeed();
     }
 
-    @Override
-    public boolean isFinished(){
-        return m_intakeLifterSystem.getRotations() > IntakeLifterConstants.kLiftRotations;
-    }
-
-
+    
     // Called once after isFinished returns true
     @Override
     public void end(boolean interrupted) {
