@@ -109,7 +109,7 @@ public class RobotContainer {
       .whileActiveOnce(new Shoot2BallsSlow(m_robotShooter, m_robotElevator));
        
     new Trigger(() -> (m_gunnerController.getRightTriggerAxis() > 0.5))
-      .whileActiveOnce(new ShootBallFast(m_robotShooter, m_robotElevator).withTimeout(0.8));
+      .whileActiveOnce(new ShootBallFast(m_robotShooter, m_robotElevator));
 
     new Trigger(() -> m_gunnerController.getLeftY() < -0.5)
       .whenActive(new LiftBall(m_robotElevator, m_robotIntake));
