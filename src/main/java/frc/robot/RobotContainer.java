@@ -138,10 +138,14 @@ public class RobotContainer {
   // }
 
   public Command getAutonomousCommand() {
-    return new AutoCommand(m_robotDrive, m_robotShooter, m_robotElevator);
+    return new AutoCommand(m_robotDrive, m_robotShooter, m_robotElevator, m_robotIntake);
     }
 
   public Command AutoParkArm() {
     return new ParkArm(m_robotClimber);
+  }
+
+  public Command AutoIntake() {
+    return new PickupBall(m_robotIntake);
   }
   }

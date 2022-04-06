@@ -64,6 +64,8 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
+    Command hjk = m_robotContainer.AutoIntake();
+    hjk.schedule();
     Command tmp = m_robotContainer.AutoParkArm();
     tmp.schedule();
   }
