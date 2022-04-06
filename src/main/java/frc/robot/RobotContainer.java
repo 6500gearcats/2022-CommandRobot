@@ -13,7 +13,7 @@ import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.PhotonVision;
+import frc.robot.subsystems.HubVision;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -28,7 +28,7 @@ import frc.robot.commands.PickupBall;
 import frc.robot.commands.ReverseLift;
 import frc.robot.commands.ShootBallFast;
 import frc.robot.commands.ShootBallSlow;
-import frc.robot.commands.UpperHubVision;
+import frc.robot.commands.AlignToHub;
 // import frc.robot.commands.VisionSteer;
 import frc.robot.commands.VomitBall;
 import frc.robot.commands.climb.groups.SetupForClimb;
@@ -53,6 +53,7 @@ public class RobotContainer {
   private final Climber m_robotClimber = new Climber();
   private final Elevator m_robotElevator = new Elevator();
   private final Intake m_robotIntake = new Intake();
+  private final HubVision m_hubVision = new HubVision();
 
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
@@ -88,7 +89,7 @@ public class RobotContainer {
     // new JoystickButton(m_driverController, Button.kRightBumper.value)
     // .whenPressed(new AutoPickup( m_robotIntake, m_robotDrive, m_driverController::getLeftY ));
     new JoystickButton(m_driverController, Button.kRightBumper.value)
-    .whenHeld(new UpperHubVision(m_robotDrive));
+    .whenHeld(new AlignToHub(m_robotDrive, m_hubVision));
 
 
     new JoystickButton(m_driverController, Button.kY.value).whenPressed(new VomitBall(m_robotIntake));

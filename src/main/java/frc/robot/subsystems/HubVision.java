@@ -8,7 +8,7 @@ import edu.wpi.first.math.util.Units;
 import frc.robot.Constants;
 import java.lang.Math;
 
-public class PhotonVision extends SubsystemBase {
+public class HubVision extends SubsystemBase {
     
     //Define PhotonVision camera
     private PhotonCamera camera = new PhotonCamera("Camera1");
