@@ -16,8 +16,7 @@ public class Shooter extends SubsystemBase{
   private CANSparkMax m_sparkMax = new CANSparkMax(ShooterConstants.kShooterMotorPort, MotorType.kBrushless);
 
   public final MotorController m_ShooterMotor = m_sparkMax;
-  private SparkMaxPIDController m_pidController = m_sparkMax.getPIDController();
-  private double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, maxRPM; 
+
   private boolean m_bBallFired = false; 
   private boolean m_bShooterAtSpeed = false;
 
@@ -25,13 +24,6 @@ public class Shooter extends SubsystemBase{
   
 
   public Shooter() {
-    kP = 6e-5;
-    kI = 0;
-    kD = 0;
-    kIz = 0;
-    kFF = 0.000015;
-    kMaxOutput = 1;
-    kMinOutput = -1;
   }
 
 
@@ -73,8 +65,7 @@ public class Shooter extends SubsystemBase{
     }
 
     public boolean shooterSpeedSetFast(){
-      double ShooterSpeed = shooterSpeed();
-      m_bShooterAtSpeed = ShooterSpeed == ShooterConstants.kShooterSpeedFast;
+      m_bShooterAtSpeed = m_shooterEncoder.getVelocity() >= ShooterConstants.kShooterFastRPM;
       return m_bShooterAtSpeed;
     }
 

@@ -29,10 +29,6 @@ public class ShootBallFast extends CommandBase {
 
     }
 
-    @Override
-    public boolean isFinished(){
-        return m_ShooterSystem.isBallFired();
-    }
 
     @Override
     public void end(boolean interrupted) {
