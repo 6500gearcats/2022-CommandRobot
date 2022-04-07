@@ -50,7 +50,7 @@ public class ClimbBar extends SequentialCommandGroup {
                 climber
             ).withTimeout(3),
 
-            // 11)	Run winch in “extend” at 100% speed for 1s, then set to zero speed
+            // 11)	Run winch in "extend" at 100% speed for 1s, then set to zero speed
             new StartEndCommand(
                 () -> climber.extendArm(), 
                 () -> climber.stopWinch(),  

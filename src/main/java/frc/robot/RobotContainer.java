@@ -25,8 +25,6 @@ import frc.robot.commands.KillClimber;
 import frc.robot.commands.LiftBall;
 import frc.robot.commands.PickupBall;
 import frc.robot.commands.ReverseLift;
-import frc.robot.commands.Shoot2BallsSlow;
-import frc.robot.commands.ShootBallFast;
 import frc.robot.commands.ShootBalls;
 import frc.robot.commands.VisionSteer;
 import frc.robot.commands.VomitBall;
@@ -49,6 +47,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveTrain m_robotDrive = new DriveTrain();
   private final Shooter m_robotShooter = new Shooter();
+  
   private final Climber m_robotClimber = new Climber();
   private final Elevator m_robotElevator = new Elevator();
   private final Intake m_robotIntake = new Intake();
@@ -106,10 +105,10 @@ public class RobotContainer {
     
     new Trigger(() -> (m_gunnerController.getLeftTriggerAxis() > 0.5))
      // .whenActive(new ShootBallSlow(m_robotShooter, m_robotElevator).withTimeout(0.8));
-      .whileActiveOnce(new Shoot2BallsSlow(m_robotShooter, m_robotElevator));
+      .whileActiveOnce(new ShootBalls(m_robotShooter, m_robotElevator, false));
        
     new Trigger(() -> (m_gunnerController.getRightTriggerAxis() > 0.5))
-      .whenActive(new ShootBallFast(m_robotShooter, m_robotElevator).withTimeout(0.8));
+      .whenActive(new ShootBalls(m_robotShooter, m_robotElevator, true));
 
     new Trigger(() -> m_gunnerController.getLeftY() < -0.5)
       .whenActive(new LiftBall(m_robotElevator, m_robotIntake));

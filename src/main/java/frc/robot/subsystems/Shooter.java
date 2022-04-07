@@ -1,72 +1,58 @@
 package frc.robot.subsystems;
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.motorcontrol.MotorController;
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
+import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 
-public class Shooter extends SubsystemBase{
+public class Shooter extends PIDSubsystem {
+  private final CANSparkMax m_shooterMotor = new CANSparkMax(ShooterConstants.kShooterMotorPort, MotorType.kBrushless);
+  private final RelativeEncoder m_shooterEncoder = m_shooterMotor.getEncoder();
 
-  private CANSparkMax m_sparkMax = new CANSparkMax(ShooterConstants.kShooterMotorPort, MotorType.kBrushless);
+  private final SimpleMotorFeedforward m_shooterFeedforward =
+      new SimpleMotorFeedforward(
+          ShooterConstants.kSVolts, ShooterConstants.kVVoltSecondsPerRotation);
 
-  public final MotorController m_ShooterMotor = m_sparkMax;
-  private boolean m_bBallFired = false; 
-  private boolean m_bShooterAtSpeed = false;
+  /** The shooter subsystem for the robot. */
+  public Shooter() {
+    super(new PIDController(ShooterConstants.kP, ShooterConstants.kI, ShooterConstants.kD));
+    getController().setTolerance(ShooterConstants.kShooterToleranceRPS);
+    setSetpoint(ShooterConstants.kShooterFastTargetRPS);
+  }
 
-  private final RelativeEncoder m_shooterEncoder = m_sparkMax.getEncoder();
-  
+  @Override
+  public void useOutput(double output, double setpoint) {
+    double newoutput = output + m_shooterFeedforward.calculate(setpoint);
+    m_shooterMotor.setVoltage(newoutput);
+    SmartDashboard.putNumber("ShooterPID output", output);
+    SmartDashboard.putNumber("ShooterPID new output", newoutput);
+    SmartDashboard.putNumber("ShooterPID setpoint", setpoint);
+  }
 
-  public Shooter() {}
+  @Override
+  public double getMeasurement() {
+    return m_shooterEncoder.getVelocity();
+  }
 
-    @Override
-    public void periodic() {
-      // This method will be called once per scheduler run
-      SmartDashboard.putNumber("Motor rotation", m_shooterEncoder.getVelocity());
-    }
-  
-    @Override
-    public void simulationPeriodic() {
-      // This method will be called once per scheduler run during simulation
-    }
-
-    public void setShooterSpeedSlow(){
-      m_ShooterMotor.set(ShooterConstants.kShooterSpeedSlow);
-    }
+  public boolean atSetpoint() {
+    return m_controller.atSetpoint();
+  }
+ 
+  @Override
+  public void periodic() {
+    // This method will be called once per scheduler run
+    SmartDashboard.putNumber("ShooterPID rotation", getMeasurement());
     
-    public void stopShooter() {
-      m_ShooterMotor.stopMotor();
-    }
+  }
 
-    public double shooterSpeed(){
-      return m_ShooterMotor.get();
-    }
-
-    public boolean isBallFired() {
-      double FireSpeed = shooterSpeed();
-      m_bBallFired = FireSpeed < ShooterConstants.kBallFiredThreshold;
-      return m_bBallFired;
-    }
-
-    public boolean shooterSpeedSetSlow(){
-      m_bShooterAtSpeed = m_shooterEncoder.getVelocity() >= ShooterConstants.kShooterSlowRPM;
-      return m_bShooterAtSpeed;
-    }
-    public void setShooterSpeedFast(){
-      m_ShooterMotor.set(ShooterConstants.kShooterSpeedFast);
-    }
-
-    public boolean shooterSpeedSetFast(){
-      double ShooterSpeed = shooterSpeed();
-      m_bShooterAtSpeed = ShooterSpeed == ShooterConstants.kShooterSpeedFast;
-      return m_bShooterAtSpeed;
-    }
-
-    public void reverseMotor() {
-      m_ShooterMotor.set(-ShooterConstants.kShooterSpeedSlow);
-    }
 
 }

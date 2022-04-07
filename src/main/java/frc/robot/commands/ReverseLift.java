@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
@@ -13,10 +14,10 @@ public class ReverseLift extends CommandBase {
 
     public boolean m_cancel = false;
     
-    public ReverseLift(Elevator theElevator, Intake theIntake, Shooter theShooter) {
+    public ReverseLift(Elevator theElevator, Intake theIntake, Subsystem theShooter) {
         m_elevatorSystem = theElevator;
         m_intakeSystem = theIntake;
-        m_shooterSystem = theShooter;
+        m_shooterSystem = (Shooter)theShooter;
         addRequirements(m_elevatorSystem, m_intakeSystem, m_shooterSystem);
         m_cancel = false;
     }
@@ -24,14 +25,14 @@ public class ReverseLift extends CommandBase {
     @Override
     public void initialize() {
             m_elevatorSystem.reverseMotor();
-            m_shooterSystem.reverseMotor();        
+            //m_shooterSystem.reverseMotor();        
         
     }
   
     @Override
     public void execute() {
         m_elevatorSystem.reverseMotor();
-        m_shooterSystem.reverseMotor();
+        //m_shooterSystem.reverseMotor();
     }
   
     @Override
@@ -43,6 +44,6 @@ public class ReverseLift extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         m_elevatorSystem.stop();
-        m_shooterSystem.stopShooter();
+        m_shooterSystem.disable();
     }
 }

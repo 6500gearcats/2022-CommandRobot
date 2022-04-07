@@ -7,12 +7,12 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.subsystems.Elevator;
-import frc.robot.subsystems.ShooterPID;
+import frc.robot.subsystems.Shooter;
 
 public class ShootBalls extends SequentialCommandGroup {
    
 
-    public ShootBalls(ShooterPID shooter, Elevator elevator, boolean goFast){
+    public ShootBalls(Shooter shooter, Elevator elevator, boolean goFast){
 
         if (goFast) {
             shooter.setSetpoint(ShooterConstants.kShooterFastTargetRPS);
