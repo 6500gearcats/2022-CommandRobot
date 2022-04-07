@@ -107,5 +107,7 @@ public final class Constants {
         public static final double pAngularGain = 0.03;   //Proportional gain control for the angular movement of the robot 
         public static final double iAngularGain = 0.0001;   //Integral gain control for the angular movement of the robot
         public static final double dAngularGain = 0.0;    //Derivative gain control for the angular movement of the robot
+        public static final int kRedBallPipelineIdx = 1;
+        public static final int kBlueBallPipelineIdx = 2;
       }
 }
