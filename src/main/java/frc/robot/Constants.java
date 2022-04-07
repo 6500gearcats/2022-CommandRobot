@@ -100,10 +100,9 @@ public final class Constants {
         public static final double cameraHeight = 38;    //Height of the camera on the robot in inches
         public static final double cameraAngle = 26.412;    //Angle of the camera on the robot in degrees
         public static final double targetDistanceFromHub = 100;    //Target distance to be from hub for upper ball shooting in inches
+        public static final double maxControllerSpeed = 0.6;
         public static final double marginForError = 2;    //The margin for error in both pitch and yaw for the shot to still be accurate
-        public static final double pLinearGain = 0.06;   //Proportional gain control for the linear movement of the robot 
-        public static final double iLinearGain = 0.005;  //Integral gain control for the linear movement of the robot
-        public static final double dLinearGain = 0.002;    //Derivative gain control for the linear movement of the robot
+        public static final double pGain = 0.002;
         public static final double pAngularGain = 0.03;   //Proportional gain control for the angular movement of the robot 
         public static final double iAngularGain = 0.0001;   //Integral gain control for the angular movement of the robot
         public static final double dAngularGain = 0.0;    //Derivative gain control for the angular movement of the robot
