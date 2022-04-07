@@ -45,7 +45,7 @@ public class AlignToHub extends CommandBase {
     System.out.println(
         iteration + 
         "," + 
-        0 + 
+        m_upperHubVision.getDistanceToTarget() + 
         "," + 
         -fowardsSpeed.output + 
         "," + 
@@ -56,7 +56,7 @@ public class AlignToHub extends CommandBase {
         -fowardsSpeed.derivative
     );
 
-    HubVision.arcadeDriveSpeeds speeds = m_upperHubVision.new arcadeDriveSpeeds(-fowardsSpeed.output, -rotationSpeed.output, 0.5);
+    HubVision.arcadeDriveSpeeds speeds = m_upperHubVision.new arcadeDriveSpeeds(-fowardsSpeed.output, -rotationSpeed.output, 0.7);
 
     m_drive.arcadeDrive(speeds.getFowardSpeed(), speeds.getRotationSpeed());
 
