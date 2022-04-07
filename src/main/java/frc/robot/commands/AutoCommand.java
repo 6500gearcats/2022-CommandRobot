@@ -17,18 +17,23 @@ public class AutoCommand extends SequentialCommandGroup {
                 new RunCommand(
                     () -> DriveTrain.arcadeDrive(-0.5,0), 
                     DriveTrain
-                ).withTimeout(1)
+                ).withTimeout(1.5)
             ),
             new LiftBall(elevator, intake),
             new RunCommand(
                 () -> DriveTrain.arcadeDrive(0.5,0), 
                 DriveTrain
-            ).withTimeout(1),
+            ).withTimeout(1.5),
+            new RunCommand(
+                    () -> DriveTrain.arcadeDrive(0,0), 
+                    DriveTrain
+                ).withTimeout(0.5),
             new ShootBallFast(shooter, elevator).withTimeout(2),
             new RunCommand(
                     () -> DriveTrain.arcadeDrive(-0.5,0), 
                     DriveTrain
-                ).withTimeout(1)
+                ).withTimeout(1.5),
+            new TurnToAngle(90.0, DriveTrain).withTimeout(2)
         );
     }
 }
