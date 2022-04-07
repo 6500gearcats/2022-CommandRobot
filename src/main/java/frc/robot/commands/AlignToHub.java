@@ -3,6 +3,7 @@ package frc.robot.commands;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.HubVision;
+import frc.robot.subsystems.ModdedPIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class AlignToHub extends CommandBase {
@@ -12,6 +13,8 @@ public class AlignToHub extends CommandBase {
   
   //Define drive
   private final DriveTrain m_drive;
+
+  private int iteration;
 
   //Init class
   public AlignToHub(DriveTrain drive, HubVision vision) {
@@ -26,18 +29,38 @@ public class AlignToHub extends CommandBase {
 
   }
 
+  @Override
+  public void initialize() {
+    iteration = 0;
+  }
+
   //Command call execute
   @Override
   public void execute() {
-    // //Print variables
-    // System.out.println("Distance in inches: " + upperHubVision.getDistanceToTarget());
-    // System.out.println("Yaw: " + upperHubVision.getYaw());
 
     //Define arcade speed
-    HubVision.arcadeDriveSpeeds speeds = m_upperHubVision.getArcadeSpeed();
-    System.out.println(speeds);
-    System.out.println(m_upperHubVision.pidValuesAsString());
+    ModdedPIDController.PIDReturnValues fowardsSpeed = m_upperHubVision.getFowardsPIDValues();
+    ModdedPIDController.PIDReturnValues rotationSpeed = m_upperHubVision.getRotationPIDValues();
+
+    System.out.println(
+        iteration + 
+        "," + 
+        0 + 
+        "," + 
+        -fowardsSpeed.output + 
+        "," + 
+        -fowardsSpeed.position + 
+        "," + 
+        -fowardsSpeed.integral + 
+        "," + 
+        -fowardsSpeed.derivative
+    );
+
+    HubVision.arcadeDriveSpeeds speeds = m_upperHubVision.new arcadeDriveSpeeds(-fowardsSpeed.output, -rotationSpeed.output, 0.5);
+
     m_drive.arcadeDrive(speeds.getFowardSpeed(), speeds.getRotationSpeed());
+
+    iteration++;
   }
 
   @Override

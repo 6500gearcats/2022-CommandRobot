@@ -19,12 +19,12 @@ public class HubVision extends SubsystemBase {
     private double targetPitch;
 
     //Create PID controller with constants from constants file
-    PIDController fowardsController = new PIDController(
+    ModdedPIDController fowardsController = new ModdedPIDController(
         Constants.VisionConstants.pLinearGain, 
         Constants.VisionConstants.iLinearGain, 
         Constants.VisionConstants.dLinearGain
     );
-    PIDController rotationController = new PIDController(
+    ModdedPIDController rotationController = new ModdedPIDController(
         Constants.VisionConstants.pAngularGain, 
         Constants.VisionConstants.iAngularGain, 
         Constants.VisionConstants.dAngularGain
@@ -37,19 +37,18 @@ public class HubVision extends SubsystemBase {
         //Speed vars
         private double fowardSpeed;
         private double rotationSpeed;
-        private boolean applySaefty = true;
         private double maxSpeed;
 
 
 
         /**
-         * Constructor
+         * Constructor with no saefty
          * 
          * @param fowardSpeed Fowards speed
          * @param rotationSpeed Rotation speed
          */
         public arcadeDriveSpeeds(double fowardSpeed, double rotationSpeed) {
-            this.maxSpeed = 0.5;
+            this.maxSpeed = -1;
             this.fowardSpeed = fowardSpeed;
             this.rotationSpeed = rotationSpeed;
         }
@@ -68,15 +67,6 @@ public class HubVision extends SubsystemBase {
             this.fowardSpeed = fowardSpeed;
             this.rotationSpeed = rotationSpeed;
         }
-
-
-
-        /**
-         * Disable saefty
-         */
-        public void disableSaefty() {
-            applySaefty = false;
-        }
  
 
 
@@ -86,8 +76,8 @@ public class HubVision extends SubsystemBase {
          * @return Fowards speed
          */
         public double getFowardSpeed() {
-            if(applySaefty && fowardSpeed > maxSpeed) return maxSpeed;
-            if(applySaefty && fowardSpeed < -maxSpeed) return -maxSpeed;
+            if(maxSpeed != -1 && fowardSpeed > maxSpeed) return maxSpeed;
+            if(maxSpeed != -1 && fowardSpeed < -maxSpeed) return -maxSpeed;
             return fowardSpeed;
         }
 
@@ -99,8 +89,8 @@ public class HubVision extends SubsystemBase {
          * @return Rotation speed
          */
         public double getRotationSpeed() {
-            if(applySaefty && rotationSpeed > maxSpeed) return maxSpeed;
-            if(applySaefty && rotationSpeed < -maxSpeed) return -maxSpeed;
+            if(maxSpeed != -1 && rotationSpeed > maxSpeed) return maxSpeed;
+            if(maxSpeed != -1 && rotationSpeed < -maxSpeed) return -maxSpeed;
             return rotationSpeed;
         }
 
@@ -144,8 +134,6 @@ public class HubVision extends SubsystemBase {
         }
     }
 
-
-
     /**
      * Print values returned from photon vision for debugging
      */
@@ -184,29 +172,37 @@ public class HubVision extends SubsystemBase {
 
 
 
-    /** 
-     * Gets the speeds that arcade drive should be assigned to get to the target spot and aim at the target
-     * 
-     * @return Arcade speed class containing the speed values required
-    */
-    public arcadeDriveSpeeds getArcadeSpeed() {
+    // /** 
+    //  * Gets the speeds that arcade drive should be assigned to get to the target spot and aim at the target
+    //  * 
+    //  * @return Arcade speed class containing the speed values required
+    // */
+    // public arcadeDriveSpeeds getArcadeSpeed() {
 
-        //If there is a target
-        if(targetInSights) {
+    //     //If there is a target
+    //     if(targetInSights) {
 
-            //Use PID controllers to calculate the speed required
-            double fowardSpeed = -fowardsController.calculate(getDistanceToTarget(), Constants.VisionConstants.targetDistanceFromHub);
-            double rotationSpeed = -rotationController.calculate(targetYaw, 0);
+    //         //Use PID controllers to calculate the speed required
+    //         double fowardSpeed = -fowardsController.calculate(getDistanceToTarget(), Constants.VisionConstants.targetDistanceFromHub);
+    //         double rotationSpeed = -rotationController.calculate(targetYaw, 0);
 
-            //Return speeds
-            return new arcadeDriveSpeeds(fowardSpeed, rotationSpeed);
+    //         //Return speeds with a saefty of 0.7
+    //         return new arcadeDriveSpeeds(fowardSpeed, rotationSpeed, 0.7);
 
-        //If there is no target then set then dont drive
-        } else {
-            return new arcadeDriveSpeeds(0, 0);
-        }
+    //     //If there is no target then set then dont drive
+    //     } else {
+    //         return new arcadeDriveSpeeds(0, 0);
+    //     }
+    // }
+
+
+    public ModdedPIDController.PIDReturnValues getFowardsPIDValues() {
+        return fowardsController.calculate(getDistanceToTarget(), Constants.VisionConstants.targetDistanceFromHub);
     }
 
+    public ModdedPIDController.PIDReturnValues getRotationPIDValues() {
+        return rotationController.calculate(targetYaw, 0);
+    }
 
     
     /**
