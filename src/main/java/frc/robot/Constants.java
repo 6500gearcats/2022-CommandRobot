@@ -86,11 +86,28 @@ public final class Constants {
 
       public static final class ShooterConstants {
         public static final int kShooterMotorPort = 30;
-        public static final double kShooterSpeedSlow = 0.43;
-        public static final double kShooterSpeedFast = 0.70;
-        public static final double kShooterSpeed = 0.85; //0.43
+        public static final double kShooterSpeedSlow = 0.6;
+        public static final double kShooterFastRPM = 4000;
+        public static final int kShooterSlowRPM = 3000;
+        public static final double kShooterSpeedFast = 0.9;
+        public static final double kShooterSpeed = 0.9; //0.43
         public static final double kBallFiredThreshold = 0.1;
         public static final int kShooterEncoderPort = 30;
+
         
+      }
+
+      public static final class VisionConstants {
+        public static final double upperHubTargetHeight = 107;    //Height of the upper hub target in inches
+        public static final double cameraHeight = 38;    //Height of the camera on the robot in inches
+        public static final double cameraAngle = 26.412;    //Angle of the camera on the robot in degrees
+        public static final double targetDistanceFromHub = 100;    //Target distance to be from hub for upper ball shooting in inches
+        public static final double marginForError = 2;    //The margin for error in both pitch and yaw for the shot to still be accurate
+        public static final double pLinearGain = 0.06;   //Proportional gain control for the linear movement of the robot 
+        public static final double iLinearGain = 0.005;  //Integral gain control for the linear movement of the robot
+        public static final double dLinearGain = 0.002;    //Derivative gain control for the linear movement of the robot
+        public static final double pAngularGain = 0.03;   //Proportional gain control for the angular movement of the robot 
+        public static final double iAngularGain = 0.0001;   //Integral gain control for the angular movement of the robot
+        public static final double dAngularGain = 0.0;    //Derivative gain control for the angular movement of the robot
       }
 }
