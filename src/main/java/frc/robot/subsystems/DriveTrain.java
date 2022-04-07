@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.hal.SimDouble;
 import edu.wpi.first.hal.simulation.SimDeviceDataJNI;
 import edu.wpi.first.math.system.plant.DCMotor;
+import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.Constants.DriveConstants;
@@ -139,6 +140,18 @@ public class DriveTrain extends SubsystemBase {
     m_drive.arcadeDrive(forward, rotation);
   }
 
+  /**
+   * Drives the the robot using the given volts for each side motors.
+   *
+   * @param leftVolts the volts to feed the left side motors
+   * @param rightVolts the volts to feed the right side motors
+   */
+  public void tankDriveVolts(double leftVolts, double rightVolts) {
+    m_leftMotors.setVoltage(leftVolts);
+    m_rightMotors.setVoltage(rightVolts);
+    m_drive.feed();
+  }
+
   /** Resets the drive encoders to currently read a position of 0. */
   public void resetEncoders() {
     m_leftEncoder.reset();
@@ -170,6 +183,15 @@ public class DriveTrain extends SubsystemBase {
    */
   public Encoder getRightEncoder() {
     return m_rightEncoder;
+  }
+
+  /**
+   * Gets the speed of the wheels at a given moment.
+   *
+   * @return DifferentialDriveWheelSpeeds containing the wheel speeds
+   */
+  public DifferentialDriveWheelSpeeds getWheelSpeeds() {
+    return new DifferentialDriveWheelSpeeds(m_leftEncoder.getRate(), m_rightEncoder.getRate());
   }
 
   /**
