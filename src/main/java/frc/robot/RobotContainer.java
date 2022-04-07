@@ -26,6 +26,7 @@ import frc.robot.commands.KillClimber;
 import frc.robot.commands.LiftBall;
 import frc.robot.commands.PickupBall;
 import frc.robot.commands.ReverseLift;
+import frc.robot.commands.Shoot2BallsSlow;
 import frc.robot.commands.ShootBallFast;
 import frc.robot.commands.ShootBallSlow;
 import frc.robot.commands.AlignToHub;
@@ -109,10 +110,11 @@ public class RobotContainer {
     new JoystickButton(m_gunnerController, Button.kBack.value).whenPressed(new StowClimber(m_robotClimber));
     
     new Trigger(() -> (m_gunnerController.getLeftTriggerAxis() > 0.5))
-      .whenActive(new ShootBallSlow(m_robotShooter, m_robotElevator).withTimeout(0.8));
+     // .whenActive(new ShootBallSlow(m_robotShooter, m_robotElevator).withTimeout(0.8));
+      .whileActiveOnce(new Shoot2BallsSlow(m_robotShooter, m_robotElevator));
        
     new Trigger(() -> (m_gunnerController.getRightTriggerAxis() > 0.5))
-      .whenActive(new ShootBallFast(m_robotShooter, m_robotElevator).withTimeout(0.8));
+      .whileActiveOnce(new ShootBallFast(m_robotShooter, m_robotElevator));
 
     new Trigger(() -> m_gunnerController.getLeftY() < -0.5)
       .whenActive(new LiftBall(m_robotElevator, m_robotIntake));
