@@ -48,14 +48,14 @@ public class ClimbBar extends SequentialCommandGroup {
             new RunCommand(
                 () -> climber.tiltRobot(ClimberConstants.kFwdTiltSpeed), 
                 climber
-            ).withTimeout(3),
+            ).withTimeout(3)
 
             // 11)	Run winch in “extend” at 100% speed for 1s, then set to zero speed
-            new StartEndCommand(
-                () -> climber.extendArm(), 
-                () -> climber.stopWinch(),  
-                climber
-            ).withTimeout(1)
+            // new StartEndCommand(
+            //     () -> climber.extendArm(), 
+            //     () -> climber.stopWinch(),  
+            //     climber
+            // ).withTimeout(0.3)
 
             
 

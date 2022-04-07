@@ -73,13 +73,15 @@ public final class Constants {
         public static final double kMaxWinchRotations = 330;
         public static final double kMaxWinchSpeed = -1.0;
         public static final double kMaxDriveSpeed = 0.1;
-        public static final int kMaxLiftCurrent = 30;
+        public static final int kMaxLiftCurrent = 40;
         public static final int kMaxTiltCurrent = 2;
         public static final double kFwdTiltSpeed = 0.5;
         public static final double kBackTiltSpeed = -0.5;
         public static final double kTraversalRaiseSpeed = 1;
         public static final double kTraversalTiltSpeed = 1;
         public static final double kParkSpeed = -0.05;
+        public static final double kStoreArmSpeed = -0.25;
+        public static final double kPrepSpeed = 0.8;
       }
 
       public static final class ShooterConstants {

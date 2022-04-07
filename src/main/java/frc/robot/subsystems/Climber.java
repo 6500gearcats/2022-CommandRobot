@@ -161,4 +161,8 @@ public class Climber extends SubsystemBase{
     public void ParkArm() {
       m_tiltMotor.set(ClimberConstants.kParkSpeed);
     }
+
+    public void PrepArm() {
+      m_tiltMotor.set(ClimberConstants.kPrepSpeed);
+    }
 }
