@@ -14,6 +14,7 @@ import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.IntakeLifter;
 import frc.robot.commands.AutoCommandSimple;
 import frc.robot.commands.AutoCommand;
 import frc.robot.subsystems.HubVision;
@@ -22,16 +23,16 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
-import frc.robot.commands.AutoCommand;
 // import frc.robot.commands.AutoPickup;
 import frc.robot.commands.DefaultDrive;
+import frc.robot.commands.IntakeDown;
+import frc.robot.commands.IntakeUp;
 import frc.robot.commands.KillClimber;
 import frc.robot.commands.LiftBall;
 import frc.robot.commands.PickupBall;
 import frc.robot.commands.ReverseLift;
 import frc.robot.commands.Shoot2BallsSlow;
 import frc.robot.commands.ShootBallFast;
-import frc.robot.commands.ShootBallSlow;
 import frc.robot.commands.AlignToHub;
 // import frc.robot.commands.VisionSteer;
 import frc.robot.commands.VomitBall;
@@ -39,8 +40,6 @@ import frc.robot.commands.climb.groups.SetupForClimb;
 import frc.robot.commands.climb.groups.TraversalClimb;
 // import frc.robot.commands.climb.groups.Climb2Bars;
 import frc.robot.commands.climb.groups.Climb3Bars;
-import frc.robot.commands.climb.groups.ClimbBar1;
-import frc.robot.commands.climb.groups.ClimbBar2;
 import frc.robot.commands.climb.individual.ParkArm;
 import frc.robot.commands.climb.individual.RetractArm;
 import frc.robot.commands.climb.individual.StowClimber;
@@ -58,6 +57,7 @@ public class RobotContainer {
   private final Climber m_robotClimber = new Climber();
   private final Elevator m_robotElevator = new Elevator();
   private final Intake m_robotIntake = new Intake();
+  private final IntakeLifter m_robotIntakeLifter = new IntakeLifter();
   private final HubVision m_hubVision = new HubVision();
 
   // The driver's controller
@@ -138,6 +138,13 @@ public class RobotContainer {
       
     new Trigger(() -> m_gunnerController.getRightY() > 0.5)
     .whenActive((new PickupBall(m_robotIntake)));
+
+    new JoystickButton(m_gunnerController, Button.kLeftBumper.value)
+    .whileActiveOnce(new IntakeUp(m_robotIntakeLifter));
+
+    new JoystickButton(m_gunnerController, Button.kRightBumper.value)
+    .whileActiveOnce(new IntakeDown(m_robotIntakeLifter));
+
 
     // new JoystickButton(m_driverController, OIConstants.kSlowModeTrigger)
     //   .whenPressed(() -> m_robotDrive.setMaxOutput(ClimberConstants.kMaxDriveSpeed))

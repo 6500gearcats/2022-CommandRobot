@@ -102,9 +102,20 @@ public final class Constants {
         public static final double kShooterSpeed = 0.9; //0.43
         public static final double kBallFiredThreshold = 0.1;
         public static final int kShooterEncoderPort = 30;
-
-        
+       
+        public static final class IntakeLifterConstants {
+        public static final int kIntakeLifterMotorPort = 22;  
+        public static final double kIntakeLifterDownSpeed = -0.2;
+        public static final double kIntakeLifterUpSpeed = 0.2;
+        public static final double kIntakeLiftedThreshhold = 0.1;
+        public static final int kLifterEncoder = 22;
+        public static final int kEncoderRate = 4096;
+        public static final int kMaxLifterCurrent = 20;
+        public static final double kLiftRotations = 30;
       }
+    }  
+      
+
 
       public static final class VisionConstants {
         public static final double upperHubTargetHeight = 107;    //Height of the upper hub target in inches
