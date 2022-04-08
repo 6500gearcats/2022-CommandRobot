@@ -163,7 +163,7 @@ public class RobotContainer {
     // Below is auto chooser
   SendableChooser<Command> m_chooser = new SendableChooser<>();
   
-  Command m_autoCommandSimple = new AutoCommandSimple(m_robotDrive, m_robotShooter, m_robotElevator, m_robotClimber);
+  Command m_autoCommandSimple = new AutoCommandSimple(m_robotDrive, m_robotShooter, m_robotElevator, m_robotClimber, m_robotIntake);
   Command m_autoCommand = new AutoCommand(m_robotDrive, m_robotShooter, m_robotElevator, m_robotClimber, m_robotIntake, m_hubVision);;
   public void SendableChooser() {
   }
