@@ -56,7 +56,6 @@ public class RobotContainer {
   private final Elevator m_robotElevator = new Elevator();
   private final Intake m_robotIntake = new Intake();
   private final HubVision m_hubVision = new HubVision();
-  private final LEDSetter m_ledStrip = new LEDSetter();
 
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
@@ -66,9 +65,6 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-
-    //Set LED strips to teal
-    m_ledStrip.setEntireStripColor(Constants.LEDConstants.teal);
 
    // Configure default commands
     // Set the default drive command to split-stick arcade drive
