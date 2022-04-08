@@ -35,9 +35,13 @@ public class LEDSetter {
      * @param blue Blue value for the strip
      */
     public void setEntireStripColor(int red, int green, int blue) {
+        //Set data for buffer
         for (var i = 0; i < ledBuffer.getLength(); i++) {
             ledBuffer.setRGB(i, red, green, blue);
          }
+
+        //Write data to led strip
+         ledStrip.setData(ledBuffer);
     }
 
     /**
