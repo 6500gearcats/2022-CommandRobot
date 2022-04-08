@@ -3,15 +3,18 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Intake;
 
 public class ShootBallFast extends CommandBase {
    
     private final Shooter m_ShooterSystem;
     private final Elevator m_ElevatorSystem;
+    private final Intake m_IntakeSystem;
 
-    public ShootBallFast(Shooter theShooter, Elevator theElevator){
+    public ShootBallFast(Shooter theShooter, Elevator theElevator, Intake theIntake){
         m_ShooterSystem = theShooter;
         m_ElevatorSystem = theElevator;
+        m_IntakeSystem = theIntake;
         addRequirements(m_ShooterSystem, m_ElevatorSystem);
     }
 
@@ -25,8 +28,9 @@ public class ShootBallFast extends CommandBase {
     public void execute(){
         if (m_ShooterSystem.shooterSpeedSetFast()){
             m_ElevatorSystem.startMotor();
+            m_IntakeSystem.setPickupSpeed();
         }
-
+        
     }
 
 

@@ -10,16 +10,16 @@ public class TurnToAngle extends PIDCommand{
   /**
    * Turns to robot to the specified angle.
    *
-   * @param targetAngleDegrees The angle to turn to
+   * @param targetAngleRadians The angle to turn to
    * @param drive The drive subsystem to use
    */
-  public TurnToAngle(double targetAngleDegrees, DriveTrain drive) {
+  public TurnToAngle(double targetAngleRadians, DriveTrain drive) {
     super(
         new PIDController(DriveConstants.kTurnP, DriveConstants.kTurnI, DriveConstants.kTurnD),
         // Close loop on heading
         drive::getHeading,
         // Set reference to target
-        Math.toRadians(targetAngleDegrees),
+        targetAngleRadians,
         // Pipe output to turn robot
         output -> drive.arcadeDrive(0, output),
         // Require the drive

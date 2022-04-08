@@ -1,5 +1,6 @@
 package frc.robot.commands;
 import frc.robot.commands.climb.individual.ParkArm;
+import frc.robot.subsystems.HubVision;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
@@ -10,11 +11,10 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 public class AutoCommand extends SequentialCommandGroup {
-    public AutoCommand(DriveTrain DriveTrain, Shooter shooter, Elevator elevator,  Climber climber, Intake intake) {
+    public AutoCommand(DriveTrain DriveTrain, Shooter shooter, Elevator elevator,  Climber climber, Intake intake, HubVision vision) {
         addCommands(
             new StoreArm(climber).withTimeout(0.2),
-            new ParkArm(climber),
-            new ShootBallFast(shooter, elevator).withTimeout(2),
+            //new ParkArm(climber),
             new ParallelCommandGroup(
                 new PickupBall(intake),
                 new RunCommand(
@@ -22,21 +22,14 @@ public class AutoCommand extends SequentialCommandGroup {
                     DriveTrain
                 ).withTimeout(1.5)
             ),
-            new LiftBall(elevator, intake),
-            new RunCommand(
-                () -> DriveTrain.arcadeDrive(0.5,0), 
-                DriveTrain
-            ).withTimeout(1.5),
-            new RunCommand(
-                    () -> DriveTrain.arcadeDrive(0,0), 
-                    DriveTrain
-                ).withTimeout(0.5),
-            new ShootBallFast(shooter, elevator).withTimeout(2),
+            //new LiftBall(elevator, intake),
+            new AlignToHub(DriveTrain, vision).withTimeout(4),
+            new ShootBallFast(shooter, elevator, intake).withTimeout(1.2),
+            new ShootBallFast(shooter, elevator, intake).withTimeout(1.2),
             new RunCommand(
                     () -> DriveTrain.arcadeDrive(-0.5,0), 
                     DriveTrain
-                ).withTimeout(1.5),
-            new TurnToAngle(90.0, DriveTrain).withTimeout(2)
+                ).withTimeout(1.5)
 
         );
     }

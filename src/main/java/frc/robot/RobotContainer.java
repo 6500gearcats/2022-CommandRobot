@@ -114,7 +114,7 @@ public class RobotContainer {
       .whileActiveOnce(new Shoot2BallsSlow(m_robotShooter, m_robotElevator));
        
     new Trigger(() -> (m_gunnerController.getRightTriggerAxis() > 0.5))
-      .whileActiveOnce(new ShootBallFast(m_robotShooter, m_robotElevator));
+      .whileActiveOnce(new ShootBallFast(m_robotShooter, m_robotElevator, m_robotIntake));
 
     new Trigger(() -> m_gunnerController.getLeftY() < -0.5)
       .whenActive(new LiftBall(m_robotElevator, m_robotIntake));
@@ -145,7 +145,7 @@ public class RobotContainer {
   // }
 
   public Command getAutonomousCommand() {
-    return new AutoCommand(m_robotDrive, m_robotShooter, m_robotElevator, m_robotClimber, m_robotIntake);
+    return new AutoCommand(m_robotDrive, m_robotShooter, m_robotElevator, m_robotClimber, m_robotIntake, m_hubVision);
     }
 
   public Command AutoParkArm() {
