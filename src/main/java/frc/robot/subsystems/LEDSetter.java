@@ -15,7 +15,7 @@ public class LEDSetter {
      * @param pwmPin PWM pin that the stip connects to
      * @param stripLength Length of the LED strip
      */
-    public void setPinAndLength(int pwmPin, int stripLength) {
+    public static void setPinAndLength(int pwmPin, int stripLength) {
         //Define the addressable led and set the legnth
         ledStrip = new AddressableLED(pwmPin);
         ledStrip.setLength(stripLength);
@@ -34,7 +34,7 @@ public class LEDSetter {
      * @param green Green value for the strip
      * @param blue Blue value for the strip
      */
-    public void setEntireStripColor(int[] color) {
+    public static void setEntireStripColor(int[] color) {
         //Set data for buffer
         for (var i = 0; i < ledBuffer.getLength(); i++) {
             ledBuffer.setRGB(i, color[0], color[1], color[2]);
@@ -47,7 +47,7 @@ public class LEDSetter {
     /**
      * Stop the LED strip object
      */
-    public void stop() {
+    public static void stop() {
         ledStrip.stop();
     }
 

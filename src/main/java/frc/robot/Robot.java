@@ -32,9 +32,8 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
     CameraServer.startAutomaticCapture();
 
-    LEDSetter m_ledStrip = new LEDSetter();
-    m_ledStrip.setPinAndLength(Constants.LEDConstants.ledPwmPin, Constants.LEDConstants.ledStripLength);
-    m_ledStrip.setEntireStripColor(Constants.LEDConstants.teal);
+    LEDSetter.setPinAndLength(Constants.LEDConstants.ledPwmPin, Constants.LEDConstants.ledStripLength);
+    LEDSetter.setEntireStripColor(Constants.LEDConstants.teal);
   }
 
   /**
