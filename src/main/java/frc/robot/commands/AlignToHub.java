@@ -30,15 +30,11 @@ public class AlignToHub extends CommandBase {
   //Command call execute
   @Override
   public void execute() {
-    // //Print variables
-    // System.out.println("Distance in inches: " + upperHubVision.getDistanceToTarget());
-    // System.out.println("Yaw: " + upperHubVision.getYaw());
 
     //Define arcade speed
     HubVision.arcadeDriveSpeeds speeds = m_upperHubVision.getArcadeSpeed();
     System.out.println(speeds);
-    System.out.println(m_upperHubVision.pidValuesAsString());
-    m_drive.arcadeDrive(speeds.getFowardSpeed(), speeds.getRotationSpeed());
+    m_drive.arcadeDrive(-speeds.getFowardSpeed(), speeds.getRotationSpeed());
   }
 
   @Override
