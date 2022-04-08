@@ -15,6 +15,10 @@ public class LEDSetter {
      * @param pwmPin PWM pin that the stip connects to
      * @param stripLength Length of the LED strip
      */
+    public LEDSetter(int pwmPin, int stripLength) {
+        setPinAndLength(pwmPin, stripLength);
+    }
+
     public void setPinAndLength(int pwmPin, int stripLength) {
         //Define the addressable led and set the legnth
         ledStrip = new AddressableLED(pwmPin);

@@ -27,14 +27,15 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+
+    //Define LED strips
+    LEDSetter m_ledStrip = new LEDSetter(Constants.LEDConstants.ledPwmPin, Constants.LEDConstants.ledStripLength);
+    m_ledStrip.setEntireStripColor(Constants.LEDConstants.teal);
+
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     CameraServer.startAutomaticCapture();
-
-    LEDSetter m_ledStrip = new LEDSetter();
-    m_ledStrip.setPinAndLength(Constants.LEDConstants.ledPwmPin, Constants.LEDConstants.ledStripLength);
-    m_ledStrip.setEntireStripColor(Constants.LEDConstants.teal);
   }
 
   /**
