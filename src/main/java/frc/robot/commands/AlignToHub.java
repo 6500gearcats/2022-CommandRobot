@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import frc.robot.Constants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.HubVision;
@@ -34,6 +35,11 @@ public class AlignToHub extends CommandBase {
     HubVision.arcadeDriveSpeeds speeds = m_upperHubVision.getArcadeSpeed();
     System.out.println(speeds);
     m_drive.arcadeDrive(-speeds.getFowardSpeed(), speeds.getRotationSpeed());
+  }
+
+  @Override
+  public boolean isFinished() {
+    return m_upperHubVision.getDistanceToTarget() < Constants.VisionConstants.marginForError;
   }
 
   @Override

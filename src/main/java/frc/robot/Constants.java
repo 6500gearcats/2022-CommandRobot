@@ -18,26 +18,33 @@ import edu.wpi.first.wpilibj.XboxController.Button;
 public final class Constants {
 
     public static final class DriveConstants {
-        public static final int kLeftMotor1Port = 1;
-        public static final int kLeftMotor2Port = 3;
-        public static final int kRightMotor1Port = 2;
-        public static final int kRightMotor2Port = 4;
-    
-        public static final int[] kLeftEncoderPorts = new int[] {1, 3};
-        public static final int[] kRightEncoderPorts = new int[] {2, 4};
-        public static final boolean kLeftEncoderReversed = false;
-        public static final boolean kRightEncoderReversed = true;
-    
-        public static final int kEncoderCPR = 1024;
-        public static final double kWheelDiameterInches = 6;
-        public static final double kEncoderDistancePerPulse =
-            // Assumes the encoders are directly mounted on the wheel shafts
-            (kWheelDiameterInches * Math.PI) / (double) kEncoderCPR;
-        public static final double kMaxSpeed = 1;
-        public static final double kSlowSpeed = 0.2;
-        public static final double kDriveRateLimit = 2;
-        public static final double kTurnRateLimit = 20;
-        public static final double kAutoSpeed = -0.5;
+      public static final int kLeftMotor1Port = 1;
+      public static final int kLeftMotor2Port = 3;
+      public static final int kRightMotor1Port = 2;
+      public static final int kRightMotor2Port = 4;
+  
+      public static final int[] kLeftEncoderPorts = new int[] {1, 3};
+      public static final int[] kRightEncoderPorts = new int[] {2, 4};
+      public static final boolean kLeftEncoderReversed = false;
+      public static final boolean kRightEncoderReversed = true;
+  
+      public static final int kEncoderCPR = 1024;
+      public static final double kWheelDiameterInches = 6;
+      public static final double kEncoderDistancePerPulse =
+          // Assumes the encoders are directly mounted on the wheel shafts
+          (kWheelDiameterInches * Math.PI) / (double) kEncoderCPR;
+      public static final double kMaxSpeed = 1;
+      public static final double kSlowSpeed = 0.2;
+      public static final double kDriveRateLimit = 2;
+      public static final double kTurnRateLimit = 20;
+      public static final double kAutoSpeed = -0.5;
+      public static final boolean kGyroReversed = false;
+      public static final int kVisionFilterSamples = 10;
+      public static final double kTurnP = 1;
+      public static final double kTurnD = 0;
+      public static final double kTurnI = 0;
+      public static final double kTurnToleranceDeg = 5;
+      public static final double kTurnRateToleranceDegPerS = 10;
       }
 
       public static final class IntakeConstants {
@@ -117,6 +124,6 @@ public final class Constants {
         };
         public static final double pAngularGain = 0.03;   //Proportional gain control for the angular movement of the robot 
         public static final double iAngularGain = 0.0001;   //Integral gain control for the angular movement of the robot
-        public static final double dAngularGain = 0.0;    //Derivative gain control for the angular movement of the robot
+        public static final double dAngularGain = 0;    //Derivative gain control for the angular movement of the robot
       }
 }
