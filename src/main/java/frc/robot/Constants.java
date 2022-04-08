@@ -102,7 +102,7 @@ public final class Constants {
         public static final double targetDistanceFromHub = 100;    //Target distance to be from hub for upper ball shooting in inches
         public static final double maxControllerSpeed = 0.6;
         public static final double marginForError = 2;    //The margin for error in both pitch and yaw for the shot to still be accurate
-        public static final double[][] stepControllerArray = {
+        public static final double[][] stepControllerArray = {    //Array of values that define what speed the robot should move at each interval 
             {5, 0.1},
             {15, 0.3},
             {20, 0.4},

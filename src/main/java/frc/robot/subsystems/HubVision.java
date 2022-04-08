@@ -19,7 +19,7 @@ public class HubVision extends SubsystemBase {
     private double targetYaw;
     private double targetPitch;
 
-    //Create PID controller with constants from constants file
+    //Create PID and step controller with constants from constants file
     StepController fowardsController = new StepController(Constants.VisionConstants.stepControllerArray);
     PIDController rotationController = new PIDController(
         Constants.VisionConstants.pAngularGain, 
