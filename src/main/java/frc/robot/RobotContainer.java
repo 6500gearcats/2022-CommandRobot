@@ -4,15 +4,18 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Intake;
+import frc.robot.commands.AutoCommandSimple;
+import frc.robot.commands.AutoCommand;
 import frc.robot.subsystems.HubVision;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -73,6 +76,12 @@ public class RobotContainer {
         new DefaultDrive(
             m_robotDrive, m_driverController::getLeftY, m_driverController::getRightX));
 
+            m_chooser.setDefaultOption("Simple Auto", m_autoCommandSimple);
+            m_chooser.addOption("Complex Auto", m_autoCommand);
+          
+          
+            //Put the chooser on the dashboard
+            SmartDashboard.putData(m_chooser); 
   }
 
   /**
@@ -144,11 +153,22 @@ public class RobotContainer {
   //   return m_autoCommand;
   // }
 
-  public Command getAutonomousCommand() {
-    return new AutoCommand(m_robotDrive, m_robotShooter, m_robotElevator, m_robotClimber, m_robotIntake, m_hubVision);
-    }
+  //public Command getAutonomousCommand() {
+    //return new AutoCommand(m_robotDrive, m_robotShooter, m_robotElevator, m_robotClimber, m_robotIntake, m_hubVision);
+    //}
 
   public Command AutoParkArm() {
     return new ParkArm(m_robotClimber);
   }
+    // Below is auto chooser
+  SendableChooser<Command> m_chooser = new SendableChooser<>();
+  
+  Command m_autoCommandSimple = new AutoCommandSimple(m_robotDrive, m_robotShooter, m_robotElevator, m_robotClimber);
+  Command m_autoCommand = new AutoCommand(m_robotDrive, m_robotShooter, m_robotElevator, m_robotClimber, m_robotIntake, m_hubVision);;
+  public void SendableChooser() {
   }
+
+  public Command getAutonomousCommand() {
+    return m_chooser.getSelected();
+  }
+}
