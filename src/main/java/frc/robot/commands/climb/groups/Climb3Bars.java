@@ -20,16 +20,16 @@ public class Climb3Bars extends SequentialCommandGroup {
     public Climb3Bars(Climber climber) {
         addCommands(
             // Setup the robot for climbing the bar
-            new ClimbBar(climber),
-            new RunCommand(
-                () -> climber.tiltRobot(ClimberConstants.kFwdTiltSpeed), 
-                climber
-            ).withTimeout(2),          
+            new ClimbBar1(climber),
+            //new RunCommand(
+            //    () -> climber.tiltRobot(ClimberConstants.kFwdTiltSpeed), 
+            //    climber
+            //).withTimeout(2),          
             //new WaitCommand(1),
-            new RaiseArm(climber),
+            //new RaiseArm(climber),
            // new WaitCommand(1),          
-            new ClimbBar(climber),
-            
+            new ClimbBar2(climber),
+
             new TraversalClimb(climber)
         );
     }

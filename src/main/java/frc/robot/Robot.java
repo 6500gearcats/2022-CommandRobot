@@ -64,8 +64,6 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
-    // Command tmp = m_robotContainer.AutoParkArm();
-    // tmp.schedule();
   }
 
   /** This function is called periodically during autonomous. */
@@ -98,4 +96,5 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during test mode. */
   @Override
   public void testPeriodic() {}
+
 }

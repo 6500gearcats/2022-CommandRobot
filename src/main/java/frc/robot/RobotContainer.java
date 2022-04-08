@@ -4,23 +4,27 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.IntakeLifter;
+import frc.robot.commands.AutoCommandSimple;
+import frc.robot.commands.AutoCommand;
+import frc.robot.subsystems.HubVision;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.AutoCommand;
-import frc.robot.commands.AutoPickup;
+// import frc.robot.commands.AutoPickup;
 import frc.robot.commands.DefaultDrive;
 import frc.robot.commands.IntakeDown;
 import frc.robot.commands.IntakeUp;
@@ -28,15 +32,18 @@ import frc.robot.commands.KillClimber;
 import frc.robot.commands.LiftBall;
 import frc.robot.commands.PickupBall;
 import frc.robot.commands.ReverseLift;
+import frc.robot.commands.Shoot2BallsSlow;
 import frc.robot.commands.ShootBallFast;
 import frc.robot.commands.ShootBallSlow;
-import frc.robot.commands.VisionSteer;
+import frc.robot.commands.AlignToHub;
+// import frc.robot.commands.VisionSteer;
 import frc.robot.commands.VomitBall;
 import frc.robot.commands.climb.groups.SetupForClimb;
 import frc.robot.commands.climb.groups.TraversalClimb;
-import frc.robot.commands.climb.groups.Climb2Bars;
+// import frc.robot.commands.climb.groups.Climb2Bars;
 import frc.robot.commands.climb.groups.Climb3Bars;
-import frc.robot.commands.climb.groups.ClimbBar;
+import frc.robot.commands.climb.groups.ClimbBar1;
+import frc.robot.commands.climb.groups.ClimbBar2;
 import frc.robot.commands.climb.individual.ParkArm;
 import frc.robot.commands.climb.individual.RetractArm;
 import frc.robot.commands.climb.individual.StowClimber;
@@ -55,6 +62,7 @@ public class RobotContainer {
   private final Elevator m_robotElevator = new Elevator();
   private final Intake m_robotIntake = new Intake();
   private final IntakeLifter m_robotIntakeLifter = new IntakeLifter();
+  private final HubVision m_hubVision = new HubVision();
 
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
@@ -73,6 +81,12 @@ public class RobotContainer {
         new DefaultDrive(
             m_robotDrive, m_driverController::getLeftY, m_driverController::getRightX));
 
+            m_chooser.setDefaultOption("Simple Auto", m_autoCommandSimple);
+            m_chooser.addOption("Complex Auto", m_autoCommand);
+          
+          
+            //Put the chooser on the dashboard
+            SmartDashboard.putData(m_chooser); 
   }
 
   /**
@@ -87,8 +101,10 @@ public class RobotContainer {
 
     new JoystickButton(m_driverController, Button.kA.value).whenPressed(new PickupBall(m_robotIntake));
     
+    // new JoystickButton(m_driverController, Button.kRightBumper.value)
+    // .whenPressed(new AutoPickup( m_robotIntake, m_robotDrive, m_driverController::getLeftY ));
     new JoystickButton(m_driverController, Button.kRightBumper.value)
-    .whenPressed(new AutoPickup( m_robotIntake, m_robotDrive, m_driverController::getLeftY ));
+    .whenHeld(new AlignToHub(m_robotDrive, m_hubVision));
 
 
     new JoystickButton(m_driverController, Button.kY.value).whenPressed(new VomitBall(m_robotIntake));
@@ -108,16 +124,18 @@ public class RobotContainer {
     new JoystickButton(m_gunnerController, Button.kBack.value).whenPressed(new StowClimber(m_robotClimber));
     
     new Trigger(() -> (m_gunnerController.getLeftTriggerAxis() > 0.5))
-      .whenActive(new ShootBallSlow(m_robotShooter, m_robotElevator).withTimeout(0.8));
+     // .whenActive(new ShootBallSlow(m_robotShooter, m_robotElevator).withTimeout(0.8));
+      .whileActiveOnce(new Shoot2BallsSlow(m_robotShooter, m_robotElevator));
        
     new Trigger(() -> (m_gunnerController.getRightTriggerAxis() > 0.5))
-      .whenActive(new ShootBallFast(m_robotShooter, m_robotElevator).withTimeout(0.8));
+      .whileActiveOnce(new ShootBallFast(m_robotShooter, m_robotElevator, m_robotIntake));
 
     new Trigger(() -> m_gunnerController.getLeftY() < -0.5)
       .whenActive(new LiftBall(m_robotElevator, m_robotIntake));
       
     new Trigger(() -> m_gunnerController.getLeftY() > 0.5)
-      .whileActiveOnce(new ReverseLift(m_robotElevator, m_robotIntake, m_robotShooter));    
+      .whileActiveContinuous(new ReverseLift(m_robotElevator, m_robotIntake, m_robotShooter));
+    
 
     new Trigger(() -> m_gunnerController.getRightY() < -0.5)
     .whenActive((new VomitBall(m_robotIntake)));
@@ -147,11 +165,22 @@ public class RobotContainer {
   //   return m_autoCommand;
   // }
 
-  public Command getAutonomousCommand() {
-    return new AutoCommand(m_robotDrive, m_robotShooter, m_robotElevator, m_robotClimber);
-    }
+  //public Command getAutonomousCommand() {
+    //return new AutoCommand(m_robotDrive, m_robotShooter, m_robotElevator, m_robotClimber, m_robotIntake, m_hubVision);
+    //}
 
   public Command AutoParkArm() {
     return new ParkArm(m_robotClimber);
   }
+    // Below is auto chooser
+  SendableChooser<Command> m_chooser = new SendableChooser<>();
+  
+  Command m_autoCommandSimple = new AutoCommandSimple(m_robotDrive, m_robotShooter, m_robotElevator, m_robotClimber, m_robotIntake);
+  Command m_autoCommand = new AutoCommand(m_robotDrive, m_robotShooter, m_robotElevator, m_robotClimber, m_robotIntake, m_hubVision);;
+  public void SendableChooser() {
   }
+
+  public Command getAutonomousCommand() {
+    return m_chooser.getSelected();
+  }
+}

@@ -91,7 +91,7 @@ public class Climber extends SubsystemBase{
       
     //   m_tiltMotor.set(speed);
     // }
-
+      private boolean m_PastRotationLimit = false;
 
     public void extendArm() {
       this.extendArm(ClimberConstants.kMaxWinchSpeed);
@@ -111,6 +111,8 @@ public class Climber extends SubsystemBase{
       return (m_upperLimit.isPressed() 
           || (Math.abs(m_winchOdometer.getPosition())) > ClimberConstants.kMaxWinchRotations);
     }
+
+
 
     public void resetWinchPosition() {
       m_winchOdometer.reset();

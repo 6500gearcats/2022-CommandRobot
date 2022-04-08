@@ -25,12 +25,6 @@ public class RetractArm extends CommandBase {
     m_climber.retractArm();      
   }
 
-  
-  @Override
-  public void execute() {
-
-  }
-
   @Override
   public boolean isFinished() {
     boolean isRetracted = m_climber.ArmIsFullyRetracted();
