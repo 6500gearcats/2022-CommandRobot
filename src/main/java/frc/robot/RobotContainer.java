@@ -68,7 +68,7 @@ public class RobotContainer {
     configureButtonBindings();
 
     //Set LED strips to teal
-    m_ledStrip.setEntireStripColor(0, 0, 255);
+    m_ledStrip.setEntireStripColor(Constants.LEDConstants.teal);
 
    // Configure default commands
     // Set the default drive command to split-stick arcade drive

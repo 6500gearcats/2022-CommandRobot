@@ -8,7 +8,6 @@ public class LEDSetter {
     //Define addressable led and its buffer
     private AddressableLED ledStrip;
     private AddressableLEDBuffer ledBuffer;
-
     /**
      * Constructor
      * 
@@ -34,10 +33,10 @@ public class LEDSetter {
      * @param green Green value for the strip
      * @param blue Blue value for the strip
      */
-    public void setEntireStripColor(int red, int green, int blue) {
+    public void setEntireStripColor(int[] color) {
         //Set data for buffer
         for (var i = 0; i < ledBuffer.getLength(); i++) {
-            ledBuffer.setRGB(i, red, green, blue);
+            ledBuffer.setRGB(i, color[0], color[1], color[2]);
          }
 
         //Write data to led strip

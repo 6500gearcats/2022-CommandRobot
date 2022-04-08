@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.XboxController.Button;
+import frc.robot.subsystems.LEDSetter;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -114,5 +115,8 @@ public final class Constants {
       public static final class LEDConstants {
         public static final int ledPwmPin = 0;
         public static final int ledStripLength = 51;
+        public static final int[] teal = new int[] {32, 227, 45};
+        public static final int[] white = new int[] {255, 255, 255};
+        public static final int[] black = new int[] {0, 0, 0};
       }
 }
