@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.util.Units;
 import frc.robot.Constants;
-import frc.robot.utility.PIController;
+import frc.robot.utility.StepController;
 import java.lang.Math;
 
 public class HubVision extends SubsystemBase {
@@ -20,9 +20,7 @@ public class HubVision extends SubsystemBase {
     private double targetPitch;
 
     //Create PID controller with constants from constants file
-    PIController fowardsController = new PIController(
-        Constants.VisionConstants.pGain
-    );
+    StepController fowardsController = new StepController(Constants.VisionConstants.stepControllerArray);
     PIDController rotationController = new PIDController(
         Constants.VisionConstants.pAngularGain, 
         Constants.VisionConstants.iAngularGain, 
@@ -48,7 +46,7 @@ public class HubVision extends SubsystemBase {
          * @param rotationSpeed Rotation speed
          */
         public arcadeDriveSpeeds(double fowardSpeed, double rotationSpeed) {
-            this.maxSpeed = 0.5;
+            this.maxSpeed = 1;
             this.fowardSpeed = fowardSpeed;
             this.rotationSpeed = rotationSpeed;
         }
