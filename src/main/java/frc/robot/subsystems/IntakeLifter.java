@@ -17,8 +17,6 @@ public class IntakeLifter extends SubsystemBase {
 
     private final RelativeEncoder m_lifterEncoder;
     
-    private boolean m_bIntakeLifted = false; 
-
     public IntakeLifter() {
       CANSparkMax lifterMotor =  new CANSparkMax(IntakeLifterConstants.kIntakeLifterMotorPort, MotorType.kBrushed);
       m_intakeLifterMotor = lifterMotor;
