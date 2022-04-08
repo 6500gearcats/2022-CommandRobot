@@ -13,6 +13,7 @@ import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.LEDSetter;
 import frc.robot.subsystems.HubVision;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -55,6 +56,8 @@ public class RobotContainer {
   private final Elevator m_robotElevator = new Elevator();
   private final Intake m_robotIntake = new Intake();
   private final HubVision m_hubVision = new HubVision();
+  private final LEDSetter m_rightLEDStrip = new LEDSetter(Constants.LEDConstants.rightPWMPin, Constants.LEDConstants.rightStripLength);
+  private final LEDSetter m_leftLEDStrip = new LEDSetter(Constants.LEDConstants.leftPWMPin, Constants.LEDConstants.leftStripLength);
 
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
@@ -64,6 +67,10 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+
+    //Set LED strips to teal
+    m_rightLEDStrip.setEntireStripColor(0, 0, 255);
+    m_leftLEDStrip.setEntireStripColor(0, 0, 255);
 
    // Configure default commands
     // Set the default drive command to split-stick arcade drive
