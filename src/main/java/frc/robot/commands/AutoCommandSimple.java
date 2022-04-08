@@ -10,9 +10,9 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 //TODO Make sure the code works.
 //Seth is not responsible for any damage done by this code.
 
-public class AutoCommand extends SequentialCommandGroup {
+public class AutoCommandSimple extends SequentialCommandGroup {
 
-    public AutoCommand(DriveTrain DriveTrain, Shooter shooter, Elevator elevator, Climber climber) {
+    public AutoCommandSimple(DriveTrain DriveTrain, Shooter shooter, Elevator elevator, Climber climber) {
         addCommands(
             new StoreArm(climber).withTimeout(0.2),
             new ParkArm(climber),
