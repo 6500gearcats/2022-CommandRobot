@@ -56,7 +56,7 @@ public class RobotContainer {
   private final Elevator m_robotElevator = new Elevator();
   private final Intake m_robotIntake = new Intake();
   private final HubVision m_hubVision = new HubVision();
-  private final LEDSetter m_ledStrip = new LEDSetter(Constants.LEDConstants.ledPwmPin, Constants.LEDConstants.ledStripLength);
+  private final LEDSetter m_ledStrip = new LEDSetter();
 
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);

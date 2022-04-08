@@ -6,15 +6,16 @@ import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 public class LEDSetter {
     
     //Define addressable led and its buffer
-    private AddressableLED ledStrip;
-    private AddressableLEDBuffer ledBuffer;
+    private static AddressableLED ledStrip;
+    private static AddressableLEDBuffer ledBuffer;
+    
     /**
-     * Constructor
+     * Set the pin and length
      * 
      * @param pwmPin PWM pin that the stip connects to
      * @param stripLength Length of the LED strip
      */
-    public LEDSetter(int pwmPin, int stripLength) {
+    public void setPinAndLength(int pwmPin, int stripLength) {
         //Define the addressable led and set the legnth
         ledStrip = new AddressableLED(pwmPin);
         ledStrip.setLength(stripLength);

@@ -8,6 +8,7 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.LEDSetter;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -30,6 +31,10 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     CameraServer.startAutomaticCapture();
+
+    LEDSetter m_ledStrip = new LEDSetter();
+    m_ledStrip.setPinAndLength(Constants.LEDConstants.ledPwmPin, Constants.LEDConstants.ledStripLength);
+    m_ledStrip.setEntireStripColor(Constants.LEDConstants.teal);
   }
 
   /**
