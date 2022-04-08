@@ -28,7 +28,9 @@ public class RaiseArm extends CommandBase {
   
   @Override
   public void execute() {
-
+    if (m_climber.ArmPastRotationLimit()){
+      m_climber.ArmIsFullyExtended();
+    }
   }
 
   @Override
@@ -36,9 +38,12 @@ public class RaiseArm extends CommandBase {
     return m_climber.ArmIsFullyExtended();
   }
 
+
   // Called once after isFinished returns true
   @Override
   public void end(boolean interrupted) {
     m_climber.stopWinch();
+
+
   }
 }

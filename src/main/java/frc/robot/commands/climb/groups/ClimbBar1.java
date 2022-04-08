@@ -4,6 +4,7 @@ package frc.robot.commands.climb.groups;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants.ClimberConstants;
 import frc.robot.commands.KillClimber;
 import frc.robot.commands.climb.individual.*;
@@ -13,30 +14,30 @@ import frc.robot.subsystems.Climber;
  * Sequential command that encapsulates the various sub-commands used
  * by the robot in climbing a bar in the climbing challenge
  */
-public class ClimbBar extends SequentialCommandGroup {
+public class ClimbBar1 extends SequentialCommandGroup {
     /**
      * Creates a new ClimbBar.
      * 
      * @param climber The climber subsystem this command will run on
      */
-    public ClimbBar(Climber climber) {
+    public ClimbBar1(Climber climber) {
         addCommands(
             // 4)	Energize tilt motor backward at 25% tilt speed 
             new RunCommand(
                 () -> climber.tiltRobot(ClimberConstants.kBackTiltSpeed), 
                 climber
-            ).withTimeout(1),
+            ).withTimeout(2),
 
             // 5)	Wait 0.5 seconds for full bar engagement
-            //new WaitCommand(0.5), 
+            new WaitCommand(0.5), 
 
             // Ascend to the bar being climbed
             // 6)	Energize winch in "retract" at 100% speed for 2s, then set to zero speed
-            new StartEndCommand(
-                () -> climber.retractArm(), 
-                () -> climber.stopWinch(),  
-                climber
-            ).withTimeout(2),
+            //new StartEndCommand(
+            //    () -> climber.retractArm(), 
+            //    () -> climber.stopWinch(),  
+            //    climber
+            //).withTimeout(2),
 
             // 7)	Wait 1s for robot to finish tilting
             //new WaitCommand(1), 
@@ -50,15 +51,10 @@ public class ClimbBar extends SequentialCommandGroup {
                 climber
             ).withTimeout(3),
 
+            new WaitCommand(0.5),
+
             // 11)	Run winch in “extend” at 100% speed for 1s, then set to zero speed
-            new StartEndCommand(
-                () -> climber.extendArm(), 
-                () -> climber.stopWinch(),  
-                climber
-            ).withTimeout(1)
-
-            
-
+            new RaiseArm(climber)
         );
     }
 
