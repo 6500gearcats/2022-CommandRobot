@@ -48,6 +48,8 @@ public final class Constants {
         public static final int kBallPresentThreshold = 500;
         public static final double kPushBallSpeed = 0.5;
         public static final double kIntakeVomitSpeed = -0.5;
+        public static final int kBlueBallThreshold = 1;
+        public static final int kRedBallThreshold = 1;
       }
 
       public static final class OIConstants {
@@ -70,13 +72,13 @@ public final class Constants {
         public static final int kTiltMotorPort = 10;
         public static final int kWinchMotorPort = 11;    
         public static final double kDefaultTiltSpeed = 0.5;
-        public static final double kMaxWinchRotations = 330;
+        public static final double kMaxWinchRotations = 190;
         public static final double kMaxWinchSpeed = -1.0;
         public static final double kMaxDriveSpeed = 0.1;
         public static final int kMaxLiftCurrent = 40;
         public static final int kMaxTiltCurrent = 2;
         public static final double kFwdTiltSpeed = 0.5;
-        public static final double kBackTiltSpeed = -0.5;
+        public static final double kBackTiltSpeed = -0.25;
         public static final double kTraversalRaiseSpeed = 1;
         public static final double kTraversalTiltSpeed = 1;
         public static final double kParkSpeed = -0.05;

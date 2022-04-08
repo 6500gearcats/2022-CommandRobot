@@ -25,20 +25,17 @@ public class RaiseArm extends CommandBase {
     m_climber.extendArm();      
   }
 
-  
-  @Override
-  public void execute() {
-
-  }
-
   @Override
   public boolean isFinished() {
     return m_climber.ArmIsFullyExtended();
   }
 
+
   // Called once after isFinished returns true
   @Override
   public void end(boolean interrupted) {
     m_climber.stopWinch();
+
+
   }
 }
