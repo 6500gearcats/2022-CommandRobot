@@ -26,7 +26,7 @@ public class ClimbBar1 extends SequentialCommandGroup {
             new RunCommand(
                 () -> climber.tiltRobot(ClimberConstants.kBackTiltSpeed), 
                 climber
-            ).withTimeout(2),
+            ).withTimeout(1),
 
             // 5)	Wait 0.5 seconds for full bar engagement
             new WaitCommand(0.5), 
@@ -49,7 +49,7 @@ public class ClimbBar1 extends SequentialCommandGroup {
             new RunCommand(
                 () -> climber.tiltRobot(ClimberConstants.kFwdTiltSpeed), 
                 climber
-            ).withTimeout(3),
+            ).withTimeout(1),
 
             new WaitCommand(0.5),
 

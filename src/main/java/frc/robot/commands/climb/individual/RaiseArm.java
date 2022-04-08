@@ -25,14 +25,6 @@ public class RaiseArm extends CommandBase {
     m_climber.extendArm();      
   }
 
-  
-  @Override
-  public void execute() {
-    if (m_climber.ArmPastRotationLimit()){
-      m_climber.ArmIsFullyExtended();
-    }
-  }
-
   @Override
   public boolean isFinished() {
     return m_climber.ArmIsFullyExtended();

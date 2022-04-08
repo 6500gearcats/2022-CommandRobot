@@ -26,11 +26,9 @@ public class Climb3Bars extends SequentialCommandGroup {
             //    climber
             //).withTimeout(2),          
             //new WaitCommand(1),
-            new RaiseArm(climber),
+            //new RaiseArm(climber),
            // new WaitCommand(1),          
             new ClimbBar2(climber),
-            
-           
 
             new TraversalClimb(climber)
         );

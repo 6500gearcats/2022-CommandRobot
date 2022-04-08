@@ -23,7 +23,7 @@ public class TraversalClimb extends SequentialCommandGroup {
                 //() -> climber.stopTilt(),  
                 //climber
             //).withTimeout(1),
-            new RaiseArm(climber),
+            new RaiseArm(climber).withTimeout(1.5),
             new RunCommand(
                 () -> climber.tiltRobot(ClimberConstants.kTraversalTiltSpeed), 
                 climber

@@ -112,11 +112,7 @@ public class Climber extends SubsystemBase{
           || (Math.abs(m_winchOdometer.getPosition())) > ClimberConstants.kMaxWinchRotations);
     }
 
-    public boolean ArmPastRotationLimit() {
-      double armRotations = m_winchEncoder.getVelocity();
-      m_PastRotationLimit = armRotations > ClimberConstants.kExtensionThreshold;
-      return m_PastRotationLimit;
-    }
+
 
     public void resetWinchPosition() {
       m_winchOdometer.reset();
