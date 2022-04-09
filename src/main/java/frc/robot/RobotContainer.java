@@ -97,7 +97,7 @@ public class RobotContainer {
 
     new JoystickButton(m_driverController, Button.kA.value).whenPressed(new PickupBall(m_robotIntake));
     
-    new JoystickButton(m_gunnerController, Button.kY.value).whenPressed(new frc.robot.commands.climb.groups.Climb3Bars(m_robotClimber));
+    // new JoystickButton(m_gunnerController, Button.kY.value).whenPressed(new frc.robot.commands.climb.groups.Climb3Bars(m_robotClimber));
 
     // new JoystickButton(m_driverController, Button.kRightBumper.value)
     // .whenPressed(new AutoPickup( m_robotIntake, m_robotDrive, m_driverController::getLeftY ));
@@ -115,7 +115,8 @@ public class RobotContainer {
     // XBox 2 - gunner bindings
     new JoystickButton(m_gunnerController, Button.kA.value).whenPressed(new SetupForClimb(m_robotClimber));
     new JoystickButton(m_gunnerController, Button.kY.value).whenPressed(new frc.robot.commands.climb.original.Climb3Bars(m_robotClimber));
-    new JoystickButton(m_gunnerController, Button.kX.value).whenPressed(new TraversalClimb(m_robotClimber));
+    // new JoystickButton(m_gunnerController, Button.kX.value).whenPressed(new TraversalClimb(m_robotClimber));
+    new JoystickButton(m_gunnerController, Button.kX.value).whenPressed(new frc.robot.commands.climb.groups.Climb3Bars(m_robotClimber));
 
     new JoystickButton(m_gunnerController, Button.kB.value).whenPressed(new KillClimber(m_robotClimber));
     new JoystickButton(m_gunnerController, Button.kStart.value).whenPressed(new RetractArm(m_robotClimber));
