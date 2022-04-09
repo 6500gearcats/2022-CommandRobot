@@ -147,6 +147,7 @@ public final class Constants {
         public static final int[] blueRGB = new int[] {0, 0, 255};
         public static final int[] whiteRGB = new int[] {255, 255, 100};
         public static final int[] greenRGB = new int[] {0, 255, 0};
+        public static final int[] yellowRGB = new int[] {255, 255, 0};
         public static final int[] blackRGB = new int[] {0, 0, 0};
       }
 }

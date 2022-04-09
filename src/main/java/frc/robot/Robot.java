@@ -58,7 +58,10 @@ public class Robot extends TimedRobot {
 
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+    //Set LED strip
+    LEDSetter.setEntireStripColor(Constants.LEDConstants.tealRGB);
+  }
 
   @Override
   public void disabledPeriodic() {}
@@ -71,6 +74,9 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
+
+    //Set LEDS
+    LEDSetter.setStripEndColor(5, Constants.LEDConstants.yellowRGB, Constants.LEDConstants.tealRGB);
   }
 
   /** This function is called periodically during autonomous. */
@@ -88,6 +94,9 @@ public class Robot extends TimedRobot {
     }
     Command tmp = m_robotContainer.AutoParkArm();
     tmp.schedule();
+
+    //Set LED strip
+    LEDSetter.setEntireStripColor(Constants.LEDConstants.tealRGB);
   }
 
   /** This function is called periodically during operator control. */
