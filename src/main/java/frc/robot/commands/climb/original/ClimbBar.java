@@ -46,7 +46,7 @@ public class ClimbBar extends SequentialCommandGroup {
 
             //9)	Switch tilt motor to forward at 25% speed
             new RunCommand(
-                () -> climber.tiltRobot(0.4), 
+                () -> climber.tiltRobot(ClimberConstants.kFwdTiltSpeed), 
                 climber
             ).withTimeout(3),
 

@@ -23,7 +23,7 @@ public class Climb2Bars extends SequentialCommandGroup {
             // Setup the robot for climbing the bar
             new ClimbBar(climber),
             new RunCommand(
-                () -> climber.tiltRobot(ClimberConstants.kFwdTiltSpeed * 0.8), 
+                () -> climber.tiltRobot(ClimberConstants.kFwdTiltSpeed), 
                 climber
             ).withTimeout(2),
             //new WaitCommand(1),
