@@ -142,6 +142,7 @@ public final class Constants {
       public static final class LEDConstants {
         public static final int ledPwmPin = 0;
         public static final int ledStripLength = 51;
+        public static final int endLEDCount = 10;
         public static final int[] tealRGB = new int[] {32, 227, 45};
         public static final int[] redRGB = new int[] {255, 0, 0};
         public static final int[] blueRGB = new int[] {0, 0, 255};

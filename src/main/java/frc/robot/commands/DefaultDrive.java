@@ -1,9 +1,11 @@
 package frc.robot.commands;
 
+import frc.robot.Constants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import java.util.function.DoubleSupplier;
+import frc.robot.subsystems.LEDSetter;
 
 /**
  * A command to drive the robot with joystick input (passed in as {@link DoubleSupplier}s). Written
@@ -40,6 +42,13 @@ public class DefaultDrive extends CommandBase {
   @Override
   public void initialize() {
     m_drive.setMaxOutput(m_maxSpeed);
+
+    if(m_maxSpeed == Constants.DriveConstants.kMaxSpeed) LEDSetter.setEntireStripColor(Constants.LEDConstants.tealRGB);
+    if(m_maxSpeed == Constants.DriveConstants.kSlowSpeed) LEDSetter.setStripEndColor(
+      Constants.LEDConstants.endLEDCount, 
+      Constants.LEDConstants.tealRGB, 
+      Constants.LEDConstants.blackRGB
+    );;
   }
 
   @Override
