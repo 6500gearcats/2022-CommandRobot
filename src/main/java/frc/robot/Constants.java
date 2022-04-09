@@ -106,8 +106,8 @@ public final class Constants {
        
         public static final class IntakeLifterConstants {
         public static final int kIntakeLifterMotorPort = 22;  
-        public static final double kIntakeLifterDownSpeed = -0.2;
-        public static final double kIntakeLifterUpSpeed = 0.2;
+        public static final double kIntakeLifterDownSpeed = -0.4;
+        public static final double kIntakeLifterUpSpeed = 0.4;
         public static final double kIntakeLiftedThreshhold = 0.1;
         public static final int kLifterEncoder = 22;
         public static final int kEncoderRate = 4096;
