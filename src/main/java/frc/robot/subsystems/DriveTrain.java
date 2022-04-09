@@ -19,18 +19,24 @@ import com.kauailabs.navx.frc.AHRS;
 
 public class DriveTrain extends SubsystemBase {
 
+  private CANSparkMax m_motor1 =  new CANSparkMax(DriveConstants.kLeftMotor1Port, MotorType.kBrushless);
+  private CANSparkMax m_motor2 = new CANSparkMax(DriveConstants.kLeftMotor2Port, MotorType.kBrushless);
+  private CANSparkMax m_motor3 = new CANSparkMax(DriveConstants.kRightMotor1Port, MotorType.kBrushless);
+  private CANSparkMax m_motor4 = new CANSparkMax(DriveConstants.kRightMotor2Port, MotorType.kBrushless);
+
   private double m_maxOutput = 0.0;
   // The motors on the left side of the drive.
+
   private final MotorControllerGroup m_leftMotors =
       new MotorControllerGroup(
-          new CANSparkMax(DriveConstants.kLeftMotor1Port, MotorType.kBrushless),
-          new CANSparkMax(DriveConstants.kLeftMotor2Port, MotorType.kBrushless));
+          m_motor1,
+          m_motor2);
 
   // The motors on the right side of the drive.
   private final MotorControllerGroup m_rightMotors =
       new MotorControllerGroup(
-          new CANSparkMax(DriveConstants.kRightMotor1Port, MotorType.kBrushless),
-          new CANSparkMax(DriveConstants.kRightMotor2Port, MotorType.kBrushless));
+          m_motor3,
+          m_motor4);
 
   // The robot's drive
   private final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotors, m_rightMotors);
@@ -88,6 +94,11 @@ public class DriveTrain extends SubsystemBase {
     // result in both sides moving forward. Depending on how your robot's
     // gearbox is constructed, you might have to invert the left side instead.
     m_rightMotors.setInverted(true);
+
+    m_motor1.setSmartCurrentLimit(DriveConstants.kMaxMotorAmps);
+    m_motor2.setSmartCurrentLimit(DriveConstants.kMaxMotorAmps);
+    m_motor3.setSmartCurrentLimit(DriveConstants.kMaxMotorAmps);
+    m_motor4.setSmartCurrentLimit(DriveConstants.kMaxMotorAmps);
 
     // Sets the distance per pulse for the encoders
     m_leftEncoder.setDistancePerPulse(DriveConstants.kEncoderDistancePerPulse);

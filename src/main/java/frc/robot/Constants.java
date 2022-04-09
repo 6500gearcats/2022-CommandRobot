@@ -46,6 +46,7 @@ public final class Constants {
       public static final double kTurnI = 0;
       public static final double kTurnToleranceDeg = 5;
       public static final double kTurnRateToleranceDegPerS = 10;
+      public static final int kMaxMotorAmps = 50;
       }
 
       public static final class IntakeConstants {
