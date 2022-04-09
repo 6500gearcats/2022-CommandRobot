@@ -4,7 +4,6 @@ package frc.robot.commands.climb.original;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants.ClimberConstants;
-import frc.robot.commands.climb.individual.RaiseArm;
 import frc.robot.subsystems.Climber;
 
 /**
@@ -22,7 +21,7 @@ public class Climb3Bars extends SequentialCommandGroup {
             // Setup the robot for climbing the bar
             new ClimbBar(climber),
             new RunCommand(
-                () -> climber.tiltRobot(ClimberConstants.kFwdTiltSpeed), 
+                () -> climber.tiltRobot(ClimberConstants.kFwdTiltSpeed * 0.8), 
                 climber
             ).withTimeout(2),          
             //new WaitCommand(1),

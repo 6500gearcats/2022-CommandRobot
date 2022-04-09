@@ -33,7 +33,7 @@ public class ClimbBar extends SequentialCommandGroup {
             // Ascend to the bar being climbed
             // 6)	Energize winch in "retract" at 100% speed for 2s, then set to zero speed
             new StartEndCommand(
-                () -> climber.retractArm(), 
+                () -> climber.retractArm(0.8), 
                 () -> climber.stopWinch(),  
                 climber
             ).withTimeout(2),
@@ -46,7 +46,7 @@ public class ClimbBar extends SequentialCommandGroup {
 
             //9)	Switch tilt motor to forward at 25% speed
             new RunCommand(
-                () -> climber.tiltRobot(ClimberConstants.kFwdTiltSpeed), 
+                () -> climber.tiltRobot(0.4), 
                 climber
             ).withTimeout(3),
 
