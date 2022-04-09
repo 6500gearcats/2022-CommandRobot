@@ -36,7 +36,9 @@ public class AlignToHub extends CommandBase {
 
     //Define arcade speed
     HubVision.arcadeDriveSpeeds speeds = m_upperHubVision.getArcadeSpeed();
-    m_drive.arcadeDrive(-speeds.getFowardSpeed(), speeds.getRotationSpeed());
+    System.out.println(speeds.toString());
+    // m_drive.arcadeDrive(-speeds.getFowardSpeed(), -speeds.getRotationSpeed());
+    m_drive.arcadeDrive(0, -speeds.getRotationSpeed());
 
     //Set the LED color based on based on distanceToTarget
     double postionError = m_upperHubVision.getDistanceToTarget() - Constants.VisionConstants.targetDistanceFromHub;

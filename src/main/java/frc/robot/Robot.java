@@ -76,11 +76,7 @@ public class Robot extends TimedRobot {
     }
 
     //Set LEDS
-    LEDSetter.setStripEndColor(
-      Constants.LEDConstants.endLEDCount, 
-      Constants.LEDConstants.yellowRGB, 
-      Constants.LEDConstants.tealRGB
-    );
+    LEDSetter.setStripEndColor(10, Constants.LEDConstants.yellowRGB, Constants.LEDConstants.tealRGB);
   }
 
   /** This function is called periodically during autonomous. */

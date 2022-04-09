@@ -20,12 +20,8 @@ public class HubVision extends SubsystemBase {
     private double targetPitch;
 
     //Create PID and step controller with constants from constants file
-    StepController fowardsController = new StepController(Constants.VisionConstants.stepControllerArray);
-    PIDController rotationController = new PIDController(
-        Constants.VisionConstants.pAngularGain, 
-        Constants.VisionConstants.iAngularGain, 
-        Constants.VisionConstants.dAngularGain
-    );
+    StepController fowardsController = new StepController(Constants.VisionConstants.linearStepControllerArray);
+    StepController rotationController = new StepController(Constants.VisionConstants.rotationalStepControllerArray);
 
 
 
@@ -191,7 +187,7 @@ public class HubVision extends SubsystemBase {
 
             //Use PID controllers to calculate the speed required
             double fowardSpeed = -fowardsController.calculate(getDistanceToTarget(), Constants.VisionConstants.targetDistanceFromHub);
-            double rotationSpeed = -rotationController.calculate(targetYaw, 0);
+            double rotationSpeed = -rotationController.calculate(targetYaw, Constants.VisionConstants.yawOffset);
 
             //Return speeds
             return new arcadeDriveSpeeds(fowardSpeed, rotationSpeed);

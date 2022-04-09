@@ -19,24 +19,25 @@ public class AutoCommandSimple extends SequentialCommandGroup {
             new StoreArm(climber).withTimeout(0.2),
             //new ParkArm(climber),
             new ParallelCommandGroup(
-                    new PickupBall(intake),
+                new PickupBall(intake),
                 new RunCommand(
-                        () -> DriveTrain.arcadeDrive(-0.5,0), 
-                        DriveTrain
-                    ).withTimeout(1.5)
-            ),
-            //new LiftBall(elevator, intake),
-            new RunCommand(
-                    () -> DriveTrain.arcadeDrive(0.5,0), 
+                    () -> DriveTrain.arcadeDrive(-0.5,0), 
                     DriveTrain
-                ).withTimeout(0.5),
+                ).withTimeout(1.5)
+            ),
+            new RunCommand(
+                () -> DriveTrain.arcadeDrive(0.5,0), 
+                DriveTrain
+            ).withTimeout(0.5),
+            //new LiftBall(elevator, intake),
             new ShootBallFast(shooter, elevator, intake).withTimeout(1.2),
             new ShootBallFast(shooter, elevator, intake).withTimeout(1.2),
             new RunCommand(
-                () -> DriveTrain.arcadeDrive(-0.5,0), 
-                DriveTrain
-            ).withTimeout(1)
+                    () -> DriveTrain.arcadeDrive(-0.5,0), 
+                    DriveTrain
+                ).withTimeout(1.5)
 
         );
+
     }
 }

@@ -120,24 +120,29 @@ public final class Constants {
 
 
       public static final class VisionConstants {
-        public static final double upperHubTargetHeight = 107;    //Height of the upper hub target in inches
+        public static final double upperHubTargetHeight = 103;    //Height of the upper hub target in inches
         public static final double cameraHeight = 38;    //Height of the camera on the robot in inches
         public static final double cameraAngle = 26.412;    //Angle of the camera on the robot in degrees
-        public static final double targetDistanceFromHub = 100;    //Target distance to be from hub for upper ball shooting in inches
+        public static final double targetDistanceFromHub = 130;    //Target distance to be from hub for upper ball shooting in inches
         public static final double maxControllerSpeed = 0.6;
         public static final double marginForError = 5;    //The margin for error in both pitch and yaw for the shot to still be accurate
-        public static final double[][] stepControllerArray = {    //Array of values that define what speed the robot should move at each interval 
+        public static final double[][] linearStepControllerArray = {    //Array of values that define what speed the robot should move at each interval 
             {5, 0.1},
-            {15, 0.3},
+            {10, 0.3},
             {20, 0.4},
             {50, 0.5},
             {100, 0.7},
-            {150, 0.85},
+            {150, 0.8},
             {1000, 1}
         };
-        public static final double pAngularGain = 0.03;   //Proportional gain control for the angular movement of the robot 
-        public static final double iAngularGain = 0.0001;   //Integral gain control for the angular movement of the robot
-        public static final double dAngularGain = 0;    //Derivative gain control for the angular movement of the robot
+        public static final double[][] rotationalStepControllerArray = {    //Array of values that define what speed the robot should move at each interval 
+          {2, 0.1},
+          {5, 0.3},
+          {10, 0.35},
+          {20, 0.4},
+          {100, 0.45}  
+        };
+        public static final double yawOffset = -4;
       }
 
       public static final class LEDConstants {
