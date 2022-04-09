@@ -1,11 +1,12 @@
 package frc.robot.subsystems;
 
 import org.photonvision.PhotonCamera;
-import edu.wpi.first.math.controller.PIDController;
 import org.photonvision.targeting.PhotonTrackedTarget;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.util.Units;
 import frc.robot.Constants;
+import frc.robot.utility.StepController;
 import java.lang.Math;
 
 public class HubVision extends SubsystemBase {
@@ -18,12 +19,8 @@ public class HubVision extends SubsystemBase {
     private double targetYaw;
     private double targetPitch;
 
-    //Create PID controller with constants from constants file
-    PIDController fowardsController = new PIDController(
-        Constants.VisionConstants.pLinearGain, 
-        Constants.VisionConstants.iLinearGain, 
-        Constants.VisionConstants.dLinearGain
-    );
+    //Create PID and step controller with constants from constants file
+    StepController fowardsController = new StepController(Constants.VisionConstants.stepControllerArray);
     PIDController rotationController = new PIDController(
         Constants.VisionConstants.pAngularGain, 
         Constants.VisionConstants.iAngularGain, 
@@ -49,7 +46,7 @@ public class HubVision extends SubsystemBase {
          * @param rotationSpeed Rotation speed
          */
         public arcadeDriveSpeeds(double fowardSpeed, double rotationSpeed) {
-            this.maxSpeed = 0.5;
+            this.maxSpeed = 1;
             this.fowardSpeed = fowardSpeed;
             this.rotationSpeed = rotationSpeed;
         }
@@ -142,16 +139,6 @@ public class HubVision extends SubsystemBase {
         } else {
             targetInSights = false;
         }
-    }
-
-
-
-    /**
-     * Print values returned from photon vision for debugging
-     */
-    public String pidValuesAsString() {
-        return "PID VALUES: [Fowards error: [postion=" + fowardsController.getPositionError() + ", velocity=" + fowardsController.getVelocityError() +
-        "], Rotation error: [postion = " + rotationController.getPositionError() + ", velocity=" + rotationController.getVelocityError() + "]]";
     }
 
 

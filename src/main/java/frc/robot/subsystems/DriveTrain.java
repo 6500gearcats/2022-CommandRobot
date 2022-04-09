@@ -14,6 +14,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import edu.wpi.first.wpilibj.SPI;
+import com.kauailabs.navx.frc.AHRS;
 
 public class DriveTrain extends SubsystemBase {
 
@@ -58,6 +60,28 @@ public class DriveTrain extends SubsystemBase {
   //     tab.add("RotationSlewRate", 0.8)
   //       .getEntry();
       
+  private final AHRS m_navX = new AHRS(SPI.Port.kMXP);
+
+  /**
+   * Returns the turn rate of the robot.
+   *
+   * @return The turn rate of the robot, in degrees per second
+   */
+  public double getTurnRate() {
+    return m_navX.getRate() * (DriveConstants.kGyroReversed ? -1.0 : 1.0);
+  }
+
+  public void resetAngle() {
+    m_navX.reset();
+  }
+
+  // public double gyroAngle = m_gyro.getAngle();
+
+  public boolean isAtTargetAngle(double angle) {
+
+    return m_navX.getAngle() >= angle;
+  }
+
   /** Creates a new DriveSubsystem. */
   public DriveTrain() {
     // We need to invert one side of the drivetrain so that positive voltages
@@ -173,6 +197,20 @@ public class DriveTrain extends SubsystemBase {
     m_maxOutput = maxOutput;
     SmartDashboard.putNumber("DriveTrain Max Output Set", m_maxOutput);
     m_drive.setMaxOutput(maxOutput);
+  }
+
+  /** Zeroes the heading of the robot. */
+  public void zeroHeading() {
+    m_navX.reset();
+  }
+
+  /**
+   * Returns the heading of the robot.
+   *
+   * @return the robot's heading in degrees, from 180 to 180
+   */
+  public double getHeading() {
+    return Math.IEEEremainder(m_navX.getAngle(), 360) * (DriveConstants.kGyroReversed ? -1.0 : 1.0);
   }
 
 }

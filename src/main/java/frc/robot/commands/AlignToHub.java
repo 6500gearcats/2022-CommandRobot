@@ -33,13 +33,10 @@ public class AlignToHub extends CommandBase {
   //Command call execute
   @Override
   public void execute() {
-    // //Print variables
-    // System.out.println("Distance in inches: " + upperHubVision.getDistanceToTarget());
-    // System.out.println("Yaw: " + upperHubVision.getYaw());
 
     //Define arcade speed
     HubVision.arcadeDriveSpeeds speeds = m_upperHubVision.getArcadeSpeed();
-    m_drive.arcadeDrive(speeds.getFowardSpeed(), speeds.getRotationSpeed());
+    m_drive.arcadeDrive(-speeds.getFowardSpeed(), speeds.getRotationSpeed());
 
     //Set the LED color based on based on distanceToTarget
     double postionError = m_upperHubVision.getDistanceToTarget() - Constants.VisionConstants.targetDistanceFromHub;
@@ -49,6 +46,11 @@ public class AlignToHub extends CommandBase {
       LEDSetter.setPercentageOfStrip(Math.abs(postionError)/100, Constants.LEDConstants.blackRGB, Constants.LEDConstants.whiteRGB);
     }
   }
+
+  // @Override
+  // public boolean isFinished() {
+  //   return m_upperHubVision.getDistanceToTarget() < Constants.VisionConstants.marginForError;
+  // }
 
   @Override
   public void end(boolean interrupted) {
