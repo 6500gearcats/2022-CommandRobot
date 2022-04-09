@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.XboxController.Button;
+import frc.robot.subsystems.LEDSetter;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -123,7 +124,7 @@ public final class Constants {
         public static final double cameraAngle = 26.412;    //Angle of the camera on the robot in degrees
         public static final double targetDistanceFromHub = 100;    //Target distance to be from hub for upper ball shooting in inches
         public static final double maxControllerSpeed = 0.6;
-        public static final double marginForError = 2;    //The margin for error in both pitch and yaw for the shot to still be accurate
+        public static final double marginForError = 5;    //The margin for error in both pitch and yaw for the shot to still be accurate
         public static final double[][] stepControllerArray = {    //Array of values that define what speed the robot should move at each interval 
             {5, 0.1},
             {15, 0.3},
@@ -136,5 +137,17 @@ public final class Constants {
         public static final double pAngularGain = 0.03;   //Proportional gain control for the angular movement of the robot 
         public static final double iAngularGain = 0.0001;   //Integral gain control for the angular movement of the robot
         public static final double dAngularGain = 0;    //Derivative gain control for the angular movement of the robot
+      }
+
+      public static final class LEDConstants {
+        public static final int ledPwmPin = 0;
+        public static final int ledStripLength = 51;
+        public static final int[] tealRGB = new int[] {32, 227, 45};
+        public static final int[] redRGB = new int[] {255, 0, 0};
+        public static final int[] blueRGB = new int[] {0, 0, 255};
+        public static final int[] whiteRGB = new int[] {255, 255, 100};
+        public static final int[] greenRGB = new int[] {0, 255, 0};
+        public static final int[] yellowRGB = new int[] {255, 255, 0};
+        public static final int[] blackRGB = new int[] {0, 0, 0};
       }
 }

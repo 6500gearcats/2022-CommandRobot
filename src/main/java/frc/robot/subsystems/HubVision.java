@@ -135,7 +135,7 @@ public class HubVision extends SubsystemBase {
             targetYaw = bestTarget.getYaw();
             targetPitch = bestTarget.getPitch();
 
-        // If there are no targets, print and stop drive
+        // If there are no targets then stop drive
         } else {
             targetInSights = false;
         }
@@ -158,15 +158,23 @@ public class HubVision extends SubsystemBase {
      * @return Distance in inches to the target
      */
     public double getDistanceToTarget() {
-        //Get constants from constants file and convert to meters
-        double upperHubTargetHeight = Units.inchesToMeters(Constants.VisionConstants.upperHubTargetHeight);
-        double cameraHeight = Units.inchesToMeters(Constants.VisionConstants.cameraHeight);
-        double cameraAngle = Constants.VisionConstants.cameraAngle;
+        //If there is a target
+        if(targetInSights) {
 
-        //Return distace
-        return Units.metersToInches(
-            (upperHubTargetHeight - cameraHeight) / Math.tan(Math.toRadians(targetPitch + cameraAngle))
-        );
+            //Get constants from constants file and convert to meters
+            double upperHubTargetHeight = Units.inchesToMeters(Constants.VisionConstants.upperHubTargetHeight);
+            double cameraHeight = Units.inchesToMeters(Constants.VisionConstants.cameraHeight);
+            double cameraAngle = Constants.VisionConstants.cameraAngle;
+
+            //Return distace
+            return Units.metersToInches(
+                (upperHubTargetHeight - cameraHeight) / Math.tan(Math.toRadians(targetPitch + cameraAngle))
+            );
+
+        //If there is no target
+        } else {
+            return 0;
+        }
     }
 
 
