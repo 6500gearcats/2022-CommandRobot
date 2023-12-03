@@ -7,11 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.Elevator;
-import frc.robot.subsystems.Intake;
-import edu.wpi.first.wpilibj2.command.Command;
+//import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.DefaultDrive;
 
@@ -24,10 +20,7 @@ import frc.robot.commands.DefaultDrive;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveTrain m_robotDrive = new DriveTrain();
-  private final Shooter m_robotShooter = new Shooter();
-  private final Climber m_robotClimber = new Climber();
-  private final Elevator m_robotElevator = new Elevator();
-  private final Intake m_roboIntake = new Intake();
+
 
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
